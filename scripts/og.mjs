@@ -4,8 +4,8 @@ import { chromium } from "playwright";
 import { writeFileSync } from "node:fs";
 
 const copy = {
-  ja: { line1: "中国のロボットを、", line2: "日本の介護現場へ。", sub: "介護ロボットの日本ローカライズパートナー", font: "Zen Kaku Gothic New" },
-  zh: { line1: "把中国的机器人，", line2: "带进日本的介护现场。", sub: "介护机器人日本本地化落地伙伴", font: "Noto Sans SC" },
+  ja: { line1: "ロボットを、", line2: "日本の介護の力へ。", sub: "ロボティクス企業と日本の介護現場をつなぐ、ローカライズ・導入パートナー", font: "Zen Kaku Gothic New" },
+  zh: { line1: "让机器人，", line2: "成为日本介护的力量。", sub: "连接机器人企业与日本介护现场的本地化・落地伙伴", font: "Noto Sans SC" },
 };
 
 const html = (c) => `<!doctype html><html><head>

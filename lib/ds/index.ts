@@ -17,10 +17,9 @@ export { DemoTag } from "../../components/ui/demo-tag";
 export { Footnote } from "../../components/ui/footnote";
 
 export { Wordmark } from "../../components/site/wordmark";
-export { LocaleToggle } from "../../components/site/locale-toggle";
 export { Nav } from "../../components/site/nav";
 export { Footer } from "../../components/site/footer";
-export { Section, SectionHeading } from "../../components/site/section";
+export { Section, SectionHeading, Kicker, Heading } from "../../components/site/section";
 export { Reveal, Stagger, StaggerItem } from "../../components/site/reveal";
 
 export { CountUp } from "../../components/viz/count-up";
@@ -40,12 +39,12 @@ export type { SceneId } from "../../components/viz/mimamori-scenes";
 export { Hero } from "../../components/sections/hero";
 export { WhyJapan } from "../../components/sections/why-japan";
 export { Walls } from "../../components/sections/walls";
+export { Bridge } from "../../components/sections/bridge";
 export { Mimamori } from "../../components/sections/mimamori";
 export { CareOS } from "../../components/sections/careos";
 export { Value } from "../../components/sections/value";
 export { Method } from "../../components/sections/method";
 export { Trust } from "../../components/sections/trust";
 export { Partner } from "../../components/sections/partner";
-export { Fit } from "../../components/sections/fit";
 export { Company } from "../../components/sections/company";
 export { Contact } from "../../components/sections/contact";

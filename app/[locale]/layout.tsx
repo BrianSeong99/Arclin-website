@@ -11,7 +11,7 @@ const fontZh = Noto_Sans_SC({ weight: ["400", "500", "700"], subsets: ["latin"],
 const fontMono = IBM_Plex_Mono({ weight: ["400", "500"], subsets: ["latin"], variable: "--font-mono", display: "swap" });
 const fontDisplay = Instrument_Serif({ weight: "400", style: ["normal", "italic"], subsets: ["latin"], variable: "--font-display", display: "swap" });
 
-const SITE = "https://arclin.jp";
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://arclin.jp";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = getMessages(locale);
   return {
     metadataBase: new URL(SITE),
-    title: t.meta.title,
-    description: t.meta.description,
+    title: t.metaTitle,
+    description: t.metaDesc,
     alternates: {
       canonical: `/${locale}/`,
       languages: { ja: "/ja/", zh: "/zh/", "x-default": "/ja/" },
@@ -34,9 +34,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale === "ja" ? "ja_JP" : "zh_CN",
       url: `/${locale}/`,
       siteName: "Arclin K.K.",
-      title: t.meta.title,
-      description: t.meta.description,
-      images: [{ url: `/og-${locale}.png`, width: 1200, height: 630, alt: t.meta.ogAlt }],
+      title: t.ogTitle,
+      description: t.ogDesc,
+      images: [{ url: `/og-${locale}.png`, width: 1200, height: 630, alt: t.ogTitle }],
     },
     twitter: { card: "summary_large_image" },
     robots: { index: true, follow: true },

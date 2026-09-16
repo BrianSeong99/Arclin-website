@@ -1,129 +1,126 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { useLocale } from "@/lib/i18n/context";
-import { Section, SectionHeading } from "@/components/site/section";
+import { RING_SEGMENTS, SCENE_FOR_SEG, SEG_HOUR, segFor, type SegId } from "@/lib/site";
+import { Section, Kicker, Heading } from "@/components/site/section";
 import { Reveal } from "@/components/site/reveal";
 import { RingTimeline } from "@/components/viz/ring-timeline";
 import { SceneIllustration, type SceneId } from "@/components/viz/mimamori-scenes";
 import { DemoTag } from "@/components/ui/demo-tag";
 import { cn } from "@/lib/utils";
 
-const SCENE_HOURS: Record<SceneId, number> = { patrol: 10, standup: 14.5, intake: 18.5, voice: 23.5 };
-const CYCLE_MS = 5000;
-
+/** 24h ring that advances ~1 minute per real second while in view; tabs jump to a time band. */
 export function Mimamori() {
   const { t } = useLocale();
-  const s = t.mimamori;
   const reduce = useReducedMotion();
-  const [idx, setIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hour, setHour] = useState(10);
+  const paused = useRef(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (reduce || paused) return;
-    const id = setInterval(() => setIdx((i) => (i + 1) % s.scenes.length), CYCLE_MS);
+    if (reduce) return;
+    const id = setInterval(() => {
+      if (!paused.current) setHour((h) => (h + 0.1) % 24);
+    }, 250);
     return () => clearInterval(id);
-  }, [reduce, paused, s.scenes.length]);
+  }, [reduce]);
 
-  const scene = s.scenes[idx];
-  const hour = SCENE_HOURS[scene.id as SceneId];
-  const active = s.segments.find((seg) => (seg.start < seg.end ? hour >= seg.start && hour < seg.end : hour >= seg.start || hour < seg.end)) ?? s.segments[0];
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(([e]) => {
+      paused.current = !e.isIntersecting;
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const segId = segFor(hour);
+  const seg = t.segs.find((s) => s.id === segId) ?? t.segs[0];
+  const hh = Math.floor(hour);
+  const mm = Math.floor((hour - hh) * 60);
+  const label = `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}`;
 
   return (
-    <Section id="mimamori" tone="console" className="console-grid">
-      <div className="container-x">
-        <SectionHeading num={s.num} title={s.title} lead={s.lead} tone="console" aside={<DemoTag tone="console" />} />
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-12">
-          {/* ring */}
-          <Reveal className="mx-auto w-full max-w-sm lg:max-w-none">
+    <Section id="mimamori" tone="console">
+      <div ref={ref}>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <Reveal>
+            <Kicker tone="console">{t.mimaLabel}</Kicker>
+          </Reveal>
+          <DemoTag tone="console" />
+        </div>
+        <Reveal>
+          <Heading lines={[t.mimaH2a, t.mimaH2b]} className="mt-5" />
+        </Reveal>
+        <Reveal>
+          <p className="mt-5 max-w-[36em] text-pretty text-console-muted">{t.mimaBody}</p>
+        </Reveal>
+        <div className="mt-14 grid items-center gap-[clamp(24px,4vw,56px)] [grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))]">
+          <Reveal className="relative mx-auto w-full max-w-[460px]">
             <RingTimeline
-              segments={s.segments}
-              activeId={active.id}
+              segments={RING_SEGMENTS}
+              activeId={segId}
               hour={hour}
               center={
-                <div className="text-center">
-                  <div className="font-mono text-[10px] tracking-[0.25em] text-console-muted uppercase">{s.ringTitle}</div>
-                  <div className="mt-2 font-mono text-3xl text-console-text tabular">
-                    {String(Math.floor(hour)).padStart(2, "0")}:{String(Math.round((hour % 1) * 60)).padStart(2, "0")}
-                  </div>
-                  <div className="mt-2 max-w-[10rem] text-xs text-signal">{active.label}</div>
+                <div className="pointer-events-none text-center">
+                  <div className="font-mono text-[clamp(28px,4vw,40px)] leading-none text-console-text tabular">{label}</div>
+                  <div className="mt-2.5 text-[15px] text-signal">{seg.label}</div>
+                  <div className="mt-1 font-mono text-[10px] tracking-[0.16em] text-console-muted">{seg.range}</div>
                 </div>
               }
             />
-            <ul className="mt-6 grid gap-2">
-              {s.segments.map((seg) => (
-                <li
-                  key={seg.id}
-                  className={cn(
-                    "flex items-start gap-3 rounded-md border px-3 py-2 text-xs transition-colors",
-                    seg.id === active.id ? "border-signal/40 bg-signal/5 text-console-text" : "border-console-line text-console-muted",
-                  )}
-                >
-                  <span className="font-mono tabular">
-                    {String(seg.start).padStart(2, "0")}–{String(seg.end).padStart(2, "0")}
-                  </span>
-                  <span>
-                    <span className="font-medium">{seg.label}</span>
-                    <span className="block text-console-muted">{seg.desc}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
           </Reveal>
-
-          {/* storyboard */}
-          <Reveal delay={0.1} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-            <div className="overflow-hidden rounded-lg border border-console-line bg-console-2">
-              <div className="flex items-center justify-between border-b border-console-line px-4 py-2.5">
-                <span className="font-mono text-[10px] tracking-[0.25em] text-console-muted uppercase">
-                  scene {String(idx + 1).padStart(2, "0")} / {String(s.scenes.length).padStart(2, "0")}
-                </span>
-                <span className="flex gap-1">
-                  {s.scenes.map((sc, i) => (
-                    <button
-                      key={sc.id}
-                      type="button"
-                      aria-label={sc.title}
-                      aria-current={i === idx}
-                      onClick={() => setIdx(i)}
-                      className={cn("h-1.5 rounded-full transition-all", i === idx ? "w-6 bg-signal" : "w-1.5 bg-console-line hover:bg-console-muted")}
-                    />
-                  ))}
-                </span>
-              </div>
-              <div className="grid gap-6 p-5 sm:grid-cols-[1.2fr_1fr] sm:p-6">
-                <div key={scene.id} className="rounded-md border border-console-line bg-console p-3 motion-safe:animate-[fade_0.5s_ease-out]">
-                  <SceneIllustration id={scene.id as SceneId} />
-                </div>
-                <div>
-                  <div className="font-mono text-[11px] tracking-[0.2em] text-signal uppercase">{active.label}</div>
-                  <h3 className="mt-2 text-xl font-medium text-console-text">{scene.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-console-muted">{scene.body}</p>
-                </div>
-              </div>
-            </div>
-            <ol className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {s.scenes.map((sc, i) => (
-                <li key={sc.id}>
+          <div>
+            <div role="tablist" className="flex flex-wrap gap-2">
+              {t.segs.map((s) => {
+                const on = s.id === segId;
+                return (
                   <button
+                    key={s.id}
                     type="button"
-                    onClick={() => setIdx(i)}
-                    aria-current={i === idx}
+                    role="tab"
+                    aria-selected={on}
+                    onClick={() => {
+                      paused.current = true;
+                      setHour(SEG_HOUR[s.id as SegId]);
+                    }}
                     className={cn(
-                      "w-full rounded-md border px-3 py-2 text-left text-xs transition-colors",
-                      i === idx ? "border-signal/50 text-console-text" : "border-console-line text-console-muted hover:text-console-text",
+                      "rounded-full border px-4 py-2 text-[13.5px] transition-colors",
+                      on ? "cursor-default border-signal bg-signal text-console" : "border-console-line text-console-text hover:border-signal",
                     )}
                   >
-                    <span className="mr-2 font-mono text-[10px] text-console-muted">{String(i + 1).padStart(2, "0")}</span>
-                    {sc.title}
+                    {s.label}
                   </button>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
+                );
+              })}
+            </div>
+            <div className="console-grid mt-6 rounded-xl border border-console-line bg-console-2 p-5">
+              <SceneIllustration id={SCENE_FOR_SEG[segId] as SceneId} />
+            </div>
+            <h3 className="mt-6 text-[22px] font-medium text-console-text">{seg.title}</h3>
+            <p className="mt-2.5 text-pretty text-console-muted">{seg.body}</p>
+            <p className="mt-3.5 font-display text-xl italic text-signal">{seg.quote}</p>
+          </div>
         </div>
-        <p className="mt-10 max-w-3xl text-xs leading-relaxed text-console-muted">{s.footnote}</p>
+        <div className="mt-[72px] grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
+          {t.stories.map((st, i) => (
+            <Reveal key={st.tag} delay={i * 0.1} className="grid content-start gap-3.5 rounded-xl border border-console-line bg-console-2 p-5">
+              <div className="flex justify-between font-mono text-[11px] tracking-[0.16em] text-console-muted">
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                <span>{st.tag}</span>
+              </div>
+              <div className="overflow-hidden rounded-lg border border-console-line bg-console">
+                <SceneIllustration id={st.scene as SceneId} />
+              </div>
+              <h3 className="text-lg font-medium text-console-text">{st.title}</h3>
+              <p className="text-pretty text-sm text-console-muted">{st.body}</p>
+              <p className="border-t border-console-line pt-3 text-[12.5px] text-signal">{st.note}</p>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </Section>
   );

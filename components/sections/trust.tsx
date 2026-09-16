@@ -1,34 +1,28 @@
 "use client";
 
-import { Lock, ShieldCheck, RadioTower, Network, type LucideIcon } from "lucide-react";
 import { useLocale } from "@/lib/i18n/context";
 import { Section, SectionHeading } from "@/components/site/section";
-import { Stagger, StaggerItem } from "@/components/site/reveal";
-
-const icons: Record<string, LucideIcon> = { privacy: Lock, safety: ShieldCheck, radio: RadioTower, network: Network };
+import { Reveal } from "@/components/site/reveal";
 
 export function Trust() {
   const { t } = useLocale();
-  const s = t.trust;
   return (
-    <Section id="trust" tone="paper-2">
-      <div className="container-x">
-        <SectionHeading num={s.num} title={s.title} lead={s.lead} />
-        <Stagger className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
-          {s.items.map((it) => {
-            const Icon = icons[it.icon] ?? ShieldCheck;
-            return (
-              <StaggerItem key={it.title}>
-                <span className="flex size-12 items-center justify-center rounded-full border border-line-strong text-pine">
-                  <Icon className="size-5" aria-hidden />
-                </span>
-                <h3 className="mt-5 text-base font-medium text-ink">{it.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-2">{it.body}</p>
-              </StaggerItem>
-            );
-          })}
-        </Stagger>
+    <Section id="trust">
+      <SectionHeading label={t.trustLabel} lines={[t.trustH2a, t.trustH2b]} />
+      <div className="mt-10 grid gap-x-10 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
+        {t.trust.map((tr, i) => (
+          <Reveal key={tr.title} delay={i * 0.06} className="grid grid-cols-[28px_1fr] gap-4 border-t border-line py-[22px]">
+            <span aria-hidden className="mt-0.5 size-[22px] rounded border-[1.5px] border-pine" />
+            <div>
+              <div className="font-medium">{tr.title}</div>
+              <p className="mt-1 text-pretty text-sm text-ink-2">{tr.body}</p>
+            </div>
+          </Reveal>
+        ))}
       </div>
+      <Reveal>
+        <p className="mt-8 max-w-[44em] text-[13px] text-ink-3">{t.trustNote}</p>
+      </Reveal>
     </Section>
   );
 }

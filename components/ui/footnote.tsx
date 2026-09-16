@@ -26,7 +26,7 @@ export function Footnote({ text, className, tone = "paper" }: { text: string; cl
         )}
       >
         <Info className="size-3" aria-hidden />
-        {t.common.source}
+        {t.source}
       </button>
       <p
         id={id}

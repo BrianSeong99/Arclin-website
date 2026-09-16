@@ -6,12 +6,12 @@ export default meta;
 type S = StoryObj<typeof SectionHeading>;
 
 export const Paper: S = {
-  args: { num: "02", title: "私たちが解決する「六つの壁」", lead: "良いロボットが、そのままでは日本の介護現場に入れない理由。" },
+  args: { label: "課題", lines: ["技術があるだけでは、", "介護現場には届かない。"], lead: "海外のロボティクス企業が日本の介護市場へ参入するとき、製品性能以外にも多くの壁があります。" },
 };
 export const Console: S = {
   render: () => (
     <div className="bg-console p-8">
-      <SectionHeading tone="console" num="03" title="製品シナリオ — Mimamori" lead="日中・夕方・夜間。" />
+      <SectionHeading tone="console" label="Mimamori — 見守り" lines={["24時間の介護の流れに、", "そっと寄り添う。"]} lead="日中・夕方・夜間。" />
     </div>
   ),
 };

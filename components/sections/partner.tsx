@@ -1,45 +1,40 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
 import { useLocale } from "@/lib/i18n/context";
+import { mailto } from "@/lib/site";
 import { Section, SectionHeading } from "@/components/site/section";
-import { Stagger, StaggerItem } from "@/components/site/reveal";
-import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/site/reveal";
 
 export function Partner() {
   const { t } = useLocale();
-  const s = t.partner;
   return (
-    <Section id="partner">
-      <div className="container-x">
-        <SectionHeading num={s.num} title={s.title} lead={s.lead} />
-        <Stagger className="grid gap-4 md:grid-cols-2" stagger={0.12}>
-          {s.paths.map((p) => (
-            <StaggerItem key={p.id}>
-              <details className="group rounded-lg border border-line bg-paper open:border-pine/50 hover:border-pine/50">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6 [&::-webkit-details-marker]:hidden">
-                  <div>
-                    <Badge>{p.tag}</Badge>
-                    <h3 className="mt-3 text-xl font-medium text-ink">{p.title}</h3>
-                    <p className="mt-1 text-sm text-ink-2">{p.summary}</p>
-                  </div>
-                  <ArrowRight className="size-5 shrink-0 text-pine transition-transform group-open:rotate-90" aria-hidden />
-                </summary>
-                <div className="border-t border-line px-6 pb-6 pt-4">
-                  <ol className="space-y-2">
-                    {p.details.map((d, i) => (
-                      <li key={d} className="flex gap-3 text-sm text-ink-2">
-                        <span className="font-mono text-[11px] text-pine">{String(i + 1).padStart(2, "0")}</span>
-                        {d}
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              </details>
-            </StaggerItem>
-          ))}
-        </Stagger>
-        <p className="mt-6 font-mono text-[11px] tracking-wider text-ink-3">{s.pricing}</p>
+    <Section id="partner" tone="paper-2">
+      <SectionHeading label={t.partnerLabel} lines={t.partnerH2} />
+      <div className="mt-12 grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]">
+        {t.partners.map((p, i) => (
+          <Reveal
+            key={p.kicker}
+            delay={i * 0.12}
+            className="grid content-start gap-4 rounded-[14px] border border-line bg-paper p-[clamp(24px,3vw,36px)] transition-[transform,border-color,box-shadow] duration-[450ms] ease-out-expo hover:-translate-y-1 hover:border-pine-3 hover:shadow-[0_12px_30px_-18px_rgba(23,27,26,.35)]"
+          >
+            <div className="font-mono text-[11px] tracking-[0.18em] text-pine">{p.kicker}</div>
+            <h3 className="text-2xl font-medium leading-[1.35]">{p.title}</h3>
+            <p className="text-pretty text-ink-2">{p.body}</p>
+            <div className="mt-2">
+              <div className="mb-2 font-mono text-[10px] tracking-[0.18em] text-ink-3">{t.fitKicker}</div>
+              {p.fit.map((f, j) => (
+                <Reveal key={f} delay={j * 0.07} className="flex gap-2.5 border-t border-line py-[7px] text-sm text-ink-2">
+                  <span className="flex-none font-mono text-pine">✓</span>
+                  <span>{f}</span>
+                </Reveal>
+              ))}
+            </div>
+            <a href={mailto(p.subject)} className="mt-2 inline-flex items-center gap-2 justify-self-start rounded-md bg-pine px-[18px] py-3 text-[14.5px] font-medium text-paper transition-colors hover:bg-pine-2">
+              {p.cta}
+              <span aria-hidden>→</span>
+            </a>
+          </Reveal>
+        ))}
       </div>
     </Section>
   );

@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 
-export type RingSegment = { id: string; label: string; start: number; end: number };
+export type RingSegment = { id: string; label?: string; start: number; end: number };
 
 const R_OUTER = 40;
 const R_INNER = 33;
