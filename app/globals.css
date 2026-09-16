@@ -1,26 +1,138 @@
 @import "tailwindcss";
 
+/* ---- Arclin design tokens ----------------------------------------
+   Paper (washi) surfaces, ink text, pine accent, ember for alerts,
+   and a dark "console" family for the dashboard-style panels.
+------------------------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #efece2;
+  --paper-2: #e6e2d3;
+  --paper-3: #d9d4c2;
+  --ink: #171b1a;
+  --ink-2: #3d423f;
+  --ink-3: #6d726d;
+  --pine: #1e4d46;
+  --pine-2: #2e6b61;
+  --pine-3: #9dbfb6;
+  --ember: #c4562f;
+  --console: #0e1614;
+  --console-2: #16221f;
+  --console-3: #1f2e2a;
+  --console-line: #2a3d37;
+  --console-text: #dce5e1;
+  --console-muted: #7f948d;
+  --signal: #6fd3b4;
+  --signal-2: #f2c14e;
+  --line: color-mix(in oklab, var(--ink) 14%, transparent);
+  --line-strong: color-mix(in oklab, var(--ink) 32%, transparent);
+  --radius: 6px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-pine: var(--pine);
+  --color-pine-2: var(--pine-2);
+  --color-pine-3: var(--pine-3);
+  --color-ember: var(--ember);
+  --color-console: var(--console);
+  --color-console-2: var(--console-2);
+  --color-console-3: var(--console-3);
+  --color-console-line: var(--console-line);
+  --color-console-text: var(--console-text);
+  --color-console-muted: var(--console-muted);
+  --color-signal: var(--signal);
+  --color-signal-2: var(--signal-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --font-sans: var(--font-body), "Hiragino Sans", "PingFang SC", sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-display: var(--font-display), Georgia, serif;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+html[lang="ja"] { --font-body: var(--font-ja); }
+html[lang="zh"] { --font-body: var(--font-zh); }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "palt" 1;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* paper grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection { background: var(--pine); color: var(--paper); }
+
+:focus-visible {
+  outline: 2px solid var(--pine);
+  outline-offset: 3px;
+}
+
+/* utilities */
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 76rem;
+  padding-inline: 1.25rem;
+  @media (width >= 40rem) { padding-inline: 2rem; }
+}
+@utility hairline { border-color: var(--line); }
+@utility tabular { font-variant-numeric: tabular-nums; }
+
+/* grid paper used behind console panels */
+.console-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--console-line) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--console-line) 55%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+@keyframes float-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+.anim-draw {
+  stroke-dasharray: var(--len, 1000);
+  stroke-dashoffset: var(--len, 1000);
+  animation: draw 2.4s var(--ease-out-expo) forwards;
+  animation-delay: var(--delay, 0s);
+}
+.anim-blink { animation: blink 1.6s ease-in-out infinite; }
+.anim-float { animation: float-y 5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .anim-draw { stroke-dashoffset: 0; animation: none; }
+  .anim-blink, .anim-float { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }

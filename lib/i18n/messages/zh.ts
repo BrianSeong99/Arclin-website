@@ -1,0 +1,225 @@
+/**
+ * 中文文案（草稿）。最终文案另行提供，替换本文件即可生效。
+ * 值为「确认中」的字段待登记信息 / 数据出处确定后更新。
+ */
+import type { Messages } from "./ja";
+
+export const zh: Messages = {
+  meta: {
+    title: "智渡仁 Arclin K.K. — 介护机器人日本本地化落地伙伴",
+    description:
+      "智渡仁（Arclin K.K.）是中国机器人企业进入日本介护市场的本地化落地伙伴。把防跌倒起身搀扶、饮食感应、语音模式提醒适配到日本介护现场。",
+    ogAlt: "Arclin K.K. — 介护机器人日本本地化落地伙伴",
+  },
+  common: {
+    demo: "演示数据／概念示意",
+    demoLong: "本面板的数值与动作均为前端模拟的演示效果，并非真实设备的实时数据。",
+    source: "出处・性质",
+    close: "关闭",
+    langSwitch: "日本語",
+    langSwitchTitle: "日本語に切り替え",
+    skip: "跳到正文",
+    company: "株式会社智渡仁",
+    companyEn: "Arclin K.K.",
+    tbd: "确认中",
+  },
+  nav: [
+    { id: "why-japan", label: "为什么是日本" },
+    { id: "walls", label: "六道墙" },
+    { id: "mimamori", label: "Mimamori" },
+    { id: "careos", label: "CareOS" },
+    { id: "value", label: "价值·指标" },
+    { id: "method", label: "落地方法" },
+    { id: "trust", label: "合规" },
+    { id: "partner", label: "合作" },
+    { id: "company", label: "公司概要" },
+    { id: "contact", label: "联系我们" },
+  ],
+  hero: {
+    eyebrow: "中国机器人企业进入日本介护市场的本地化落地伙伴",
+    headline: ["把中国的机器人，", "带进日本的介护现场。"],
+    latin: "Local adaptation partner for care robotics in Japan",
+    body:
+      "智渡仁是把优秀机器人变成日本介护机构「真正用得上」的落地伙伴。我们提供防跌倒的起身搀扶支撑，但抱起、转移等承重护理动作仍交由人工完成——在守住这条边界的前提下，把产品适配到现场。",
+    ctaPrimary: "我是介护机构",
+    ctaSecondary: "我是机器人企业",
+    meta: [
+      { k: "公司", v: "株式会社智渡仁 / Arclin K.K." },
+      { k: "设立", v: "确认中" },
+      { k: "所在地", v: "东京（确认中）" },
+    ],
+    illustrationAlt: "机器人搀扶老人起身的线条插画",
+    illustrationCaption: "起身瞬间的平衡支撑 — 不做搬运与转移",
+  },
+  whyJapan: {
+    num: "01",
+    title: "为什么是日本",
+    lead: "全球老龄化程度最高、介护人手最紧缺的市场。机器人「能派上用场」的空间，在这里最大。",
+    stats: [
+      { value: 29.3, suffix: "%", decimals: 1, label: "65岁以上人口占比", sub: "2024年9月", source: "日本总务省统计局《从统计看我国高龄者》（2024年）。※出处待最终核对。" },
+      { value: 13.8, prefix: "约", suffix: "万亿日元", decimals: 1, label: "介护保险年度总费用", sub: "2023年度（预算口径）", source: "厚生劳动省介护保险事业状况报告・介护给付费实态统计。※出处待最终核对。" },
+      { value: 57, prefix: "约", suffix: "万人", decimals: 0, label: "2040年度介护人员缺口", sub: "厚劳省推算", source: "厚生劳动省《基于第9期介护保险事业计划的介护人员需求》（2024年7月）。※出处待最终核对。" },
+    ],
+    trend: {
+      title: "65岁以上人口占比走势",
+      unit: "%",
+      note: "2025年起为推算值。基于国立社会保障・人口问题研究所《日本未来推算人口》的概算。※出处待最终核对。",
+      points: [
+        { year: 2000, value: 17.4 },
+        { year: 2005, value: 20.2 },
+        { year: 2010, value: 23.0 },
+        { year: 2015, value: 26.6 },
+        { year: 2020, value: 28.6 },
+        { year: 2025, value: 29.6 },
+        { year: 2030, value: 30.8 },
+        { year: 2040, value: 34.8 },
+      ],
+    },
+  },
+  walls: {
+    num: "02",
+    title: "我们解决的「跨境六道墙」",
+    lead: "好机器人为什么原样进不了日本介护现场——跨境落地必然撞上的六道障碍，由智渡仁接下来。",
+    items: [
+      { icon: "language", title: "语言与说明资料", body: "UI、语音、手册、合同。不是翻译，而是改写成介护人员一读就懂、不会迟疑的日语。" },
+      { icon: "regulation", title: "法规与认证", body: "电波法、PSE、ISO 13482。划清需要的认证范围，陪跑取证。" },
+      { icon: "workflow", title: "介护现场的业务流程", body: "夜间巡视、记录、交接班。把功能调整成能「插进」既有流程的形态。" },
+      { icon: "privacy", title: "个人信息与数据", body: "按 APPI（个人信息保护法）设计采集、保存、删除，并对本人与家属尽到说明义务。" },
+      { icon: "channel", title: "渠道与信任", body: "与机构、地方政府、维保公司建立关系。从零实绩做出第一单。" },
+      { icon: "ops", title: "本地运营与维保", body: "安装、培训、故障响应、更新。不让机器人被「放着不管」。" },
+    ],
+  },
+  mimamori: {
+    num: "03",
+    title: "产品场景 — Mimamori",
+    lead: "日间、傍晚、夜间。用四个分镜展示机器人在 24 小时内具体做什么。",
+    ringTitle: "24小时时间轴",
+    segments: [
+      { id: "day", label: "日间 — 陪伴巡视", start: 7, end: 17, desc: "巡视居室与公共区域，在起身和移动的瞬间靠近。" },
+      { id: "evening", label: "傍晚 — 饮食与饮水", start: 17, end: 21, desc: "感应进食与饮水量，留下记录。" },
+      { id: "night", label: "夜间 — 巡逻", start: 21, end: 7, desc: "静音巡逻，异常模式通知护理人员。" },
+    ],
+    scenes: [
+      { id: "patrol", title: "巡回定位", body: "在时间轴上显示当前时段与所在位置。机器人沿既定路线安静巡视。" },
+      { id: "standup", title: "起身检测与搀扶", body: "检测到从床或椅子起身即趋近，在站起的瞬间提供平衡支撑，防止跌倒。不抱起、不转移。" },
+      { id: "intake", title: "饮食感应", body: "通过杯盘下方的重量变化推算饮水量与进食量，转为记录图标。" },
+      { id: "voice", title: "语音模式提醒", body: "不记录对话内容，只检测发话模式的变化。异常时通知介护人员做专业复核，不由机器人下诊断。" },
+    ],
+    footnote: "本节的时间轴、数值与动作均为概念示意，不构成对实机行为的保证。语音仅做模式检测，不记录、不判断对话内容。",
+  },
+  careos: {
+    num: "04",
+    title: "方案架构 — CareOS",
+    lead: "机器人本体的知识产权归合作企业，日本适配层归智渡仁。边界清晰的四层架构。",
+    ipLabel: "IP 边界",
+    ipPartner: "合作企业 IP",
+    ipArclin: "智渡仁 IP・服务",
+    layers: [
+      { id: "platform", name: "中国机器人平台", owner: "partner" as const, body: "硬件、底层控制、SLAM。由合作企业持有。" },
+      { id: "careos", name: "CareOS 核心", owner: "arclin" as const, body: "介护场景行为逻辑、安全边界、日语 UI/语音。" },
+      { id: "bridge", name: "CareBridge 连接模块", owner: "arclin" as const, body: "对接介护记录软件、呼叫系统、机构 Wi-Fi。" },
+      { id: "ops", name: "日本现场运营", owner: "arclin" as const, body: "安装、培训、维保、APPI 合规。由人承担的一层。" },
+    ],
+  },
+  value: {
+    num: "05",
+    title: "客户价值与验收指标",
+    lead: "给三方各自可衡量的价值。导入时以数值约定验收标准。",
+    parties: [
+      { title: "介护机构", body: "减轻夜间巡视与看护负担，自动化记录，有助于降低跌倒风险。" },
+      { title: "机器人企业", body: "最短路径拿到日本首个落地实绩。法规、渠道、运营可整体委托。" },
+      { title: "现场人员与住户", body: "不是「替你做」，而是「在旁支撑」。不剥夺人的护理角色。" },
+    ],
+    kpiTitle: "验收指标示例",
+    kpis: [
+      { id: "noise", label: "夜间运行噪声", value: 42, target: 45, unit: "dB", direction: "below" as const, desc: "目标 ≤ 45 dB（居室相邻区域）" },
+      { id: "detect", label: "起身检测准确率", value: 96, target: 95, unit: "%", direction: "above" as const, desc: "目标 ≥ 95%（现场验证阶段）" },
+      { id: "uptime", label: "运行可用率", value: 92, target: 90, unit: "%", direction: "above" as const, desc: "目标 ≥ 90%（不含充电时间）" },
+    ],
+    footnote: "指标与数值均为示例（演示数据）。实际验收标准按机构与机型逐一协商确定。",
+  },
+  method: {
+    num: "06",
+    title: "落地方法",
+    lead: "四步从需求确认走到正式上线。每一步的完成条件事先约定。",
+    steps: [
+      { id: "confirm", title: "需求确认", body: "梳理机构痛点、动线、既有系统、法规要求。" },
+      { id: "localize", title: "本地化开发", body: "CareOS/CareBridge 适配开发、日语化、认证对应。" },
+      { id: "verify", title: "现场验证", body: "在限定区域试运行，测量验收指标。" },
+      { id: "launch", title: "正式上线", body: "全馆部署、人员培训、建立维保与更新机制。" },
+    ],
+  },
+  trust: {
+    num: "07",
+    title: "合规与信任",
+    lead: "不求炫，求确定。公开四项原则，明示认证取得范围。",
+    items: [
+      { icon: "privacy", title: "隐私（APPI）", body: "书面化采集数据种类、保存期限与删除流程，以本人与家属同意为前提。语音不保存内容。" },
+      { icon: "safety", title: "人身安全（ISO 13482）", body: "起身搀扶涉及身体接触。按对应安全类别设计，并公开已取得认证的范围。（取得状况：确认中）" },
+      { icon: "radio", title: "无线与电气（电波法・PSE）", body: "确认在日本使用的无线模块与电源适配后再导入。" },
+      { icon: "network", title: "网络运营", body: "与机构网络隔离、更新签名校验、日志留存。" },
+    ],
+  },
+  partner: {
+    num: "08",
+    title: "合作方式",
+    lead: "两类合作对象，各有各的入口。",
+    paths: [
+      {
+        id: "robotics",
+        title: "机器人企业",
+        tag: "中国・海外厂商",
+        summary: "整体委托日本市场落地",
+        details: ["面向日本市场的需求定义与适配开发", "法规・认证取得陪跑", "拿下首家导入机构并负责现场运营", "代理维保、更新与咨询窗口"],
+      },
+      {
+        id: "facility",
+        title: "介护机构",
+        tag: "特养・老健・收费养老院",
+        summary: "导入已适配的机器人并运营",
+        details: ["按痛点选型", "限定区域试导入", "人员培训与流程嵌入", "持续维保与改进"],
+      },
+    ],
+    pricing: "费用依项目范围洽谈。",
+  },
+  fit: {
+    num: "09",
+    title: "适合的合作机构",
+    lead: "并非所有机构都适合。符合以下条目越多，越容易出成果。",
+    items: [
+      "夜间巡视与看护的人力负担已成为经营课题",
+      "能配合在限定区域做试导入",
+      "馆内有 Wi-Fi 环境，并在使用记录软件",
+      "愿意向住户与家属说明并取得同意",
+      "拥有量产机型并认真投入日本市场（机器人企业）",
+    ],
+  },
+  company: {
+    num: "10",
+    title: "公司概要",
+    rows: [
+      { k: "公司名", v: "株式会社智渡仁（Arclin K.K.）" },
+      { k: "设立", v: "确认中" },
+      { k: "所在地", v: "确认中" },
+      { k: "代表者", v: "确认中" },
+      { k: "资本金", v: "确认中" },
+      { k: "事业内容", v: "介护机器人面向日本市场的本地化、导入支持与现场运营" },
+    ],
+    registry: "登记信息可通过日本国税厅法人番号公表网站查询。",
+  },
+  contact: {
+    num: "11",
+    title: "联系我们",
+    lead: "机构参观咨询、机型带入咨询，均可通过邮件联系。",
+    email: "contact@arclin.jp",
+    emailNote: "（域名确认中）",
+    address: "东京都（地址确认中）",
+    cta: "发送邮件",
+  },
+  footer: {
+    disclaimer:
+      "具体报价与费率以项目范围、双方洽谈结果及正式签署的协议为准。我们卖的不是「通用化产品」，而是「通用化适配能力」。登记信息可通过日本国税厅法人番号公表网站查询。",
+    demoNote: "本站内的仪表盘、时间轴与数值面板均为前端模拟的演示数据／概念示意，并非真实设备的实时数据。",
+    rights: "© {year} Arclin K.K. All rights reserved.",
+  },
+};

@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Arclin K.K. (株式会社智渡仁) — corporate website
 
-## Getting Started
+Single-page, bilingual (JA / ZH) marketing site for Arclin K.K., the Japan localisation partner
+for Chinese care-robotics companies. Static export, no backend.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router, `output: "export"`) · React 19 · TypeScript
+- Tailwind CSS v4 with design tokens in `app/globals.css`
+- `motion` for scroll / in-view animation (all honour `prefers-reduced-motion`)
+- Storybook 10 (`@storybook/nextjs-vite`) for every component and section
+- pnpm
+
+## Commands
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev              # http://localhost:3000 → redirects to /ja/ or /zh/
+pnpm build            # static export to ./out
+pnpm lint
+pnpm storybook        # http://localhost:6006
+pnpm build-storybook  # ./storybook-static
+node scripts/og.mjs   # regenerate public/og-{ja,zh}.png after changing hero copy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Layout
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/
+  (redirect)/page.tsx   root: remembers / detects locale, redirects to /ja/ or /zh/
+  [locale]/             /ja/ and /zh/ — per-locale <html lang>, metadata, OG
+  sitemap.ts robots.ts icon.svg
+lib/i18n/
+  messages/ja.ts        all Japanese copy (source of truth for the shape)
+  messages/zh.ts        all Chinese copy (typed against ja)
+  context.tsx           LocaleProvider / useLocale()
+components/
+  ui/        button, badge, demo-tag, footnote
+  site/      nav, footer, wordmark, locale toggle, section chrome, reveal
+  viz/       count-up, trend-line, donut-gauge, ring-timeline, flow-steps, layer-stack, illustrations
+  sections/  the 12 page sections in order
+scripts/     og.mjs (OG images), shot*.mjs (Playwright screenshot helpers)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Editing copy
 
-## Learn More
+All visible text lives in `lib/i18n/messages/{ja,zh}.ts`. Values marked `確認中` / `确认中`
+(company registration, address, email domain, certification status) are placeholders awaiting
+confirmation. Statistic footnotes (`source`) must be finalised before launch.
 
-To learn more about Next.js, take a look at the following resources:
+## Content rules (from the brief)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Every simulated dashboard / timeline / KPI carries the 「演示データ／概念図」 tag — keep it.
+- No fundraising amounts, financial models, equity, pricing ranges, competitor matrices, or
+  internal milestone terminology.
+- Wording: the robot provides *balance support at the moment of standing* (fall prevention);
+  it does not lift, carry or transfer. Voice = pattern alert reviewed by staff, never a diagnosis.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Static output in `out/`. Vercel: framework preset Next.js, build `pnpm build`. Domain TBD
+(`arclin.ai` / `arclin.jp`); `SITE` in `app/[locale]/layout.tsx`, `sitemap.ts` and `robots.ts`
+must be updated once the domain is confirmed.
