@@ -96,5 +96,6 @@
       "/lib/i18n/"
     ]
   },
-  "readmeHeader": ".design-sync/conventions.md"
+  "readmeHeader": ".design-sync/conventions.md",
+  "projectId": "c37eeb81-adf0-40ca-8bec-45a4915f3e44"
 }
