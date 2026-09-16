@@ -16,7 +16,7 @@ const detect = `
       if(s.indexOf('zh')===0){l='zh';break}
       if(s.indexOf('ja')===0){l='ja';break}}
   }
-  var base=location.pathname.replace(/\/(index\.html)?$/,'');
+  var base=location.pathname.replace(/\\/(index\\.html)?$/,'');
   location.replace(base+'/'+l+'/');
 })();`;
 
