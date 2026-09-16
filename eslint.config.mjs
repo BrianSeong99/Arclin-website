@@ -15,6 +15,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "dist/**",
+    "storybook-static/**",
+    ".ds-sync/**",
+    "ds-bundle/**",
+    ".design-sync/**",
   ]),
   ...storybook.configs["flat/recommended"]
 ]);

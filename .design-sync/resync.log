@@ -1,0 +1,107 @@
+{
+  "version": 2,
+  "ok": true,
+  "shape": "storybook",
+  "anchor": "not_provided",
+  "learningsUnmerged": [],
+  "stages": {
+    "build": {
+      "ok": true,
+      "exit": 0,
+      "skipped": null
+    },
+    "diff": {
+      "ok": true,
+      "exit": 0,
+      "skipped": null
+    },
+    "validate": {
+      "ok": true,
+      "exit": 0,
+      "skipped": null
+    },
+    "capture": {
+      "ok": true,
+      "exit": 0,
+      "skipped": null
+    }
+  },
+  "verification": {
+    "unchanged": [],
+    "changed": [],
+    "added": [
+      "Badge",
+      "Button",
+      "CareOS",
+      "Company",
+      "Contact",
+      "CountUp",
+      "DemoTag",
+      "DonutGauge",
+      "Fit",
+      "FlowSteps",
+      "Footer",
+      "Footnote",
+      "Hero",
+      "HeroIllustration",
+      "LayerStack",
+      "LocaleToggle",
+      "Method",
+      "Mimamori",
+      "Nav",
+      "Partner",
+      "Reveal",
+      "RingTimeline",
+      "SceneIllustration",
+      "SectionHeading",
+      "TrendLine",
+      "Trust",
+      "Value",
+      "Walls",
+      "WhyJapan",
+      "Wordmark"
+    ],
+    "removed": [],
+    "pendingGrade": [],
+    "canary": null
+  },
+  "upload": {
+    "any": true,
+    "components": [
+      "Badge",
+      "Button",
+      "CareOS",
+      "Company",
+      "Contact",
+      "CountUp",
+      "DemoTag",
+      "DonutGauge",
+      "Fit",
+      "FlowSteps",
+      "Footer",
+      "Footnote",
+      "Hero",
+      "HeroIllustration",
+      "LayerStack",
+      "LocaleToggle",
+      "Method",
+      "Mimamori",
+      "Nav",
+      "Partner",
+      "Reveal",
+      "RingTimeline",
+      "SceneIllustration",
+      "SectionHeading",
+      "TrendLine",
+      "Trust",
+      "Value",
+      "Walls",
+      "WhyJapan",
+      "Wordmark"
+    ],
+    "deletePaths": [],
+    "bundle": true,
+    "styling": true,
+    "aux": true
+  }
+}

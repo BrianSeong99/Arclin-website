@@ -1,0 +1,100 @@
+{
+  "pkg": "arclin-website",
+  "globalName": "Arclin",
+  "shape": "storybook",
+  "storybookConfigDir": ".storybook",
+  "storybookStatic": ".design-sync/sb-reference",
+  "buildCmd": "pnpm build:ds",
+  "entry": "dist/index.js",
+  "cssEntry": "dist/index.css",
+  "tsconfig": "tsconfig.json",
+  "srcDir": "components",
+  "provider": {
+    "component": "LocaleProvider",
+    "props": {
+      "locale": "ja"
+    }
+  },
+  "overrides": {
+    "DonutGauge": {
+      "cardMode": "column"
+    },
+    "Nav": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x160"
+    },
+    "Hero": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "WhyJapan": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "Walls": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "Mimamori": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "CareOS": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "Value": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "Method": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "Trust": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "Partner": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "Fit": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "Company": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "Contact": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "Footer": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    }
+  },
+  "storyImports": {
+    "shim": [
+      "/components/",
+      "/lib/i18n/"
+    ]
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}

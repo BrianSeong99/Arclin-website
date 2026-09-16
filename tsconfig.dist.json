@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "outDir": "dist/types",
+    "rootDir": ".",
+    "incremental": false
+  },
+  "include": ["lib/ds/index.ts", "next-env.d.ts"],
+  "exclude": ["node_modules", ".next", "out", "dist", "**/*.stories.tsx", ".storybook", "scripts"]
+}

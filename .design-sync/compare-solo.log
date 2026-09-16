@@ -1,0 +1,7 @@
+○ [COMPARE] Button: 5 needs-grade — grade keys: "Primary", "Outline", "Ghost", "Sizes", "Console"
+○ [COMPARE] DonutGauge: 2 needs-grade — grade keys: "Console", "Paper"
+○ [COMPARE] Hero: 1 needs-grade — grade keys: "Default"
+○ [COMPARE] Mimamori: 1 needs-grade — grade keys: "Default"
+
+compare: 4 component(s) — 0 carried forward unchanged, 4 captured, 0 with factual failures, 4 awaiting your grade
+Grade from the true images: Read each _screenshots/compare/<group>__<Name>.png sheet (raw/ PNGs are the full-res authority), then Write the verdicts to .design-sync/.cache/compare/<Name>.grade.json (a recapture clears the old grade — its contract changed).

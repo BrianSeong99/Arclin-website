@@ -1,0 +1,16 @@
+  .ds-build-meta.json: 30 components (storybook)
+  _ds_bundle.js: 577 KB, syntax OK
+  _ds_bundle.js header: window.Arclin, 30 components, 0 inlined externals
+  _ds_sync.json: 30 render hash(es), anchor matches the bundle
+  _ds_sync.json render hashes match disk (30 recomputed)
+  styles.css: 2 @import(s), all resolve
+  _ds_bundle.css: 31 KB
+  tokens: 104 defined, 74 referenced
+  [FONT_REMOTE] "Zen Kaku Gothic New" (--font-ja) — a remote font-host @import is present; assuming it serves these at runtime
+  components/: 30 previews, 30 .prompt.md
+  all .d.ts parse cleanly
+  window.Arclin: 39 exports (30 fn + 0 compound)
+  render check: 30/30 previews render cleanly (screenshots in _screenshots/)
+  contact sheets: 2 sheet(s) → _screenshots/contact-sheet-1.png … contact-sheet-2.png
+
+✓ bundle is complete
