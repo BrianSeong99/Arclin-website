@@ -8,10 +8,8 @@ for Chinese care-robotics companies. Static export, no backend.
 - Next.js 16 (App Router, `output: "export"`) · React 19 · TypeScript
 - Tailwind CSS v4 with design tokens in `app/globals.css`
 - `motion` for scroll / in-view animation (all honour `prefers-reduced-motion`)
-- React Three Fiber + drei for the procedural 3D hero (`components/viz/hero-scene.tsx`); it lazy-loads
-  after first paint behind the SVG illustration and falls back to the SVG without WebGL
-- React Three Fiber + drei for the procedural 3D hero (`components/viz/hero-scene.tsx`); it lazy-loads
-  after first paint behind the SVG illustration and falls back to the SVG without WebGL
+- All visuals are SVG + Motion (`components/viz/floor-plan.tsx`, `iso-stack.tsx`, gauges, ring); no WebGL
+- All visuals are SVG + Motion (`components/viz/floor-plan.tsx`, `iso-stack.tsx`, gauges, ring); no WebGL
 - Storybook 10 (`@storybook/nextjs-vite`) for every component and section
 - pnpm
 

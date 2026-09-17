@@ -95,7 +95,7 @@ export function Nav() {
         <span className="flex-1 lg:hidden" />
         <div className="flex flex-none items-center gap-2 lg:gap-3">
           {localePill}
-          <a href="#contact" className="hidden whitespace-nowrap rounded-md bg-pine px-3.5 py-[9px] text-[13.5px] font-medium text-paper transition-colors hover:bg-pine-2 lg:inline-block">
+          <a href="#contact" className="hidden h-9 items-center whitespace-nowrap rounded-full bg-ink px-4 text-[13px] font-medium text-paper transition-colors hover:bg-pine lg:inline-flex">
             {t.navContact}
           </a>
           <button
@@ -130,7 +130,7 @@ export function Nav() {
               {it.label}
             </a>
           ))}
-          <a href="#contact" onClick={() => setOpen(false)} className="mt-4 mb-2 flex items-center justify-center rounded-md bg-pine py-3 text-[15px] font-medium text-paper">
+          <a href="#contact" onClick={() => setOpen(false)} className="mt-4 mb-2 flex items-center justify-center rounded-full bg-ink py-3 text-[15px] font-medium text-paper">
             {t.navContact}
           </a>
         </nav>

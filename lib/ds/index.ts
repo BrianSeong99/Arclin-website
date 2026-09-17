@@ -34,6 +34,10 @@ export { LayerStack } from "../../components/viz/layer-stack";
 export type { Layer } from "../../components/viz/layer-stack";
 export { HeroIllustration } from "../../components/viz/hero-illustration";
 export { SceneIllustration } from "../../components/viz/mimamori-scenes";
+export { FloorPlan } from "../../components/viz/floor-plan";
+export { IsoStack } from "../../components/viz/iso-stack";
+export { SplitFlap } from "../../components/viz/split-flap";
+export { Crosshairs } from "../../components/site/crosshairs";
 export type { SceneId } from "../../components/viz/mimamori-scenes";
 
 export { Hero } from "../../components/sections/hero";

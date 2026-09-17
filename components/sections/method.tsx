@@ -26,14 +26,18 @@ export function Method() {
             </div>
           </Reveal>
         </div>
-        <ol className="border-t border-line">
+        <ol className="grid overflow-hidden rounded-2xl border border-line-strong bg-paper sm:grid-cols-2">
           {t.steps.map((s, i) => (
-            <Reveal key={s.id} delay={i * 0.08}>
-              <li className="group grid grid-cols-[3.5rem_1fr] items-start gap-6 border-b border-line py-9 transition-colors sm:grid-cols-[6rem_1fr] sm:py-11">
-                <span className="font-display text-[clamp(40px,4.5vw,64px)] leading-[0.85] tracking-[-0.03em] text-pine transition-transform duration-500 ease-out-expo group-hover:translate-x-1">{String(i + 1).padStart(2, "0")}</span>
+            <Reveal key={s.id} delay={i * 0.08} className="group relative border-b border-line p-7 transition-colors hover:bg-paper-2/60 sm:[&:nth-child(odd)]:border-r sm:[&:nth-last-child(-n+2)]:border-b-0 [&:last-child]:border-b-0">
+              <li className="grid content-between gap-6 sm:min-h-[200px] sm:gap-8">
+                <div className="flex items-center justify-between font-mono text-[10.5px] tracking-[0.18em] text-ink-3">
+                  <span>{i + 1}.0 · STEP</span>
+                  <span aria-hidden className="size-1.5 rotate-45 rounded-[1px] bg-pine opacity-0 transition-opacity group-hover:opacity-100" />
+                </div>
                 <div>
-                  <h3 className="text-[clamp(22px,2.2vw,30px)] font-medium leading-[1.3]">{s.title}</h3>
-                  <p className="mt-3 max-w-[36em] text-pretty text-ink-2">{s.body}</p>
+                  <div className="font-display text-[clamp(40px,4vw,56px)] font-semibold leading-none tracking-[-0.04em] text-ink">{String(i + 1).padStart(2, "0")}</div>
+                  <h3 className="mt-4 text-[clamp(20px,1.8vw,24px)] font-semibold leading-[1.3] tracking-[-0.01em]">{s.title}</h3>
+                  <p className="mt-2 max-w-[30em] text-pretty text-[14.5px] text-ink-2">{s.body}</p>
                 </div>
               </li>
             </Reveal>

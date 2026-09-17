@@ -15,7 +15,7 @@ export function Company() {
             <Kicker>{t.companyLabel}</Kicker>
           </Reveal>
           <Reveal>
-            <p className="mt-6 max-w-[18em] font-display text-[clamp(24px,2.6vw,32px)] italic leading-[1.35] text-ink">{t.companyTagline}</p>
+            <p className="mt-6 max-w-[18em] font-display text-[clamp(22px,2.4vw,30px)] font-semibold leading-[1.3] tracking-[-0.02em] text-ink">{t.companyTagline}</p>
           </Reveal>
           <Reveal>
             <p className="mt-4 max-w-[30em] text-pretty text-ink-2">{t.companyBody}</p>

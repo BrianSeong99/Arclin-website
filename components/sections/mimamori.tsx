@@ -8,6 +8,8 @@ import { Section, Kicker, Heading } from "@/components/site/section";
 import { Reveal } from "@/components/site/reveal";
 import { RingTimeline } from "@/components/viz/ring-timeline";
 import { SceneIllustration, type SceneId } from "@/components/viz/mimamori-scenes";
+import { FloorPlan } from "@/components/viz/floor-plan";
+import { Crosshairs } from "@/components/site/crosshairs";
 import { SplitFlap } from "@/components/viz/split-flap";
 import { DemoTag } from "@/components/ui/demo-tag";
 import { cn } from "@/lib/utils";
@@ -72,8 +74,9 @@ export function Mimamori() {
   const clock = `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}`;
 
   const stage = (
-    <div className="console-grid rounded-2xl border border-console-line bg-console-2/60 p-5 sm:p-7">
-      <div className="mx-auto max-w-[400px]">
+    <div className="blueprint-grid relative rounded-2xl border border-console-line bg-console-2/60 p-5 sm:p-7">
+      <Crosshairs tone="console" />
+      <div className="mx-auto max-w-[360px]">
         <RingTimeline
           segments={RING_SEGMENTS}
           activeId={segId}
@@ -87,14 +90,18 @@ export function Mimamori() {
           }
         />
       </div>
-      <div className="mt-5 overflow-hidden rounded-xl border border-console-line bg-console">
-        <SceneIllustration id={SCENE_FOR_SEG[segId] as SceneId} />
+      <div className="mt-5 overflow-hidden rounded-xl border border-console-line bg-console px-3 pt-2">
+        <div className="flex items-center justify-between px-1 pb-1 font-mono text-[9.5px] tracking-[0.18em] text-console-muted">
+          <span>FLOOR 2 · {seg.range}</span>
+          <span className="text-signal">{SCENE_FOR_SEG[segId].toUpperCase()}</span>
+        </div>
+        <FloorPlan tone="console" focus={segId} compact />
       </div>
     </div>
   );
 
   return (
-    <Section id="mimamori" tone="console" num="04">
+    <Section id="mimamori" tone="console" num="04" className="blueprint-grid">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <Reveal>
           <Kicker tone="console">{t.mimaLabel}</Kicker>
@@ -137,7 +144,7 @@ export function Mimamori() {
               <div className="font-mono text-[11px] tracking-[0.2em] text-signal">{String(i + 1).padStart(2, "0")} · {s.range}</div>
               <h3 className="mt-4 text-[clamp(24px,2.6vw,34px)] font-medium leading-[1.3] text-console-text">{s.title}</h3>
               <p className="mt-4 max-w-[30em] text-pretty text-console-muted">{s.body}</p>
-              <p className="mt-6 font-display text-2xl italic text-signal">{s.quote}</p>
+              <p className="mt-6 font-display text-2xl font-medium tracking-[-0.01em] text-signal">{s.quote}</p>
             </div>
           ))}
         </div>
@@ -145,7 +152,7 @@ export function Mimamori() {
         <div className="lg:hidden">
           <h3 className="text-[22px] font-medium text-console-text">{seg.title}</h3>
           <p className="mt-2.5 text-pretty text-console-muted">{seg.body}</p>
-          <p className="mt-3.5 font-display text-xl italic text-signal">{seg.quote}</p>
+          <p className="mt-3.5 font-display text-xl font-medium tracking-[-0.01em] text-signal">{seg.quote}</p>
         </div>
       </div>
 

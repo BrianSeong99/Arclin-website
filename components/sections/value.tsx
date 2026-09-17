@@ -6,6 +6,7 @@ import { Section, SectionHeading } from "@/components/site/section";
 import { Reveal } from "@/components/site/reveal";
 import { DonutGauge } from "@/components/viz/donut-gauge";
 import { DemoTag } from "@/components/ui/demo-tag";
+import { Crosshairs } from "@/components/site/crosshairs";
 
 export function Value() {
   const { t } = useLocale();
@@ -13,24 +14,26 @@ export function Value() {
   return (
     <Section id="value" num="06">
       <SectionHeading label={t.valueLabel} lines={t.valueH2} />
-      <div className="mt-12 grid gap-x-10 gap-y-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
+      <Reveal amount="some" className="mt-12 grid overflow-hidden rounded-2xl border border-line-strong bg-paper-2/60 md:grid-cols-3">
         {t.values.map((v, i) => (
-          <Reveal key={v.kicker} delay={i * 0.1} className="border-t-2 border-pine pt-5">
+          <div key={v.kicker} className="border-b border-line p-7 md:border-b-0 md:border-r md:last:border-r-0">
             <div className="font-mono text-[11px] tracking-[0.18em] text-ink-3">{v.kicker}</div>
             <h3 className="mb-4 mt-1.5 text-[22px] font-medium">{v.title}</h3>
             {v.items.map((it) => (
               <div key={it.h} className="grid grid-cols-[auto_1fr] gap-3 border-t border-line py-2.5 text-[14.5px]">
-                <span aria-hidden className="mt-[9px] size-2 rounded-full bg-pine-3" />
+                <span aria-hidden className="mt-[9px] size-1.5 rotate-45 rounded-[1px] bg-pine" />
                 <div>
                   <div className="font-medium">{it.h}</div>
                   <div className="mt-0.5 text-[13.5px] text-ink-2">{it.b}</div>
                 </div>
               </div>
             ))}
-          </Reveal>
+            <span className="sr-only">{i}</span>
+          </div>
         ))}
-      </div>
-      <Reveal amount="some" className="console-grid mt-16 overflow-hidden rounded-2xl border border-console-line bg-console text-console-text shadow-[0_30px_60px_-40px_rgba(14,22,20,.6)]">
+      </Reveal>
+      <Reveal amount="some" className="blueprint-grid relative mt-6 overflow-hidden rounded-2xl border border-console-line bg-console text-console-text shadow-[0_30px_60px_-40px_rgba(14,22,20,.6)]">
+        <Crosshairs tone="console" />
         <div className="flex items-center gap-2 border-b border-console-line px-5 py-2.5 font-mono text-[10px] tracking-[0.18em] text-console-muted">
           <span aria-hidden className="size-2 rounded-full bg-signal-2/70" /><span aria-hidden className="size-2 rounded-full bg-console-line" /><span aria-hidden className="size-2 rounded-full bg-console-line" />
           <span className="ml-3">ARCLIN · PILOT DASHBOARD</span>

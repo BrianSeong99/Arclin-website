@@ -32,16 +32,16 @@ export function Section({ tone = "paper", num, className, children, ...props }: 
 
 /** Mono kicker with a leading rule: "── なぜ日本か". */
 export function Kicker({ children, tone = "paper", className }: { children: ReactNode; tone?: "paper" | "console"; className?: string }) {
-  const c = tone === "console" ? "text-signal" : "text-pine";
+  const c = tone === "console" ? "text-console-muted" : "text-ink-3";
   return (
-    <div className={cn("flex items-center gap-3 font-mono text-xs tracking-[0.2em]", c, className)}>
-      <span aria-hidden className={cn("h-px w-8", tone === "console" ? "bg-signal" : "bg-pine")} />
+    <div className={cn("flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em]", c, className)}>
+      <span aria-hidden className={cn("size-[7px] rotate-45 rounded-[1.5px]", tone === "console" ? "bg-signal" : "bg-pine")} />
       {children}
     </div>
   );
 }
 
-export const h2Class = "text-[clamp(25px,3.6vw,44px)] leading-[1.3] font-medium tracking-[-0.01em] text-balance";
+export const h2Class = "text-[clamp(26px,3.6vw,46px)] leading-[1.2] font-semibold tracking-[-0.025em] text-balance";
 
 /** Section title; pass two lines to force the designed line break. */
 export function Heading({ lines, className, as: Tag = "h2" }: { lines: [string, string?] | string; className?: string; as?: "h1" | "h2" | "p" }) {

@@ -45,3 +45,22 @@ New: `ScrollPath` (page-level SVG, `useScroll` progress → `pathLength`), `Spli
 Build + lint clean; Playwright full-page shots ja/zh × desktop/mobile with no console errors;
 reduced-motion shot shows every section complete; Lighthouse mobile LCP < 2.5 s on the Pages
 preview. Storybook stories added for each new component; design-sync re-run after.
+
+## Direction B — "Frontier blueprint" (supersedes A, approved 2026-09-17)
+
+References: Vercel (fine grid, crosshair corners, monochrome type, bento), Dovetail (dark blueprint
+sections, wire-isometric line art), aside.com (off-white base, bold sans, product-card visuals).
+
+- Palette sharpened, not replaced: paper `#f6f4ee` / `#efede6`, ink `#0f1412`, pine unchanged as
+  the only accent, console true near-black `#0b0f0e`; hairlines at 10% / 22% ink.
+- Type: Geist (Latin/numerals) + Geist Mono (labels); serif display dropped. JA/ZH fonts unchanged.
+- Graphics: 3D robot removed (with three/R3F deps). New system visuals, all SVG + Motion:
+  `FloorPlan` (isometric care-floor wireframe, live patrol path, event pings, room labels; `focus`
+  lights a zone), `IsoStack` (wire layer stack with ember boundary planes, hover-linked to the ledger),
+  `Crosshairs` frame marks. `SceneIllustration` kept for the three Mimamori story cards.
+- Layouts: centered grid hero with a framed "MIMAMORI · FLOOR 2 · LIVE" stage and telemetry chips;
+  bento for Why Japan (3 numbers + chart), Bridge (dark blueprint centre cell), Value (3 parties +
+  dashboard card); Linear-style 2×2 Method grid; comparison table, Trust grid, ledger, partner cards
+  tightened to hairlines; contact as near-black band with pine glow; giant 智渡仁 footer in Geist.
+- Mobile: single-row header + menu sheet, stacked comparison rows, 2-up gauges, everything validated
+  by screenshot at 390px before each push.

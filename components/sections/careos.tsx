@@ -1,14 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
-import { useInView, useReducedMotion } from "motion/react";
 import { useLocale } from "@/lib/i18n/context";
 import { Section, Kicker, Heading } from "@/components/site/section";
 import { Reveal } from "@/components/site/reveal";
 import { LayerStack } from "@/components/viz/layer-stack";
+import { IsoStack } from "@/components/viz/iso-stack";
+import { Crosshairs } from "@/components/site/crosshairs";
 
-const CareOSStack = dynamic(() => import("@/components/viz/careos-stack").then((m) => m.CareOSStack), { ssr: false });
 
 const row = "flex justify-between bg-paper px-4 py-3";
 const mono = "font-mono text-[10px] tracking-[0.14em]";
@@ -16,12 +15,8 @@ const mono = "font-mono text-[10px] tracking-[0.14em]";
 /** Exploded isometric layer stack (3D, scroll-driven) beside the accessible layer list. */
 export function CareOS() {
   const { t } = useLocale();
-  const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
-  const exploded = useInView(ref, { once: true, amount: 0.4 });
   const [active, setActive] = useState<string | null>(null);
-  // 3D stack is bottom→top; the list reads top (L4) → bottom (L1)
-  const stackLayers = [...t.layers].reverse().map((l) => ({ id: l.id, owner: l.owner }));
 
   return (
     <Section id="careos" tone="paper-2" num="05">
@@ -37,9 +32,10 @@ export function CareOS() {
         </Reveal>
       </div>
       <div ref={ref} className="mt-14 grid items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-14">
-        <Reveal amount="some" className="relative aspect-square w-full overflow-hidden rounded-2xl border border-line bg-paper lg:sticky lg:top-28 [background-image:linear-gradient(var(--paper-3)_1px,transparent_1px),linear-gradient(90deg,var(--paper-3)_1px,transparent_1px)] [background-size:36px_36px]">
-          <CareOSStack layers={stackLayers} exploded={exploded} animate={!reduce} activeId={active} onActiveChange={setActive} className="!h-full !w-full" />
-          <div className="pointer-events-none absolute inset-x-4 bottom-3 flex justify-between font-mono text-[10px] tracking-[0.16em] text-ink-3">
+        <Reveal amount="some" className="fine-grid relative w-full overflow-hidden rounded-2xl border border-line-strong bg-paper p-6 lg:sticky lg:top-28">
+          <Crosshairs />
+          <IsoStack layers={t.layers} activeId={active} onActiveChange={setActive} />
+          <div className="pointer-events-none mt-2 flex justify-between font-mono text-[10px] tracking-[0.16em] text-ink-3">
             <span>{t.layerLabels.arclin} · {t.layerLabels.partner}</span>
             <span className="text-ember">{t.careIpBoundary}</span>
           </div>

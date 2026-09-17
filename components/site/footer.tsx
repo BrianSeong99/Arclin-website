@@ -17,7 +17,7 @@ export function Footer() {
         </svg>
       </div>
       <div className="container-x overflow-hidden pt-2" aria-hidden>
-        <div className="select-none whitespace-nowrap font-display text-[clamp(96px,22vw,340px)] leading-[0.95] tracking-[-0.03em] text-console-text/[0.08]">智渡仁</div>
+        <div className="select-none whitespace-nowrap font-display text-[clamp(96px,22vw,340px)] font-semibold leading-[0.95] tracking-[-0.05em] text-console-text/[0.07]">智渡仁</div>
       </div>
       <div className="container-x grid gap-8 pb-12 pt-6">
         <div className="flex flex-wrap items-start justify-between gap-6">
