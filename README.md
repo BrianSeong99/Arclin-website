@@ -8,6 +8,8 @@ for Chinese care-robotics companies. Static export, no backend.
 - Next.js 16 (App Router, `output: "export"`) · React 19 · TypeScript
 - Tailwind CSS v4 with design tokens in `app/globals.css`
 - `motion` for scroll / in-view animation (all honour `prefers-reduced-motion`)
+- React Three Fiber + drei for the procedural 3D hero (`components/viz/hero-scene.tsx`); it lazy-loads
+  after first paint behind the SVG illustration and falls back to the SVG without WebGL
 - Storybook 10 (`@storybook/nextjs-vite`) for every component and section
 - pnpm
 
@@ -57,6 +59,10 @@ confirmation. Statistic footnotes (`source`) must be finalised before launch.
   it does not lift, carry or transfer. Voice = pattern alert reviewed by staff, never a diagnosis.
 
 ## Deploy
+
+Every push to `main` deploys a preview to GitHub Pages at
+https://brianseong99.github.io/Arclin-website/ (`.github/workflows/pages.yml`, built with
+`BASE_PATH=/Arclin-website`).
 
 Static output in `out/`. Vercel: framework preset Next.js, build `pnpm build`. Domain TBD
 (`arclin.ai` / `arclin.jp`); `SITE` in `app/[locale]/layout.tsx`, `sitemap.ts` and `robots.ts`

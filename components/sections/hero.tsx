@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { useLocale } from "@/lib/i18n/context";
-import { HeroIllustration } from "@/components/viz/hero-illustration";
+import { HeroVisual } from "@/components/viz/hero-visual";
 import { cn } from "@/lib/utils";
 
 const cta = "inline-flex items-center gap-2 rounded-md px-5 py-[13px] text-[15px] font-medium transition-colors";
@@ -57,7 +57,7 @@ export function Hero() {
               className="absolute inset-0 opacity-35 [background-image:linear-gradient(var(--paper-3)_1px,transparent_1px),linear-gradient(90deg,var(--paper-3)_1px,transparent_1px)] [background-size:40px_40px] [mask-image:radial-gradient(ellipse_at_50%_60%,#000_30%,transparent_80%)]"
             />
             <div className="relative">
-              <HeroIllustration title={t.heroAlt} />
+              <HeroVisual title={t.heroAlt} />
             </div>
             <div className="relative mt-2 flex items-center justify-between gap-3 font-mono text-[11px] tracking-[0.14em] text-ink-3">
               <span>{t.heroCaption}</span>
