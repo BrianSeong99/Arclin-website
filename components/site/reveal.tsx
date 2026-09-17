@@ -9,10 +9,10 @@ const variants: Variants = {
 };
 
 type MotionDivProps = Omit<ComponentProps<typeof motion.div>, "children"> & { children?: ReactNode };
-type Props = MotionDivProps & { delay?: number; once?: boolean };
+type Props = MotionDivProps & { delay?: number; once?: boolean; amount?: number | "some" | "all" };
 
 /** Fade-up on entering the viewport. Honours prefers-reduced-motion (renders static). */
-export function Reveal({ delay = 0, once = true, children, ...rest }: Props) {
+export function Reveal({ delay = 0, once = true, amount = 0.15, children, ...rest }: Props) {
   const reduce = useReducedMotion();
   if (reduce) return <div className={rest.className as string}>{children}</div>;
   return (
@@ -20,7 +20,7 @@ export function Reveal({ delay = 0, once = true, children, ...rest }: Props) {
       variants={variants}
       initial="hidden"
       whileInView="show"
-      viewport={{ once, amount: 0.25 }}
+      viewport={{ once, amount }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
       {...rest}
     >
@@ -37,7 +37,7 @@ export function Stagger({ stagger = 0.08, children, ...rest }: MotionDivProps & 
     <motion.div
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ staggerChildren: stagger }}
       {...rest}
     >

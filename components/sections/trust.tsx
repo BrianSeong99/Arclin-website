@@ -11,7 +11,7 @@ export function Trust() {
   return (
     <Section id="trust" tone="console" num="08">
       <SectionHeading tone="console" label={t.trustLabel} lines={[t.trustH2a, t.trustH2b]} />
-      <Reveal className="mt-12 grid overflow-hidden rounded-2xl border border-console-line bg-console-2/50 sm:grid-cols-2 lg:grid-cols-3">
+      <Reveal amount="some" className="mt-12 grid overflow-hidden rounded-2xl border border-console-line bg-console-2/50 sm:grid-cols-2 lg:grid-cols-3">
         {t.trust.map((tr, i) => (
           <Reveal
             key={tr.title}

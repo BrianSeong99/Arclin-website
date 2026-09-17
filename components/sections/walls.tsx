@@ -27,7 +27,7 @@ export function Walls() {
         </Reveal>
       </div>
 
-      <Reveal className="mt-14 overflow-hidden rounded-xl border border-line bg-paper">
+      <Reveal amount="some" className="mt-14 overflow-hidden rounded-xl border border-line bg-paper">
         {/* column heads */}
         <div className="grid grid-cols-[2.5rem_1fr] border-b border-line font-mono text-[11px] tracking-[0.18em] md:grid-cols-[3.5rem_1fr_1fr]">
           <div className="border-r border-line bg-sand/40" />
@@ -60,9 +60,12 @@ export function Walls() {
                 <h3 className="mt-1.5 text-[18px] font-medium leading-[1.4]">{w.title}</h3>
                 <p className="mt-2 max-w-[36em] text-pretty text-sm text-ink-2">{w.body}</p>
               </div>
-              <div className={cn("flex gap-3 px-5 pb-6 pt-2 md:py-6", on ? "text-pine" : "text-ink-2")}>
+              <div className={cn("col-start-2 flex gap-3 border-t border-dashed border-line px-5 pb-6 pt-4 md:col-start-auto md:border-t-0 md:py-6", on ? "text-pine" : "text-ink-2")}>
                 <span aria-hidden className={cn("mt-[3px] flex-none font-mono text-sm transition-colors", on ? "text-pine" : "text-pine-3")}>✓</span>
-                <p className="text-pretty text-[15px] leading-relaxed">{w.fix}</p>
+                <div>
+                  <div className="mb-1 font-mono text-[10px] tracking-[0.16em] text-pine md:hidden">ARCLIN</div>
+                  <p className="text-pretty text-[15px] leading-relaxed">{w.fix}</p>
+                </div>
               </div>
             </Reveal>
           );

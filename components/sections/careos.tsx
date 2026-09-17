@@ -37,7 +37,7 @@ export function CareOS() {
         </Reveal>
       </div>
       <div ref={ref} className="mt-14 grid items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-14">
-        <Reveal className="relative aspect-square w-full overflow-hidden rounded-2xl border border-line bg-paper lg:sticky lg:top-28 [background-image:linear-gradient(var(--paper-3)_1px,transparent_1px),linear-gradient(90deg,var(--paper-3)_1px,transparent_1px)] [background-size:36px_36px]">
+        <Reveal amount="some" className="relative aspect-square w-full overflow-hidden rounded-2xl border border-line bg-paper lg:sticky lg:top-28 [background-image:linear-gradient(var(--paper-3)_1px,transparent_1px),linear-gradient(90deg,var(--paper-3)_1px,transparent_1px)] [background-size:36px_36px]">
           <CareOSStack layers={stackLayers} exploded={exploded} animate={!reduce} activeId={active} onActiveChange={setActive} className="!h-full !w-full" />
           <div className="pointer-events-none absolute inset-x-4 bottom-3 flex justify-between font-mono text-[10px] tracking-[0.16em] text-ink-3">
             <span>{t.layerLabels.arclin} · {t.layerLabels.partner}</span>

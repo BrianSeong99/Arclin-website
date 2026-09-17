@@ -41,7 +41,7 @@ export function Kicker({ children, tone = "paper", className }: { children: Reac
   );
 }
 
-export const h2Class = "text-[clamp(28px,3.6vw,44px)] leading-[1.3] font-medium tracking-[-0.01em] text-balance";
+export const h2Class = "text-[clamp(25px,3.6vw,44px)] leading-[1.3] font-medium tracking-[-0.01em] text-balance";
 
 /** Section title; pass two lines to force the designed line break. */
 export function Heading({ lines, className, as: Tag = "h2" }: { lines: [string, string?] | string; className?: string; as?: "h1" | "h2" | "p" }) {

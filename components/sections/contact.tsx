@@ -11,7 +11,7 @@ export function Contact() {
     <section id="contact" className="scroll-mt-20 bg-pine text-paper">
       <div className="container-x py-[clamp(64px,9vw,128px)] text-center">
         <Reveal>
-          <h2 className={`${h2Class} mx-auto max-w-[22em] text-[clamp(28px,3.8vw,48px)]`}>
+          <h2 className={`${h2Class} mx-auto max-w-[22em] text-[clamp(26px,3.8vw,48px)]`}>
             {t.contactH2a}
             <br />
             {t.contactH2b}

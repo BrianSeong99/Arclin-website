@@ -1,8 +1,8 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { RoundedBox } from "@react-three/drei";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 /**
@@ -94,12 +94,25 @@ function Slabs({ layers, exploded, animate, activeId, onActiveChange }: { layers
   );
 }
 
+/** Keeps the orthographic zoom proportional to the canvas so the exploded stack always fits. */
+function FitZoom() {
+  const { camera, size } = useThree();
+  useEffect(() => {
+    const c = camera as THREE.OrthographicCamera;
+    // eslint-disable-next-line react-hooks/immutability -- three.js camera is mutated by design
+    c.zoom = Math.min(size.width, size.height) / 5.0;
+    c.updateProjectionMatrix();
+  }, [camera, size]);
+  return null;
+}
+
 export function CareOSStack({ layers, exploded, animate = true, activeId, onActiveChange, className }: { layers: StackLayer[]; exploded: boolean; animate?: boolean; activeId?: string | null; onActiveChange?: (id: string | null) => void; className?: string }) {
   return (
     <Canvas className={className} dpr={[1, 1.75]} flat frameloop={animate ? "always" : "demand"} orthographic camera={{ position: [5, 4.2, 5], zoom: 100, near: 0.1, far: 50 }} gl={{ alpha: true, antialias: true, powerPreference: "low-power" }} onCreated={({ camera }) => camera.lookAt(0, 0.2, 0)}>
       <hemisphereLight args={["#fbf8ef", "#c9c3ae", 0.9]} />
       <directionalLight position={[3, 6, 2]} intensity={1.3} color="#fff8ea" />
       <directionalLight position={[-4, 3, -3]} intensity={0.45} color="#dfeee8" />
+      <FitZoom />
       <Slabs layers={layers} exploded={exploded} animate={animate} activeId={activeId} onActiveChange={onActiveChange} />
     </Canvas>
   );

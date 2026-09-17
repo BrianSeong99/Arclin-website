@@ -30,7 +30,7 @@ export function Value() {
           </Reveal>
         ))}
       </div>
-      <Reveal className="console-grid mt-16 overflow-hidden rounded-2xl border border-console-line bg-console text-console-text shadow-[0_30px_60px_-40px_rgba(14,22,20,.6)]">
+      <Reveal amount="some" className="console-grid mt-16 overflow-hidden rounded-2xl border border-console-line bg-console text-console-text shadow-[0_30px_60px_-40px_rgba(14,22,20,.6)]">
         <div className="flex items-center gap-2 border-b border-console-line px-5 py-2.5 font-mono text-[10px] tracking-[0.18em] text-console-muted">
           <span aria-hidden className="size-2 rounded-full bg-signal-2/70" /><span aria-hidden className="size-2 rounded-full bg-console-line" /><span aria-hidden className="size-2 rounded-full bg-console-line" />
           <span className="ml-3">ARCLIN · PILOT DASHBOARD</span>
@@ -43,7 +43,7 @@ export function Value() {
           </div>
           <DemoTag tone="console" />
         </div>
-        <div className="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(150px,1fr))]">
+        <div className="grid grid-cols-2 gap-6 sm:[grid-template-columns:repeat(auto-fit,minmax(150px,1fr))]">
           {t.kpis.map((k) => (
             <div key={k.label} className="flex justify-center">
               <DonutGauge value={k.value} fraction={k.fraction} unit={k.unit} label={k.label} size={mobile ? 130 : 160} />
