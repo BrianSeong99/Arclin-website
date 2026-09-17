@@ -9,7 +9,7 @@ const card = "grid content-start gap-2.5 rounded-xl border border-line p-7";
 export function Bridge() {
   const { t } = useLocale();
   return (
-    <Section id="bridge">
+    <Section id="bridge" num="03">
       <SectionHeading label={t.bridgeLabel} lines={[t.bridgeH2a, t.bridgeH2b]} />
       <div className="mt-14 grid items-stretch gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
         <Reveal className={card}>

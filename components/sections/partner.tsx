@@ -8,7 +8,7 @@ import { Reveal } from "@/components/site/reveal";
 export function Partner() {
   const { t } = useLocale();
   return (
-    <Section id="partner" tone="paper-2">
+    <Section id="partner" num="09" tone="paper-2">
       <SectionHeading label={t.partnerLabel} lines={t.partnerH2} />
       <div className="mt-12 grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]">
         {t.partners.map((p, i) => (

@@ -11,9 +11,20 @@ const toneClass: Record<Tone, string> = {
 };
 
 /** Full-bleed section band; children go inside the 1280px container. */
-export function Section({ tone = "paper", className, children, ...props }: ComponentProps<"section"> & { tone?: Tone }) {
+export function Section({ tone = "paper", num, className, children, ...props }: ComponentProps<"section"> & { tone?: Tone; num?: string }) {
   return (
-    <section className={cn("scroll-mt-20", toneClass[tone], className)} {...props}>
+    <section className={cn("relative scroll-mt-20", toneClass[tone], className)} {...props}>
+      {num && (
+        <span
+          aria-hidden
+          className={cn(
+            "absolute left-0 top-[clamp(56px,8vw,112px)] hidden w-20 text-center font-mono text-xs tracking-[0.2em] min-[1400px]:block",
+            tone === "console" ? "text-signal" : "text-pine",
+          )}
+        >
+          <span className={cn("inline-block rounded-full px-2 py-0.5", tone === "console" ? "bg-console" : tone === "pine" ? "bg-pine" : tone === "paper-2" ? "bg-paper-2" : "bg-paper")}>{num}</span>
+        </span>
+      )}
       <div className="container-x py-[clamp(56px,8vw,112px)]">{children}</div>
     </section>
   );

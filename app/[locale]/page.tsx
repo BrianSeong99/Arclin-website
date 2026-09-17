@@ -1,5 +1,6 @@
 import { Nav } from "@/components/site/nav";
 import { Footer } from "@/components/site/footer";
+import { PageMain } from "@/components/site/page-main";
 import { Hero } from "@/components/sections/hero";
 import { WhyJapan } from "@/components/sections/why-japan";
 import { Walls } from "@/components/sections/walls";
@@ -17,7 +18,7 @@ export default function Page() {
   return (
     <>
       <Nav />
-      <main id="main" className="flex-1">
+      <PageMain>
         <Hero />
         <WhyJapan />
         <Walls />
@@ -30,7 +31,7 @@ export default function Page() {
         <Partner />
         <Company />
         <Contact />
-      </main>
+      </PageMain>
       <Footer />
     </>
   );

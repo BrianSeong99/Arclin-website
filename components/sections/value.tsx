@@ -11,7 +11,7 @@ export function Value() {
   const { t } = useLocale();
   const mobile = useIsMobile();
   return (
-    <Section id="value">
+    <Section id="value" num="06">
       <SectionHeading label={t.valueLabel} lines={t.valueH2} />
       <div className="mt-12 grid gap-x-10 gap-y-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
         {t.values.map((v, i) => (
@@ -30,7 +30,12 @@ export function Value() {
           </Reveal>
         ))}
       </div>
-      <Reveal className="console-grid mt-16 rounded-[14px] border border-console-line bg-console p-[clamp(20px,3vw,36px)] text-console-text">
+      <Reveal className="console-grid mt-16 overflow-hidden rounded-2xl border border-console-line bg-console text-console-text shadow-[0_30px_60px_-40px_rgba(14,22,20,.6)]">
+        <div className="flex items-center gap-2 border-b border-console-line px-5 py-2.5 font-mono text-[10px] tracking-[0.18em] text-console-muted">
+          <span aria-hidden className="size-2 rounded-full bg-signal-2/70" /><span aria-hidden className="size-2 rounded-full bg-console-line" /><span aria-hidden className="size-2 rounded-full bg-console-line" />
+          <span className="ml-3">ARCLIN · PILOT DASHBOARD</span>
+        </div>
+        <div className="p-[clamp(20px,3vw,36px)]">
         <div className="mb-7 flex flex-wrap items-center justify-between gap-3">
           <div>
             <div className="font-mono text-[11px] tracking-[0.18em] text-console-muted">{t.kpiKicker}</div>
@@ -46,6 +51,7 @@ export function Value() {
           ))}
         </div>
         <p className="mt-6 text-pretty text-xs text-console-muted">{t.kpiNote}</p>
+        </div>
       </Reveal>
     </Section>
   );

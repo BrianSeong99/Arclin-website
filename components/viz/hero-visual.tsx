@@ -33,7 +33,7 @@ export function HeroVisual({ title }: { title: string }) {
   }, []);
 
   return (
-    <div className="relative aspect-[8/7] w-full">
+    <div className="relative aspect-[8/7] w-full lg:aspect-[7/6]">
       <div className={cn("absolute inset-0 transition-opacity duration-700", ready ? "opacity-0" : "opacity-100")} aria-hidden={ready}>
         <HeroIllustration title={title} className="h-full w-full" />
       </div>

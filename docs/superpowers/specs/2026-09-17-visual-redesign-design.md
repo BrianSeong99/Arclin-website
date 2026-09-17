@@ -9,7 +9,7 @@ statistics, footnotes, demo-data labels and exclusions from the brief
 Only layout, visual treatment, motion and interaction change.
 
 ## Non-negotiables
-- Palette unchanged: paper `--paper/--paper-2`, ink, pine accent, console dark panels only
+- Palette: original tokens (paper, ink, pine, console) stay the base; small supporting tints may be added where a mechanic needs them, never a new dominant hue. Console dark panels only
   where they exist today (Mimamori, KPI card, Trust). No new hues.
 - Every simulated panel keeps `DemoTag`; every statistic keeps its `Footnote`.
 - `prefers-reduced-motion`: every mechanic below degrades to a static, complete layout.

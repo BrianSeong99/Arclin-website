@@ -143,3 +143,17 @@ body::before {
   mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 28px), transparent);
 }
 .nav-fade::-webkit-scrollbar { display: none; }
+
+/* ---- redesign additions: supporting tints only ---- */
+:root {
+  --sage: #cfd9d3;   /* pine at ~25% on paper: tinted rows, chart fills */
+  --sand: #dcd5bf;   /* deeper paper: "before" column, muted cells */
+  --moss: #4f7d72;   /* mid pine: secondary strokes on paper */
+}
+@theme inline {
+  --color-sage: var(--sage);
+  --color-sand: var(--sand);
+  --color-moss: var(--moss);
+}
+@keyframes flap-in { from { transform: translateY(-100%); opacity: 0; } to { transform: none; opacity: 1; } }
+.flap-in { animation: flap-in 0.35s var(--ease-out-expo); }

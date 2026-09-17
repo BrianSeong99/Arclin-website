@@ -1,17 +1,29 @@
 "use client";
 
+import dynamic from "next/dynamic";
+import { useRef } from "react";
+import { useInView, useReducedMotion } from "motion/react";
 import { useLocale } from "@/lib/i18n/context";
 import { Section, Kicker, Heading } from "@/components/site/section";
 import { Reveal } from "@/components/site/reveal";
 import { LayerStack } from "@/components/viz/layer-stack";
 
+const CareOSStack = dynamic(() => import("@/components/viz/careos-stack").then((m) => m.CareOSStack), { ssr: false });
+
 const row = "flex justify-between bg-paper px-4 py-3";
 const mono = "font-mono text-[10px] tracking-[0.14em]";
 
+/** Exploded isometric layer stack (3D, scroll-driven) beside the accessible layer list. */
 export function CareOS() {
   const { t } = useLocale();
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const exploded = useInView(ref, { once: true, amount: 0.4 });
+  // 3D stack is bottom→top; the list reads top (L4) → bottom (L1)
+  const stackLayers = [...t.layers].reverse().map((l) => ({ id: l.id, owner: l.owner }));
+
   return (
-    <Section id="careos" tone="paper-2">
+    <Section id="careos" tone="paper-2" num="05">
       <Reveal>
         <Kicker>{t.careLabel}</Kicker>
       </Reveal>
@@ -23,9 +35,18 @@ export function CareOS() {
           <p className="max-w-[32em] text-pretty text-ink-2">{t.careBody}</p>
         </Reveal>
       </div>
-      <Reveal className="mt-14">
-        <LayerStack layers={t.layers} labels={t.layerLabels} />
-      </Reveal>
+      <div ref={ref} className="mt-14 grid items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-14">
+        <Reveal className="relative aspect-square w-full overflow-hidden rounded-2xl border border-line bg-paper [background-image:linear-gradient(var(--paper-3)_1px,transparent_1px),linear-gradient(90deg,var(--paper-3)_1px,transparent_1px)] [background-size:36px_36px]">
+          <CareOSStack layers={stackLayers} exploded={exploded} animate={!reduce} className="!h-full !w-full" />
+          <div className="pointer-events-none absolute inset-x-4 bottom-3 flex justify-between font-mono text-[10px] tracking-[0.16em] text-ink-3">
+            <span>{t.layerLabels.arclin} · {t.layerLabels.partner}</span>
+            <span className="text-ember">{t.careIpBoundary}</span>
+          </div>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <LayerStack layers={t.layers} labels={t.layerLabels} />
+        </Reveal>
+      </div>
       <Reveal className="mt-14 grid items-center gap-8 border-t border-line pt-10 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
         <blockquote className="text-balance text-[clamp(20px,2.2vw,26px)] font-medium leading-[1.5]">
           {t.careQuoteA}
