@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useInView, useReducedMotion } from "motion/react";
 import { useLocale } from "@/lib/i18n/context";
 import { Section, Kicker, Heading } from "@/components/site/section";
@@ -19,6 +19,7 @@ export function CareOS() {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const exploded = useInView(ref, { once: true, amount: 0.4 });
+  const [active, setActive] = useState<string | null>(null);
   // 3D stack is bottom→top; the list reads top (L4) → bottom (L1)
   const stackLayers = [...t.layers].reverse().map((l) => ({ id: l.id, owner: l.owner }));
 
@@ -35,16 +36,16 @@ export function CareOS() {
           <p className="max-w-[32em] text-pretty text-ink-2">{t.careBody}</p>
         </Reveal>
       </div>
-      <div ref={ref} className="mt-14 grid items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-14">
-        <Reveal className="relative aspect-square w-full overflow-hidden rounded-2xl border border-line bg-paper [background-image:linear-gradient(var(--paper-3)_1px,transparent_1px),linear-gradient(90deg,var(--paper-3)_1px,transparent_1px)] [background-size:36px_36px]">
-          <CareOSStack layers={stackLayers} exploded={exploded} animate={!reduce} className="!h-full !w-full" />
+      <div ref={ref} className="mt-14 grid items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-14">
+        <Reveal className="relative aspect-square w-full overflow-hidden rounded-2xl border border-line bg-paper lg:sticky lg:top-28 [background-image:linear-gradient(var(--paper-3)_1px,transparent_1px),linear-gradient(90deg,var(--paper-3)_1px,transparent_1px)] [background-size:36px_36px]">
+          <CareOSStack layers={stackLayers} exploded={exploded} animate={!reduce} activeId={active} onActiveChange={setActive} className="!h-full !w-full" />
           <div className="pointer-events-none absolute inset-x-4 bottom-3 flex justify-between font-mono text-[10px] tracking-[0.16em] text-ink-3">
             <span>{t.layerLabels.arclin} · {t.layerLabels.partner}</span>
             <span className="text-ember">{t.careIpBoundary}</span>
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <LayerStack layers={t.layers} labels={t.layerLabels} />
+          <LayerStack layers={t.layers} labels={t.layerLabels} activeId={active} onActiveChange={setActive} />
         </Reveal>
       </div>
       <Reveal className="mt-14 grid items-center gap-8 border-t border-line pt-10 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
