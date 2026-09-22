@@ -1,176 +1,195 @@
 @import "tailwindcss";
 
-/* ---- Arclin design tokens ----------------------------------------
-   Paper (washi) surfaces, ink text, pine accent, ember for alerts,
-   and a dark "console" family for the dashboard-style panels.
+/* ---- Kurogane design tokens ---------------------------------------
+   Source: claude.ai/artifact/LPV5WVcV8esMeHutAnp4XP (tokens.json).
+   Paper theme on :root; Night theme under [data-theme="night"].
 ------------------------------------------------------------------- */
-/* Direction B: sharpened paper/ink, single pine accent, true near-black console. */
 :root {
-  --paper: #f6f4ee;
-  --paper-2: #efede6;
-  --paper-3: #e2dfd5;
-  --ink: #0f1412;
-  --ink-2: #3a403d;
-  --ink-3: #6b716d;
-  --pine: #1e4d46;
-  --pine-2: #2b6b61;
-  --pine-3: #9fc2b8;
-  --ember: #c4562f;
-  --console: #0b0f0e;
-  --console-2: #121716;
-  --console-3: #1a201e;
-  --console-line: #242b29;
-  --console-text: #e6ebe8;
-  --console-muted: #8a958f;
-  --signal: #6fd3b4;
-  --signal-2: #f2c14e;
-  --line: color-mix(in oklab, var(--ink) 10%, transparent);
-  --line-strong: color-mix(in oklab, var(--ink) 22%, transparent);
-  --radius: 8px;
+  --surface-page: #fbf7ef;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f2ecdf;
+  --surface-brand: #102e24;
+  --hairline: #e2daca;
+  --border-strong: #8e8676;
+  --ink: #102e24;
+  --ink-muted: #47594f;
+  --ink-subtle: #5e6f68;
+  --on-brand: #fbf7ef;
+  --on-brand-muted: #c3d0c6;
+  --highlight: #f7ed92;
+  --highlight-edge: #a08a2b;
+  --on-highlight: #102e24;
+  --focus-ring: #102e24;
+  --focus-ring-inverse: #f7ed92;
+  --success: #246b49;
+  --attention: #7d5a0c;
+  --danger: #94331f;
+
+  --shadow-soft: 0 1px 2px rgba(16, 46, 36, 0.06), 0 4px 12px rgba(16, 46, 36, 0.05);
+  --shadow-lift: 0 8px 28px rgba(16, 46, 36, 0.1);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* motion: 200–320ms, nothing bounces */
+  --dur-enter: 240ms;
+  --dur-slow: 320ms;
+  --ease-enter: cubic-bezier(0.2, 0, 0, 1);
+}
+
+[data-theme="night"] {
+  --surface-page: #0b1c16;
+  --surface-raised: #13261e;
+  --surface-sunken: #071410;
+  --surface-brand: #2a6049;
+  --hairline: #2a3b32;
+  --border-strong: #63736a;
+  --ink: #f4f1e8;
+  --ink-muted: #b9c6bc;
+  --ink-subtle: #8fa096;
+  --highlight-edge: #c9b43f;
+  --focus-ring: #f7ed92;
+  --success: #7fc39d;
+  --attention: #e0c170;
+  --danger: #f0a187;
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lift: 0 8px 28px rgba(0, 0, 0, 0.55);
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-paper-2: var(--paper-2);
-  --color-paper-3: var(--paper-3);
+  --color-*: initial;
+  --color-page: var(--surface-page);
+  --color-raised: var(--surface-raised);
+  --color-sunken: var(--surface-sunken);
+  --color-brand: var(--surface-brand);
+  --color-hairline: var(--hairline);
+  --color-border-strong: var(--border-strong);
   --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-ink-3: var(--ink-3);
-  --color-pine: var(--pine);
-  --color-pine-2: var(--pine-2);
-  --color-pine-3: var(--pine-3);
-  --color-ember: var(--ember);
-  --color-console: var(--console);
-  --color-console-2: var(--console-2);
-  --color-console-3: var(--console-3);
-  --color-console-line: var(--console-line);
-  --color-console-text: var(--console-text);
-  --color-console-muted: var(--console-muted);
-  --color-signal: var(--signal);
-  --color-signal-2: var(--signal-2);
-  --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
-  --font-sans: var(--font-body), "Hiragino Sans", "PingFang SC", sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, monospace;
-  --font-display: var(--font-display), Georgia, serif;
-  --radius-sm: calc(var(--radius) - 2px);
-  --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) + 4px);
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-on-brand: var(--on-brand);
+  --color-on-brand-muted: var(--on-brand-muted);
+  --color-highlight: var(--highlight);
+  --color-highlight-edge: var(--highlight-edge);
+  --color-on-highlight: var(--on-highlight);
+  --color-focus: var(--focus-ring);
+  --color-focus-inverse: var(--focus-ring-inverse);
+  --color-success: var(--success);
+  --color-attention: var(--attention);
+  --color-danger: var(--danger);
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-lift: var(--shadow-lift);
+
+  --radius-*: initial;
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-pill: var(--radius-pill);
+
+  --font-display: var(--font-display), "Times New Roman", serif;
+  --font-ui: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
+  --font-jp: var(--font-jp), "Hiragino Maru Gothic ProN", sans-serif;
+  --font-zh: var(--font-zh), "PingFang SC", sans-serif;
+  /* Chillax first so Latin glyphs are Chillax; CJK glyphs fall through to the locale face. */
+  --font-sans: var(--font-ui), var(--font-body), sans-serif;
+
+  --ease-enter: var(--ease-enter);
+  --default-transition-duration: var(--dur-enter);
+  --default-transition-timing-function: var(--ease-enter);
 }
+
+/* CJK body font follows the document language; Latin UI stays Chillax. */
+html[lang="ja"] { --font-body: var(--font-jp); }
+html[lang="zh"] { --font-body: var(--font-zh); }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4.5rem;
+  scroll-padding-top: 5.5rem;
 }
-html[lang="ja"] { --font-body: var(--font-ja); }
-html[lang="zh"] { --font-body: var(--font-zh); }
 
 body {
-  background: var(--paper);
+  background: var(--surface-page);
   color: var(--ink);
   font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
   font-feature-settings: "palt" 1;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
 
-/* paper grain */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 50;
-  opacity: 0.18;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-::selection { background: var(--pine); color: var(--paper); }
+::selection { background: var(--highlight); color: var(--on-highlight); }
 
 :focus-visible {
-  outline: 2px solid var(--pine);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
 }
+.on-brand :focus-visible,
+.on-highlight :focus-visible {
+  outline-color: var(--focus-ring-inverse);
+}
 
-/* utilities */
+/* ---- type styles (tokens.json → classes) ---- */
+.t-display-xl { font-family: var(--font-display); font-size: clamp(56px, 7vw, 88px); line-height: 0.95; font-weight: 400; letter-spacing: 0.01em; }
+.t-display-l  { font-family: var(--font-display); font-size: clamp(44px, 5.2vw, 62px); line-height: 1.08; font-weight: 400; letter-spacing: 0.01em; }
+.t-display-m  { font-family: var(--font-display); font-size: 40px; line-height: 1.15; font-weight: 400; letter-spacing: 0.015em; }
+.t-title-l    { font-family: var(--font-ui); font-size: 30px; line-height: 1.25; font-weight: 600; letter-spacing: -0.015em; }
+.t-title-m    { font-family: var(--font-ui); font-size: 23px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; }
+.t-title-s    { font-family: var(--font-ui); font-size: 19px; line-height: 1.35; font-weight: 600; }
+.t-body-l     { font-size: 19px; line-height: 1.65; font-weight: 400; }
+.t-body       { font-size: 17px; line-height: 1.6; font-weight: 400; }
+.t-body-s     { font-size: 15px; line-height: 1.55; font-weight: 400; }
+.t-label      { font-family: var(--font-ui); font-size: 14px; line-height: 1.3; font-weight: 600; }
+.t-overline   { font-family: var(--font-ui); font-size: 12px; line-height: 1.4; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; }
+.t-caption    { font-size: 13px; line-height: 1.5; font-weight: 400; }
+.t-numeral    { font-family: var(--font-ui); font-size: clamp(40px, 5vw, 64px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; }
+/* CJK display: Zen Maru / Noto Sans SC via --font-body */
+.t-jp-display-xl { font-family: var(--font-body); font-size: clamp(36px, 5.4vw, 72px); line-height: 1.2; font-weight: 500; }
+.t-jp-display-l  { font-family: var(--font-body); font-size: clamp(30px, 4vw, 56px); line-height: 1.3; font-weight: 500; }
+.t-jp-display    { font-family: var(--font-body); font-size: clamp(24px, 2.6vw, 32px); line-height: 1.5; font-weight: 500; }
+.t-jp-body-l     { font-size: 19px; line-height: 1.9; font-weight: 400; }
+.t-jp-body       { font-size: 17px; line-height: 1.85; font-weight: 400; }
+
+/* Statement / hero sentences in Chillax, tight leading — robot.com's big-type register. */
+.t-statement { font-family: var(--font-ui); font-size: clamp(28px, 3.6vw, 52px); line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; }
+
+/* ---- utilities ---- */
 @utility container-x {
   margin-inline: auto;
   width: 100%;
-  max-width: 76rem;
-  padding-inline: 1.25rem;
-  @media (width >= 40rem) { padding-inline: 2rem; }
+  max-width: 84rem;
+  padding-inline: var(--space-4);
+  @media (width >= 40rem) { padding-inline: var(--space-8); }
 }
-@utility hairline { border-color: var(--line); }
-@utility tabular { font-variant-numeric: tabular-nums; }
-
-/* fine grid (Vercel-style) on paper */
-.fine-grid {
-  background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--ink) 7%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--ink) 7%, transparent) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-.blueprint-grid {
-  background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--console-line) 70%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--console-line) 70%, transparent) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-@keyframes ping-ring { 0% { transform: scale(0.4); opacity: 0.9; } 100% { transform: scale(2.2); opacity: 0; } }
-.anim-ping { transform-origin: center; transform-box: fill-box; animation: ping-ring 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
-
-/* grid paper used behind console panels */
-.console-grid {
-  background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--console-line) 55%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--console-line) 55%, transparent) 1px, transparent 1px);
-  background-size: 32px 32px;
+@utility band-y {
+  padding-block: clamp(var(--space-12), 8vw, 128px);
 }
 
-@keyframes draw { to { stroke-dashoffset: 0; } }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
-@keyframes float-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-
-.anim-draw {
-  stroke-dasharray: var(--len, 1000);
-  stroke-dashoffset: var(--len, 1000);
-  animation: draw 2.4s var(--ease-out-expo) forwards;
-  animation-delay: var(--delay, 0s);
+/* robot.com-style LED dot pattern, drawn in the current colour */
+.dot-grid {
+  background-image: radial-gradient(circle, currentColor 1.6px, transparent 2px);
+  background-size: 16px 16px;
 }
-.anim-blink { animation: blink 1.6s ease-in-out infinite; }
-.anim-float { animation: float-y 5s ease-in-out infinite; }
+
+@keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.anim-fade-up { animation: fade-up var(--dur-slow) var(--ease-enter) both; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .anim-draw { stroke-dashoffset: 0; animation: none; }
-  .anim-blink, .anim-float, .anim-ping { animation: none; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
 }
-
-@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-
-.nav-fade {
-  scrollbar-width: none;
-  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 28px), transparent);
-  mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 28px), transparent);
-}
-.nav-fade::-webkit-scrollbar { display: none; }
-
-/* ---- redesign additions: supporting tints only ---- */
-:root {
-  --sage: #cfd9d3;   /* pine at ~25% on paper: tinted rows, chart fills */
-  --sand: #dcd5bf;   /* deeper paper: "before" column, muted cells */
-  --moss: #4f7d72;   /* mid pine: secondary strokes on paper */
-}
-@theme inline {
-  --color-sage: var(--sage);
-  --color-sand: var(--sand);
-  --color-moss: var(--moss);
-}
-@keyframes flap-in { from { transform: translateY(-100%); opacity: 0; } to { transform: none; opacity: 1; } }
-.flap-in { animation: flap-in 0.35s var(--ease-out-expo); }

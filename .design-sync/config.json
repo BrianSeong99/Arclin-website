@@ -19,67 +19,47 @@
     "DonutGauge": {
       "cardMode": "column"
     },
+    "Announce": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x80"
+    },
     "Nav": {
       "cardMode": "single",
       "primaryStory": "Default",
-      "viewport": "1280x160"
+      "viewport": "1280x200"
     },
     "Hero": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "WhyJapan": {
+    "Statement": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "Walls": {
+    "Products": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "Mimamori": {
+    "Stats": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "CareOS": {
+    "Process": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "Value": {
+    "Cta": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "Method": {
-      "cardMode": "single",
-      "primaryStory": "Default",
-      "viewport": "1280x1600"
-    },
-    "Trust": {
-      "cardMode": "single",
-      "primaryStory": "Default",
-      "viewport": "1280x1600"
-    },
-    "Partner": {
-      "cardMode": "single",
-      "primaryStory": "Default",
-      "viewport": "1280x1600"
-    },
-    "Fit": {
-      "cardMode": "single",
-      "primaryStory": "Default",
-      "viewport": "1280x1600"
-    },
-    "Company": {
-      "cardMode": "single",
-      "primaryStory": "Default",
-      "viewport": "1280x1600"
-    },
-    "Contact": {
+    "Partners": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"

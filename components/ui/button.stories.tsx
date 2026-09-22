@@ -5,7 +5,7 @@ const meta: Meta<typeof Button> = { title: "UI/Button", component: Button, param
 export default meta;
 type S = StoryObj<typeof Button>;
 
-export const Primary: S = { args: { children: "介護施設の方へ" } };
+export const Brand: S = { args: { children: "介護施設の方へ" } };
 export const Outline: S = { args: { children: "ロボット企業の方へ", variant: "outline" } };
 export const Ghost: S = { args: { children: "詳細を見る", variant: "ghost" } };
 export const Sizes: S = {
@@ -18,10 +18,18 @@ export const Sizes: S = {
     </div>
   ),
 };
-export const Console: S = {
+export const OnBrand: S = {
   render: () => (
-    <div className="rounded-md bg-console p-4">
-      <Button variant="console">Console</Button>
+    <div className="on-brand flex gap-3 rounded-md bg-brand p-4">
+      <Button variant="on-brand">On brand</Button>
+      <Button variant="on-brand-outline">Outline</Button>
+    </div>
+  ),
+};
+export const OnHighlight: S = {
+  render: () => (
+    <div className="on-highlight rounded-md bg-highlight p-4">
+      <Button variant="on-highlight">On highlight</Button>
     </div>
   ),
 };

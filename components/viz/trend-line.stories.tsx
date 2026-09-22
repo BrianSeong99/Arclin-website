@@ -6,17 +6,5 @@ const meta: Meta<typeof TrendLine> = { title: "Viz/TrendLine", component: TrendL
 export default meta;
 type S = StoryObj<typeof TrendLine>;
 
-export const Projected: S = {
-  render: () => (
-    <div className="max-w-2xl rounded-lg border border-line bg-paper p-6">
-      <TrendLine points={TREND_POINTS} projectedFrom={2025} unit="%" />
-    </div>
-  ),
-};
-export const Plain: S = {
-  render: () => (
-    <div className="max-w-2xl rounded-lg border border-line bg-paper p-6">
-      <TrendLine points={TREND_POINTS} unit="%" />
-    </div>
-  ),
-};
+export const Projected: S = { render: () => <div className="max-w-2xl rounded-lg bg-raised p-6 shadow-soft"><TrendLine points={TREND_POINTS} projectedFrom={2020} unit="%" /></div> };
+export const Plain: S = { render: () => <div className="max-w-2xl rounded-lg bg-raised p-6 shadow-soft"><TrendLine points={TREND_POINTS} unit="%" /></div> };

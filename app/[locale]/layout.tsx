@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Geist, Geist_Mono, Noto_Sans_SC, Zen_Kaku_Gothic_New } from "next/font/google";
+import localFont from "next/font/local";
+import { Noto_Sans_SC, Zen_Maru_Gothic } from "next/font/google";
 import { notFound } from "next/navigation";
 import { getMessages, isLocale, locales, type Locale } from "@/lib/i18n";
 import { LocaleProvider } from "@/lib/i18n/context";
 import "../globals.css";
 
-const fontJa = Zen_Kaku_Gothic_New({ weight: ["400", "500", "700"], subsets: ["latin"], variable: "--font-ja", display: "swap", preload: false });
+// Kurogane faces: Italiana (display), Chillax (UI), Zen Maru Gothic (JA), Noto Sans SC (ZH).
+const fontDisplay = localFont({ src: "../../public/fonts/Italiana-Regular.woff2", weight: "400", variable: "--font-display", display: "swap" });
+const fontUi = localFont({
+  src: [
+    { path: "../../public/fonts/Chillax-Regular.woff2", weight: "400" },
+    { path: "../../public/fonts/Chillax-Medium.woff2", weight: "500" },
+    { path: "../../public/fonts/Chillax-Semibold.woff2", weight: "600" },
+    { path: "../../public/fonts/Chillax-Bold.woff2", weight: "700" },
+  ],
+  variable: "--font-ui",
+  display: "swap",
+});
+const fontJp = Zen_Maru_Gothic({ weight: ["400", "500", "700"], subsets: ["latin"], variable: "--font-jp", display: "swap", preload: false });
 const fontZh = Noto_Sans_SC({ weight: ["400", "500", "700"], subsets: ["latin"], variable: "--font-zh", display: "swap", preload: false });
-const fontMono = Geist_Mono({ weight: ["400", "500"], subsets: ["latin"], variable: "--font-mono", display: "swap" });
-const fontDisplay = Geist({ weight: ["400", "500", "600", "700"], subsets: ["latin"], variable: "--font-display", display: "swap" });
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://arclin.jp";
 
@@ -47,10 +58,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   return (
-    <html
-      lang={locale as Locale}
-      className={`${fontJa.variable} ${fontZh.variable} ${fontMono.variable} ${fontDisplay.variable} h-full`}
-    >
+    <html lang={locale as Locale} className={`${fontDisplay.variable} ${fontUi.variable} ${fontJp.variable} ${fontZh.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         <LocaleProvider locale={locale}>{children}</LocaleProvider>
       </body>

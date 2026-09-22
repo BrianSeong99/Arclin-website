@@ -5,11 +5,12 @@ const meta: Meta<typeof Wordmark> = { title: "Site/Wordmark", component: Wordmar
 export default meta;
 type S = StoryObj<typeof Wordmark>;
 
-export const Paper: S = {};
-export const Console: S = {
+export const Page: S = {};
+export const Large: S = { args: { size: "lg" } };
+export const OnBrand: S = {
   render: () => (
-    <div className="rounded-md bg-console p-4">
-      <Wordmark tone="console" />
+    <div className="rounded-md bg-brand p-4">
+      <Wordmark tone="brand" />
     </div>
   ),
 };

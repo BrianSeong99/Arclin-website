@@ -6,7 +6,7 @@ const meta: Meta<typeof HeroIllustration> = { title: "Viz/HeroIllustration", com
 export default meta;
 export const Default: StoryObj<typeof HeroIllustration> = {
   render: () => (
-    <div className="max-w-lg rounded-lg border border-line bg-paper-2 p-8">
+    <div className="max-w-lg rounded-lg bg-raised p-8 shadow-soft">
       <HeroIllustration title={ja.heroAlt} />
     </div>
   ),
