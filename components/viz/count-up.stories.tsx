@@ -5,5 +5,5 @@ const meta: Meta<typeof CountUp> = { title: "Viz/CountUp", component: CountUp, p
 export default meta;
 type S = StoryObj<typeof CountUp>;
 
-export const Percent: S = { render: () => <div className="text-6xl font-medium text-ink"><CountUp value={29.3} decimals={1} suffix="%" /></div> };
-export const Prefixed: S = { render: () => <div className="text-6xl font-medium text-ink"><CountUp value={13.8} decimals={1} prefix="約" suffix="兆円" /></div> };
+export const Percent: S = { args: { value: 29.3, decimals: 1, suffix: "%" } };
+export const Whole: S = { args: { value: 57, suffix: "万人" } };

@@ -6,10 +6,12 @@ for Chinese care-robotics companies. Static export, no backend.
 ## Stack
 
 - Next.js 16 (App Router, `output: "export"`) · React 19 · TypeScript
-- Tailwind CSS v4 with design tokens in `app/globals.css`
-- `motion` for scroll / in-view animation (all honour `prefers-reduced-motion`)
-- All visuals are SVG + Motion (`components/viz/floor-plan.tsx`, `iso-stack.tsx`, gauges, ring); no WebGL
-- All visuals are SVG + Motion (`components/viz/floor-plan.tsx`, `iso-stack.tsx`, gauges, ring); no WebGL
+- Tailwind CSS v4; tokens in `app/globals.css` come from the **Kurogane** design system
+  (claude.ai/artifact/LPV5WVcV8esMeHutAnp4XP): Kurogane green, Soga yellow, Italiana + Chillax,
+  Zen Maru Gothic (JA) / Noto Sans SC (ZH). Fonts vendored in `public/fonts/`.
+- Page rhythm after robot.com: floating nav pill, brand/highlight slabs, stats bento, numbered accordion
+- `motion` for in-view animation (240–320ms, all honour `prefers-reduced-motion`)
+- All visuals are SVG line drawings at one stroke weight; no WebGL
 - Storybook 10 (`@storybook/nextjs-vite`) for every component and section
 - pnpm
 
@@ -38,9 +40,9 @@ lib/i18n/
   context.tsx           LocaleProvider / useLocale()
 components/
   ui/        button, badge, demo-tag, footnote
-  site/      nav, footer, wordmark, locale toggle, section chrome, reveal
-  viz/       count-up, trend-line, donut-gauge, ring-timeline, flow-steps, layer-stack, illustrations
-  sections/  the 12 page sections in order
+  site/      announce, nav, footer, wordmark, section chrome, reveal
+  viz/       count-up, trend-line, donut-gauge, iso-stack, dot-eyes, illustrations
+  sections/  hero, statement, products, stats, process, cta, partners (in page order)
 scripts/     og.mjs (OG images), shot*.mjs (Playwright screenshot helpers)
 ```
 

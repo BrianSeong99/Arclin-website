@@ -1,5 +1,5 @@
 /**
- * Library entry for the Arclin design system.
+ * Library entry for the Arclin site components (Kurogane design system).
  * Built to dist/ by `pnpm build:ds`; consumed by claude.ai/design via /design-sync.
  * The Next.js app itself imports components directly, not through this barrel.
  */
@@ -17,6 +17,7 @@ export { DemoTag } from "../../components/ui/demo-tag";
 export { Footnote } from "../../components/ui/footnote";
 
 export { Wordmark } from "../../components/site/wordmark";
+export { Announce } from "../../components/site/announce";
 export { Nav } from "../../components/site/nav";
 export { Footer } from "../../components/site/footer";
 export { Section, SectionHeading, Kicker, Heading } from "../../components/site/section";
@@ -26,29 +27,17 @@ export { CountUp } from "../../components/viz/count-up";
 export { TrendLine } from "../../components/viz/trend-line";
 export type { TrendPoint } from "../../components/viz/trend-line";
 export { DonutGauge } from "../../components/viz/donut-gauge";
-export { RingTimeline } from "../../components/viz/ring-timeline";
-export type { RingSegment } from "../../components/viz/ring-timeline";
-export { FlowSteps } from "../../components/viz/flow-steps";
-export type { FlowStep } from "../../components/viz/flow-steps";
-export { LayerStack } from "../../components/viz/layer-stack";
-export type { Layer } from "../../components/viz/layer-stack";
 export { HeroIllustration } from "../../components/viz/hero-illustration";
 export { SceneIllustration } from "../../components/viz/mimamori-scenes";
-export { FloorPlan } from "../../components/viz/floor-plan";
-export { IsoStack } from "../../components/viz/iso-stack";
-export { SplitFlap } from "../../components/viz/split-flap";
-export { Crosshairs } from "../../components/site/crosshairs";
 export type { SceneId } from "../../components/viz/mimamori-scenes";
+export { IsoStack } from "../../components/viz/iso-stack";
+export type { IsoLayer } from "../../components/viz/iso-stack";
+export { DotEyes } from "../../components/viz/dot-eyes";
 
 export { Hero } from "../../components/sections/hero";
-export { WhyJapan } from "../../components/sections/why-japan";
-export { Walls } from "../../components/sections/walls";
-export { Bridge } from "../../components/sections/bridge";
-export { Mimamori } from "../../components/sections/mimamori";
-export { CareOS } from "../../components/sections/careos";
-export { Value } from "../../components/sections/value";
-export { Method } from "../../components/sections/method";
-export { Trust } from "../../components/sections/trust";
-export { Partner } from "../../components/sections/partner";
-export { Company } from "../../components/sections/company";
-export { Contact } from "../../components/sections/contact";
+export { Statement } from "../../components/sections/statement";
+export { Products } from "../../components/sections/products";
+export { Stats } from "../../components/sections/stats";
+export { Process } from "../../components/sections/process";
+export { Cta } from "../../components/sections/cta";
+export { Partners } from "../../components/sections/partners";

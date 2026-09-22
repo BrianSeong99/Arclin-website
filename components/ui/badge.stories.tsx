@@ -5,14 +5,12 @@ const meta: Meta<typeof Badge> = { title: "UI/Badge", component: Badge, paramete
 export default meta;
 type S = StoryObj<typeof Badge>;
 
-export const Default: S = { args: { children: "中国・海外メーカー" } };
-export const Pine: S = { args: { children: "智渡仁の知財", variant: "pine" } };
-export const Ember: S = { args: { children: "演示データ", variant: "ember" } };
-export const OnConsole: S = {
+export const Neutral: S = { args: { children: "介護施設" } };
+export const Highlight: S = { args: { children: "受付中", variant: "highlight" } };
+export const OnBrand: S = {
   render: () => (
-    <div className="flex gap-3 rounded-md bg-console p-4">
-      <Badge variant="console">Console</Badge>
-      <Badge variant="signal">Signal</Badge>
+    <div className="flex gap-3 rounded-md bg-brand p-4">
+      <Badge variant="on-brand">Partner</Badge>
     </div>
   ),
 };

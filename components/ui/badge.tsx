@@ -2,24 +2,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
 
-const badgeVariants = cva(
-  "inline-flex items-center gap-1.5 rounded-sm px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.14em]",
-  {
-    variants: {
-      variant: {
-        default: "border border-line-strong text-ink-2",
-        pine: "bg-pine/10 text-pine",
-        ember: "bg-ember/10 text-ember",
-        console: "border border-console-line bg-console-3 text-console-muted",
-        signal: "border border-signal/40 bg-signal/10 text-signal",
-      },
+/** Small pill tag. `highlight` is the one Soga mark permitted per view. */
+const badgeVariants = cva("t-label inline-flex items-center gap-1.5 rounded-pill px-3 py-1", {
+  variants: {
+    variant: {
+      neutral: "border border-border-strong text-ink-muted",
+      highlight: "bg-highlight text-on-highlight",
+      "on-brand": "border border-on-brand-muted/60 text-on-brand-muted",
+      "on-highlight": "border border-on-highlight/40 text-on-highlight",
     },
-    defaultVariants: { variant: "default" },
   },
-);
+  defaultVariants: { variant: "neutral" },
+});
 
 export type BadgeProps = ComponentProps<"span"> & VariantProps<typeof badgeVariants>;
-
 export function Badge({ className, variant, ...props }: BadgeProps) {
   return <span className={cn(badgeVariants({ variant }), className)} {...props} />;
 }

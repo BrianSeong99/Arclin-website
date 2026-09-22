@@ -5,11 +5,5 @@ const meta: Meta<typeof Footnote> = { title: "UI/Footnote", component: Footnote,
 export default meta;
 type S = StoryObj<typeof Footnote>;
 
-export const Paper: S = { args: { text: "総務省統計局「統計からみた我が国の高齢者」（2024年）。※出典の最終確認中。" } };
-export const Console: S = {
-  render: () => (
-    <div className="rounded-md bg-console p-4">
-      <Footnote tone="console" text="本パネルの数値はデモンストレーション用の模擬値です。" />
-    </div>
-  ),
-};
+export const Page: S = { args: { text: "総務省統計局「人口推計」（2024年）。掲載前に最新値を確認。" } };
+export const OnBrand: S = { render: () => <div className="rounded-md bg-brand p-4"><Footnote tone="brand" text="本パネルの数値はデモンストレーション用の模擬値です。" /></div> };

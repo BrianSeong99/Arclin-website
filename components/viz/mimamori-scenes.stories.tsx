@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { SceneIllustration } from "./mimamori-scenes";
+import { SceneIllustration, type SceneId } from "./mimamori-scenes";
 
 const meta: Meta<typeof SceneIllustration> = { title: "Viz/SceneIllustration", component: SceneIllustration, parameters: { layout: "padded" } };
 export default meta;
 type S = StoryObj<typeof SceneIllustration>;
 
-const frame = (id: "patrol" | "standup" | "intake" | "voice") => (
-  <div className="max-w-md rounded-md border border-console-line bg-console p-4">
+const frame = (id: SceneId) => (
+  <div className="max-w-md rounded-lg bg-page p-4 text-ink">
     <SceneIllustration id={id} />
   </div>
 );
