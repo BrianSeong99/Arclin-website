@@ -1,7 +1,8 @@
 "use client";
 import { motion, useMotionValue, useScroll, useTransform } from "motion/react";
-import { useEffect, useRef, useState, type CSSProperties, type ElementType } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties, type ElementType } from "react";
 import { usePrefersReducedMotion } from "@/lib/motion";
+import { usePreviewVariant } from "@/lib/preview-variant";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/lib/i18n/context";
 import { DEV_MEDIA } from "@/lib/dev-media";
@@ -21,7 +22,7 @@ import { RevealHeading } from "@/components/home/reveal-heading";
  * top edge), then translateY 0 → 1079 (= mask 358 + cards 713 + 8) scroll-linked and linear from
  * the moment the mask's top reaches the viewport bottom (scrollY 1161) until the cards land 4px
  * under the mask (2240). While pinned the cards hold 4px above the viewport bottom and the yellow
- * header scrolls over them, so they show through the 64 holes. No mask-image, no clip-path.
+ * header scrolls over them, so they show through the mask's cut-outs (robot.com: 64 holes). No mask-image, no clip-path.
  * robot.com does this with a GSAP pin-spacer (padding-bottom 1079); here the body is the spacer
  * (an invisible ghost grid reserves the landing row) and motion's useScroll drives the strip.
  * ------------------------------------------------------------------------------------------- */
@@ -29,18 +30,30 @@ import { RevealHeading } from "@/components/home/reveal-heading";
 /** §2 row 6: the 4px seam between the cards and the mask, and between the mask and the landing row. */
 const GAP = 4;
 
-/* ---- dot mask (V27) ------------------------------------------------------------------------- */
+/* ---- unveiling mask (V27) ------------------------------------------------------------------- */
 
-/** viewBox and hole lattice read off robot.com's path: 16 x 4 holes, dia 72.83, first centre (43.29, 46.65). */
-const MASK = { w: 1458, h: 365, cols: 16, rows: 4, r: 36.413, cx0: 43.29, cy0: 46.651, px: (1414.71 - 43.29) / 15, py: (320.771 - 46.651) / 3 };
+/**
+ * TEMPORARY review switch. robot.com's LED-hole lattice ("dots") is its product identity and goes; "blossom" and
+ * "window" are the two Kurogane replacements the founder chooses between, cut out of the same plate so the pin/rise
+ * choreography (M8, V26) is untouched. Picked by `?mask=` on the live page (usePreviewVariant) or the `mask` prop
+ * (stories). Delete the losers, this list and lib/preview-variant.ts after the decision.
+ */
+export const PRODUCT_MASKS = ["blossom", "window", "dots"] as const;
+export type ProductMask = (typeof PRODUCT_MASKS)[number];
+
+/** The plate: robot.com's viewBox (1458 x 365), shared by every variant so the 1430x358 render and the pin measurement never change. */
+const PLATE = { w: 1458, h: 365 };
+
+/** robot.com's hole lattice read off its path: 16 x 4 holes, dia 72.83, first centre (43.29, 46.65). */
+const DOTS = { cols: 16, rows: 4, r: 36.413, cx0: 43.29, cy0: 46.651, px: (1414.71 - 43.29) / 15, py: (320.771 - 46.651) / 3 };
 const KAPPA = 0.5522847498;
 
-/** One path: the full rect minus 64 circle holes, each circle four cubic curves (256 `C` commands). */
-function maskPath(): string {
-  const { w, h, cols, rows, r, cx0, cy0, px, py } = MASK;
+/** "dots": one path, the plate minus 64 circle holes, each circle four cubic curves (256 `C` commands). */
+function dotsPath(): string {
+  const { cols, rows, r, cx0, cy0, px, py } = DOTS;
   const k = KAPPA * r;
   const f = (n: number) => Number(n.toFixed(3)).toString();
-  let d = `M0 0H${w}V${h}H0Z`;
+  let d = `M0 0H${PLATE.w}V${PLATE.h}H0Z`;
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       const cx = cx0 + col * px;
@@ -55,17 +68,68 @@ function maskPath(): string {
   }
   return d;
 }
-const MASK_PATH = maskPath();
+const DOTS_PATH = dotsPath();
 
 /**
- * The dotted unveiling mask: fill currentColor = --highlight, so the holes are transparent and whatever
- * sits under the svg (the page, then the cards as they arrive) shows through. 100% wide from 768 with the
- * spec's bottom radius (12 → --radius-md); 200% wide below, clipped by the wrapper at --radius-lg (robot.com 20).
+ * "blossom": Kurogane's cover motif cut out of the plate, 2 rows x 6. Each blossom is five pill petals (w x h, rx = w/2:
+ * the flower and the button are the same shape) around a circular core (r = .42w). A blossom spans h up and .853h down
+ * (the lower petals sit 36 deg off the axis), so 35 x 75 is the largest petal that keeps two rows >= 20 units inside
+ * the plate: rows at 95 / 270 put the tips 20 from the top and bottom edges; columns at 139 + 236n leave 66.8 clear at
+ * each end and centre the field on 729. Alternate blossoms (checkerboard) turn 36 deg so the field does not read as a
+ * grid of identical stamps; the facing tips of a turned/unturned pair keep 25 units of plate between them.
  */
-function DotMask({ className }: { className?: string }) {
+const BLOSSOM = { w: 35, h: 75, cols: 6, rows: 2, cx0: 139, cy0: 95, px: 236, py: 175, turn: 36 };
+const PETALS = [0, 72, 144, 216, 288];
+
+/** One blossom cut-out at (cx, cy), turned by `rot` degrees. Black = removed, inside the luminance mask. */
+function Blossom({ cx, cy, rot }: { cx: number; cy: number; rot: number }) {
+  const { w, h } = BLOSSOM;
   return (
-    <svg viewBox={`0 0 ${MASK.w} ${MASK.h}`} xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-dot-mask className={cn("block w-[200%] text-highlight md:w-full md:rounded-b-md", className)}>
-      <path d={MASK_PATH} fill="currentColor" fillRule="evenodd" />
+    <g transform={`translate(${cx} ${cy}) rotate(${rot})`} fill="black">
+      {PETALS.map((a) => (
+        <rect key={a} x={-w / 2} y={-h} width={w} height={h} rx={w / 2} transform={`rotate(${a})`} />
+      ))}
+      <circle r={0.42 * w} />
+    </g>
+  );
+}
+
+/** "window": one aperture inset 24 units (--radius-xl at the plate's near-1:1 scale) from the plate's sides and bottom, 24 below its top, rx 24. */
+const WINDOW = { inset: 24, rx: 24 };
+
+/**
+ * The unveiling mask: fill currentColor = --highlight, so the cut-outs are transparent and whatever sits under the svg
+ * (the page, then the cards as they arrive) shows through. "dots" is robot.com's even-odd path; "blossom" and "window"
+ * cut the same plate rect with an SVG luminance mask (white keeps, black removes: mask values, not colours). 100% wide
+ * from 768 with the spec's bottom radius (12 → --radius-md); 200% wide below, clipped by the wrapper at --radius-lg
+ * (robot.com 20).
+ */
+function DotMask({ mask, className }: { mask: ProductMask; className?: string }) {
+  // React 19 ids look like «r1»; keep only word characters so url(#…) needs no escaping.
+  const id = `product-mask-${useId().replace(/\W/g, "")}`;
+  return (
+    <svg viewBox={`0 0 ${PLATE.w} ${PLATE.h}`} xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-dot-mask className={cn("block w-[200%] text-highlight md:w-full md:rounded-b-md", className)}>
+      {mask === "dots" ? (
+        <path d={DOTS_PATH} fill="currentColor" fillRule="evenodd" />
+      ) : (
+        <>
+          <defs>
+            <mask id={id} maskUnits="userSpaceOnUse" x={0} y={0} width={PLATE.w} height={PLATE.h}>
+              <rect width={PLATE.w} height={PLATE.h} fill="white" />
+              {mask === "window" ? (
+                <rect x={WINDOW.inset} y={WINDOW.inset} width={PLATE.w - 2 * WINDOW.inset} height={PLATE.h - 2 * WINDOW.inset} rx={WINDOW.rx} fill="black" />
+              ) : (
+                Array.from({ length: BLOSSOM.rows * BLOSSOM.cols }, (_, i) => {
+                  const row = Math.floor(i / BLOSSOM.cols);
+                  const col = i % BLOSSOM.cols;
+                  return <Blossom key={i} cx={BLOSSOM.cx0 + col * BLOSSOM.px} cy={BLOSSOM.cy0 + row * BLOSSOM.py} rot={(row + col) % 2 ? BLOSSOM.turn : 0} />;
+                })
+              )}
+            </mask>
+          </defs>
+          <rect width={PLATE.w} height={PLATE.h} fill="currentColor" mask={`url(#${id})`} />
+        </>
+      )}
     </svg>
   );
 }
@@ -217,12 +281,16 @@ function ProductCard({ name, tagline, body, cta, href, media, lang }: ProductCar
 export interface ProductBandProps {
   id?: string;
   className?: string;
+  /** Review override for the unveiling mask (stories); the live page reads `?mask=` instead. Default "blossom". */
+  mask?: ProductMask;
 }
 
-/** The yellow dot-grid product band: robot.com band 6 with Arclin's robot and CareOS in the two cards. */
-export function ProductBand({ id = "products", className }: ProductBandProps) {
+/** The yellow product band under its unveiling mask: robot.com band 6 with Arclin's robot and CareOS in the two cards. */
+export function ProductBand({ id = "products", className, mask: maskProp }: ProductBandProps) {
   const { locale, t } = useLocale();
   const reduce = usePrefersReducedMotion();
+  const previewMask = usePreviewVariant("mask", "blossom", PRODUCT_MASKS);
+  const mask = maskProp ?? previewMask;
   const dotsRef = useRef<HTMLDivElement>(null);
   const stripRef = useRef<HTMLDivElement>(null);
 
@@ -278,7 +346,7 @@ export function ProductBand({ id = "products", className }: ProductBandProps) {
             </Grid24>
           </motion.div>
           <div className="overflow-hidden rounded-b-lg leading-none md:overflow-visible md:rounded-b-none">
-            <DotMask />
+            <DotMask mask={mask} />
           </div>
         </div>
 

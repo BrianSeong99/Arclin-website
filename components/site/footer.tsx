@@ -2,9 +2,10 @@
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n/context";
 import { FOOTER_COLUMNS, type PageLink } from "@/lib/site";
+import { usePreviewVariant } from "@/lib/preview-variant";
 import { Band, Col, Grid24 } from "@/components/home/band";
 import { Copy } from "@/components/site/copy";
-import { DotEyes } from "@/components/viz/dot-eyes";
+import { FooterArt } from "@/components/viz/footer-art";
 import { Wordmark } from "./wordmark";
 
 /** Privacy and terms leave the main list: robot.com sets them as the small links under column 1 (§2 row 13). */
@@ -75,6 +76,7 @@ export function Footer() {
     { key: "terms", label: c.legal.terms, href: `/${locale}/terms/` },
   ];
   const socials = [c.socials.x, c.socials.linkedin, c.socials.youtube];
+  const art = usePreviewVariant("art", "camellia", ["camellia", "blossoms"] as const);
 
   return (
     <>
@@ -127,8 +129,8 @@ export function Footer() {
             </Grid24>
           </Col>
 
-          <Col span={24} spanSm={6} className="footer-dots">
-            <DotEyes className="hidden md:block" />
+          <Col span={24} spanSm={6} className="footer-dots text-on-brand-muted">
+            <FooterArt variant={art} className="hidden md:block" />
           </Col>
         </Grid24>
       </Band>
