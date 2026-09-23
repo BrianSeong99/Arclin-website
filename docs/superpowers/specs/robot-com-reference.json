@@ -1,0 +1,2892 @@
+{
+  "meta": {
+    "source": "https://www.robot.com/",
+    "capturedAt": "2026-09-23",
+    "viewports": {
+      "desktop": [
+        1440,
+        900
+      ],
+      "tablet": [
+        768,
+        1024
+      ],
+      "mobile": [
+        390,
+        844
+      ]
+    },
+    "pageHeight": {
+      "1440": 7674,
+      "768": 7181,
+      "390": 9572
+    },
+    "container": {
+      "rule": "margin:0 auto; width:calc(100% - 1rem); max-width:1928px",
+      "width1440": 1430,
+      "left": 5,
+      "gutter": 5
+    },
+    "grid": {
+      "columns": 24,
+      "track1440": 55.75,
+      "gap": 4,
+      "span6": 354.5,
+      "span12": 713,
+      "footerTrack": 52.406,
+      "footerWidth": 1350
+    },
+    "rootFontSize": "10px; @media (min-width:1492px) calc(10*100vw/1492)",
+    "seam": {
+      "value": 4,
+      "note": "padding-top 4px on 7 of 9 in-flow sections; partner section 0 (container padding-top 5); html-block 0; footer 4/4; announcement wrapper margin-top 5"
+    },
+    "libraries": {
+      "next": "15.3.6 pages router",
+      "lenis": {
+        "version": "1.0.42",
+        "duration": 1.2,
+        "lerp": false,
+        "easing": "t=>Math.min(1,1.001-Math.pow(2,-10*t))",
+        "smoothWheel": true,
+        "wheelMultiplier": 1,
+        "touchMultiplier": 2,
+        "syncTouch": false
+      },
+      "gsap": "3.12.7 + ScrollTrigger 3.12.7 + SplitText 3.13.0",
+      "intersectionObserver": "react-intersection-observer threshold 0.5 triggerOnce (adds .is-in)",
+      "framerMotion": "accordion image crossfade only",
+      "font": "Yellix 400/500/600 woff2 self-hosted, font-display swap, font-feature-settings ss01"
+    },
+    "kurogane": {
+      "surface-page": "#fbf7ef",
+      "surface-raised": "#ffffff",
+      "surface-sunken": "#f2ecdf",
+      "surface-brand": "#102e24",
+      "hairline": "#e2daca",
+      "border-strong": "#8e8676",
+      "ink": "#102e24",
+      "ink-muted": "#47594f",
+      "ink-subtle": "#5e6f68",
+      "on-brand": "#fbf7ef",
+      "on-brand-muted": "#c3d0c6",
+      "highlight": "#f7ed92",
+      "highlight-edge": "#a08a2b",
+      "on-highlight": "#102e24",
+      "focus-ring": "#102e24",
+      "focus-ring-inverse": "#f7ed92",
+      "radius-sm": 4,
+      "radius-md": 10,
+      "radius-lg": 20,
+      "radius-pill": 999,
+      "dur-enter": 240,
+      "dur-slow": 320,
+      "ease-enter": "cubic-bezier(0.2, 0, 0, 1)"
+    },
+    "colourRoleMap": [
+      {
+        "robot": "#ffffff",
+        "role": "page/body bg and section seams",
+        "kurogane": "surface-page"
+      },
+      {
+        "robot": "#f8f6f3",
+        "role": "cards (product, partner, stats C/D/E, nav tiles)",
+        "kurogane": "surface-raised",
+        "note": "tonal inversion: robot.com cards are darker than page; Kurogane raised is lighter (open question 6)"
+      },
+      {
+        "robot": "#262626",
+        "role": "dark slabs, black pill, primary text, logos",
+        "kurogane": "surface-brand (slabs) / ink (text on page)"
+      },
+      {
+        "robot": "#fff65d",
+        "role": "announcement, product band + dots svg, CTA slab, stats card B, accent pill",
+        "kurogane": "highlight"
+      },
+      {
+        "robot": "#262626 on #fff65d",
+        "role": "text on yellow",
+        "kurogane": "on-highlight"
+      },
+      {
+        "robot": "#ffffff / #f8f6f3 on #262626",
+        "role": "text on dark",
+        "kurogane": "on-brand"
+      },
+      {
+        "robot": "rgba(38,38,38,0.65)",
+        "role": "secondary body text on page",
+        "kurogane": "ink-muted"
+      },
+      {
+        "robot": "#8f8e8d",
+        "role": "muted stat text, byline",
+        "kurogane": "ink-subtle"
+      },
+      {
+        "robot": "rgba(255,255,255,0.3) / opacity .55 / .65",
+        "role": "legal text, secondary links, accordion body on dark",
+        "kurogane": "on-brand-muted"
+      },
+      {
+        "robot": "#d9d7d5",
+        "role": "accordion media frame",
+        "kurogane": "surface-sunken"
+      },
+      {
+        "robot": "rgba(255,255,255,0.1) + blur(26px)",
+        "role": "header glass on dark bands",
+        "kurogane": "new token glass-on-brand"
+      },
+      {
+        "robot": "rgba(38,38,38,0.075) + blur(26px)",
+        "role": "header glass on light bands",
+        "kurogane": "new token glass-on-page"
+      },
+      {
+        "robot": "rgba(38,38,38,0.5)",
+        "role": "menu backdrop",
+        "kurogane": "surface-brand @ 50%"
+      },
+      {
+        "robot": "rgba(0,0,0,0.6)",
+        "role": "video lightbox scrim",
+        "kurogane": "none; literal"
+      }
+    ]
+  },
+  "bands": [
+    {
+      "index": 1,
+      "robotBand": "announcement bar",
+      "selector": "div.index_announcement > div.Container_container > a.AnnouncementBar_bar",
+      "arclinBand": 1,
+      "arclinName": "announcement bar",
+      "arclinKeys": [
+        "home.announce.text",
+        "home.announce.cta"
+      ],
+      "cutIfNoFact": false,
+      "layout": {
+        "1440": {
+          "top": 5,
+          "height": 38.83,
+          "slab": {
+            "x": 5,
+            "y": 5,
+            "w": 1430,
+            "h": 38.83
+          },
+          "radius": 24,
+          "padding": "12px 20px",
+          "display": "flex",
+          "gap": 16,
+          "position": "static",
+          "wrapperMarginTop": 5,
+          "paddingTop": 0,
+          "paddingBottom": 0
+        },
+        "390": {
+          "slab": {
+            "x": 5,
+            "y": 5,
+            "w": 380,
+            "h": 38.83
+          },
+          "padding": "12px 20px"
+        }
+      },
+      "type": [
+        {
+          "role": "message",
+          "1440": "14/600/14.84/-0.28",
+          "390": "14"
+        },
+        {
+          "role": "link label",
+          "1440": "14/400/14.84/-0.28",
+          "390": "14"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#fff65d",
+          "role": "bg",
+          "kurogane": "highlight"
+        },
+        {
+          "robot": "#262626",
+          "role": "text",
+          "kurogane": "on-highlight"
+        }
+      ],
+      "motion": [
+        {
+          "what": "sets --announcement-offset on html",
+          "trigger": "scroll 0-44",
+          "values": "44px@0, 24@20, 4@40, 0@>=44",
+          "ms": 0,
+          "easing": "linear with scroll",
+          "library": "JS"
+        }
+      ],
+      "interaction": {
+        "click": "whole bar is a link (/r-dog)",
+        "hover": "underline on link label only, instant",
+        "dismiss": "none",
+        "persistence": "none (localStorage empty)",
+        "aria": "none needed"
+      }
+    },
+    {
+      "index": 2,
+      "robotBand": "header (fixed)",
+      "selector": "header.Header_header",
+      "arclinBand": 2,
+      "arclinName": "header / nav pill",
+      "arclinKeys": [
+        "site.navLabels",
+        "contactRobot"
+      ],
+      "cutIfNoFact": false,
+      "layout": {
+        "1440": {
+          "position": "fixed",
+          "top": 0,
+          "zIndex": 11,
+          "padding": "16px 0",
+          "heightWithAnnouncement": 124,
+          "heightAfter": 80,
+          "bar": {
+            "x": 536,
+            "y": 60,
+            "yScrolled": 16,
+            "w": 368,
+            "h": 48,
+            "radius": 24,
+            "maxWidth": 368,
+            "backdropFilter": "blur(26px)",
+            "overflow": "hidden"
+          },
+          "cta": {
+            "x": 1299.78,
+            "y": 60,
+            "w": 111.22,
+            "h": 48,
+            "padding": "19px 20px",
+            "radius": 24,
+            "right": 24
+          },
+          "logo": {
+            "x": 559,
+            "y": 77,
+            "w": 90,
+            "h": 14,
+            "viewBox": "0 0 90 14"
+          },
+          "toggle": {
+            "x": 861,
+            "y": 71,
+            "w": 26,
+            "h": 26,
+            "radius": 4,
+            "border": "1px solid currentColor",
+            "chevron": "16x13"
+          },
+          "barTopPadding": "0 17px 0 23px",
+          "menuOpen": {
+            "barH": 458,
+            "submenu": {
+              "x": 536,
+              "y": 108,
+              "w": 368,
+              "h": 409.56,
+              "padding": "20px 4px 15px"
+            },
+            "tiles": "3 x 116.98sq radius 17 #f8f6f3",
+            "slide": "360x230.58 radius 20",
+            "dots": "3 x 32x4 radius 30"
+          }
+        },
+        "768": {
+          "bar": {
+            "x": 200,
+            "w": 368,
+            "h": 48
+          },
+          "cta": null
+        },
+        "390": {
+          "bar": {
+            "x": 5,
+            "y": 60,
+            "w": 380,
+            "h": 48,
+            "maxWidth": "100%"
+          },
+          "toggle": {
+            "x": 342,
+            "y": 71
+          },
+          "menuOpen": {
+            "barH": 469,
+            "tiles": "3 x 120.98sq",
+            "slide": "372x238.25"
+          },
+          "cta": "fixed bottom-centre pill, bottom 4px, padding 11px 21px"
+        }
+      },
+      "type": [
+        {
+          "role": "CTA label",
+          "1440": "14/600/15.4/-0.28",
+          "390": "14"
+        },
+        {
+          "role": "tile label",
+          "1440": "10/500/11.6",
+          "390": "10"
+        },
+        {
+          "role": "slide title",
+          "1440": "24/600/24/-0.48",
+          "390": "20"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "rgba(255,255,255,0.1)+blur(26px)",
+          "role": "bar/CTA on dark bands",
+          "kurogane": "glass-on-brand (new)"
+        },
+        {
+          "robot": "rgba(38,38,38,0.075)+blur(26px)",
+          "role": "bar/CTA on light bands",
+          "kurogane": "glass-on-page (new)"
+        },
+        {
+          "robot": "#ffffff / #262626",
+          "role": "label + logo colour per theme",
+          "kurogane": "on-brand / ink"
+        },
+        {
+          "robot": "rgba(38,38,38,0.5)",
+          "role": "backdrop",
+          "kurogane": "surface-brand @50%"
+        },
+        {
+          "robot": "#f8f6f3",
+          "role": "menu tiles",
+          "kurogane": "surface-raised"
+        }
+      ],
+      "motion": [
+        {
+          "what": "bar y 60->16",
+          "trigger": "scroll 0-44 via --announcement-offset",
+          "ms": 0,
+          "easing": "linear with scroll",
+          "library": "CSS var"
+        },
+        {
+          "what": "theme class swap bar bg",
+          "trigger": "section enter",
+          "ms": 0,
+          "easing": "none (<=1 frame)",
+          "library": "class"
+        },
+        {
+          "what": "CTA bg+colour",
+          "trigger": "theme swap",
+          "ms": 450,
+          "easing": "cubic-bezier(0.16,1,0.3,1)",
+          "library": "CSS"
+        },
+        {
+          "what": "logo/toggle colour",
+          "trigger": "theme swap",
+          "ms": 350,
+          "easing": "cubic-bezier(0.16,1,0.3,1)",
+          "library": "CSS"
+        },
+        {
+          "what": "menu open height 48->458",
+          "trigger": "mouseenter (desktop) / tap (mobile)",
+          "ms": 1000,
+          "easing": "expo.out",
+          "library": "GSAP",
+          "samples": "252@100 355@200 408@300 435@400 settle~810"
+        },
+        {
+          "what": "backdrop opacity 0->1",
+          "trigger": "open",
+          "ms": 300,
+          "easing": "ease",
+          "library": "CSS"
+        },
+        {
+          "what": "chevron scaleY(-1)",
+          "trigger": "open",
+          "ms": 600,
+          "easing": "cubic-bezier(0.16,1,0.3,1)",
+          "library": "CSS"
+        },
+        {
+          "what": "submenu dots opacity 0->1",
+          "trigger": "open",
+          "ms": 300,
+          "delay": 700,
+          "easing": "expo.out",
+          "library": "GSAP"
+        },
+        {
+          "what": "menu close height ->48",
+          "trigger": "mouseleave / tap / Escape",
+          "ms": 1000,
+          "easing": "expo.out",
+          "library": "GSAP"
+        },
+        {
+          "what": "slide crossfade",
+          "trigger": "dot click",
+          "ms": 1000,
+          "easing": "cubic-bezier(0.16,1,0.3,1)",
+          "library": "CSS"
+        }
+      ],
+      "interaction": {
+        "open": "mouseenter on desktop; tap on mobile; chevron click no-op on desktop",
+        "close": "mouseleave; backdrop tap; Escape",
+        "scrollLock": "html.lenis-stopped",
+        "focus": "moved to first submenu link after tween",
+        "aria": "toggle aria-label only; no aria-expanded/aria-controls; logo link 0px tall (Arclin must fix)"
+      }
+    },
+    {
+      "index": 3,
+      "robotBand": "hero video",
+      "selector": "header.HeroMedia_hero > div.Container_container.HeroMedia_container",
+      "arclinBand": 3,
+      "arclinName": "hero video",
+      "arclinKeys": [
+        "home.hero.line",
+        "home.hero.cjkLine",
+        "home.hero.cta",
+        "home.hero.videoLabel"
+      ],
+      "cutIfNoFact": false,
+      "layout": {
+        "1440": {
+          "top": 48.83,
+          "height": 890,
+          "slab": {
+            "x": 5,
+            "y": 48.83,
+            "w": 1430,
+            "h": 890
+          },
+          "heightRule": "calc(100vh - 1rem)",
+          "radius": 24,
+          "overflow": "hidden",
+          "padding": 24,
+          "display": "flex row, align center, justify space-between, gap 32",
+          "content": {
+            "x": 29,
+            "y": 420.56,
+            "w": 288,
+            "h": 146.52,
+            "flex": "column gap 15",
+            "h1MaxWidth": 383
+          },
+          "video": {
+            "x": 5,
+            "y": 48.83,
+            "w": 1430,
+            "h": 890,
+            "objectFit": "cover",
+            "radius": 0,
+            "native": "1920x1080"
+          },
+          "paddingTop": 0,
+          "paddingBottom": 0
+        },
+        "768": {
+          "slab": {
+            "w": 758,
+            "h": 1014
+          }
+        },
+        "390": {
+          "slab": {
+            "x": 5,
+            "y": 48.83,
+            "w": 380,
+            "h": 834
+          },
+          "display": "flex column gap 48",
+          "padding": 24,
+          "pillY": 819.69
+        }
+      },
+      "type": [
+        {
+          "role": "h1",
+          "1440": "42/600/46.2/-0.84",
+          "390": "32/600/35.2/-0.64"
+        },
+        {
+          "role": "pill",
+          "1440": "14/600/17.15/-0.28",
+          "390": "14"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#ffffff",
+          "role": "h1",
+          "kurogane": "on-brand"
+        },
+        {
+          "robot": "#fff65d / #262626",
+          "role": "accent pill",
+          "kurogane": "highlight / on-highlight"
+        },
+        {
+          "robot": "linear-gradient(180deg, rgba(0,0,0,.45) 0, .28 15%, .1 32%, 0 48%)",
+          "role": "figure::before",
+          "kurogane": "literal"
+        },
+        {
+          "robot": "rgba(0,0,0,.38) at edges -> 0 at 42-58%",
+          "role": "figure::after vignette",
+          "kurogane": "literal"
+        }
+      ],
+      "motion": [
+        {
+          "what": "no entrance on h1/pill",
+          "trigger": "load",
+          "ms": 0,
+          "easing": "none",
+          "library": "none"
+        },
+        {
+          "what": "preloader white cover removal",
+          "trigger": "hydration ~1.7s after commit (0.4s on reload)",
+          "ms": 0,
+          "easing": "none",
+          "library": "GSAP autoAlpha"
+        },
+        {
+          "what": "video play()",
+          "trigger": "JS ~2.4s after commit",
+          "ms": 37930,
+          "easing": "loop",
+          "library": "HTMLMediaElement"
+        }
+      ],
+      "interaction": {
+        "video": "preload=none playsinline loop muted crossorigin=anonymous draggable=false poster=jpg + track captions; no autoplay attr; keeps playing off-screen",
+        "hover": "pill roll-over"
+      }
+    },
+    {
+      "index": 4,
+      "robotBand": "trusted by (partner logos)",
+      "selector": "section.light > div.Container_container.PartnerList_content",
+      "arclinBand": 4,
+      "arclinName": "trusted by",
+      "arclinKeys": [
+        "home.trustedBy.eyebrow",
+        "home.trustedBy.facilities",
+        "home.trustedBy.sentence",
+        "home.trustedBy.cta"
+      ],
+      "cutIfNoFact": true,
+      "layout": {
+        "1440": {
+          "top": 938.83,
+          "height": 376.53,
+          "sectionPaddingTop": 0,
+          "sectionPaddingBottom": 0,
+          "containerPaddingTop": 5,
+          "grid": "24 x 55.578px + 1 x 0px implicit (25 tracks), gap 4, bg #fff",
+          "headerCard": {
+            "x": 5,
+            "y": 943.83,
+            "w": 353.5,
+            "h": 371.53,
+            "gridColumn": "span 6",
+            "radius": 24,
+            "padding": 24,
+            "bg": "#f8f6f3",
+            "flex": "column, h2 top, p+pill bottom"
+          },
+          "partnerList": {
+            "x": 362.5,
+            "w": 1072.5,
+            "gridColumn": "7 / span 19",
+            "flex": "row gap 4",
+            "cards": "5 x 211.3x371.53 radius 24 padding 24 #f8f6f3",
+            "logoImg": "147.9sq (wide) or 95.1sq, absolute centred, object-fit contain"
+          }
+        },
+        "768": {
+          "headerCard": {
+            "w": 758,
+            "h": 228.88
+          },
+          "stacked": true,
+          "height": 741.88
+        },
+        "390": {
+          "grid": "6 cols gap 4 stacked",
+          "headerCard": {
+            "x": 5,
+            "w": 380,
+            "h": 214.03,
+            "padding": 24
+          },
+          "height": 795.03
+        }
+      },
+      "type": [
+        {
+          "role": "h2",
+          "1440": "41/600/41/-0.82",
+          "390": "26/600/27.56/-0.52"
+        },
+        {
+          "role": "p",
+          "1440": "14/500/16.24 (max-width 260)",
+          "390": "14/500/16.24"
+        },
+        {
+          "role": "pill (black)",
+          "1440": "14/600",
+          "390": "14"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#f8f6f3",
+          "role": "cards",
+          "kurogane": "surface-raised"
+        },
+        {
+          "robot": "#262626",
+          "role": "h2, logos (monochrome)",
+          "kurogane": "ink"
+        },
+        {
+          "robot": "rgba(38,38,38,0.65)",
+          "role": "p",
+          "kurogane": "ink-muted"
+        },
+        {
+          "robot": "#262626 / #fff",
+          "role": "black pill",
+          "kurogane": "surface-brand / on-brand"
+        }
+      ],
+      "motion": [
+        {
+          "what": "h2 line reveal",
+          "trigger": "IntersectionObserver .5 once",
+          "ms": 400,
+          "delay": 150,
+          "easing": "cubic-bezier(0.25,0.46,0.45,0.94)",
+          "library": "CSS (SplitText lines)"
+        },
+        {
+          "what": "logo LQIP src swap",
+          "trigger": "load",
+          "ms": 0,
+          "easing": "none",
+          "library": "react-datocms"
+        },
+        {
+          "what": "marquee",
+          "trigger": "none",
+          "ms": 0,
+          "easing": "none",
+          "library": "none (static grid)"
+        }
+      ],
+      "interaction": {
+        "hover": "pill roll-over"
+      }
+    },
+    {
+      "index": 5,
+      "robotBand": "statement slab (dark, word scrub)",
+      "selector": "section.ScrollTextSection_container.dark > div.Container_container > div.ScrollTextSection_inner",
+      "arclinBand": 6,
+      "arclinName": "scale band (surface-brand)",
+      "arclinKeys": [
+        "home.scale.figures"
+      ],
+      "cutIfNoFact": true,
+      "orderNote": "swapped with brief band 5; see open question 1",
+      "layout": {
+        "1440": {
+          "top": 1315.36,
+          "height": 501.56,
+          "sectionPaddingTop": 4,
+          "sectionPaddingBottom": 0,
+          "slab": {
+            "x": 5,
+            "y": 1319.36,
+            "w": 1430,
+            "h": 497.56,
+            "radius": 26,
+            "padding": "26px 24px 300px",
+            "bg": "#262626"
+          },
+          "h3": {
+            "x": 29,
+            "y": 1345.36,
+            "w": 1382
+          },
+          "inlineImage": {
+            "w": 200,
+            "h": 151.58,
+            "radius": 10
+          }
+        },
+        "768": {
+          "slab": {
+            "w": 758,
+            "h": 669.13
+          }
+        },
+        "390": {
+          "slab": {
+            "x": 5,
+            "w": 380,
+            "h": 402,
+            "padding": "20px sides"
+          },
+          "textWidth": 340
+        }
+      },
+      "type": [
+        {
+          "role": "h3 words",
+          "1440": "52/600/57.2/-1.04",
+          "390": "26/600/26/-0.52"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#262626",
+          "role": "slab",
+          "kurogane": "surface-brand"
+        },
+        {
+          "robot": "#f8f6f3",
+          "role": "lit words",
+          "kurogane": "on-brand"
+        },
+        {
+          "robot": "#f8f6f3 @ opacity .3",
+          "role": "unlit words",
+          "kurogane": "on-brand @30% (static equivalent on-brand-muted)"
+        }
+      ],
+      "motion": [
+        {
+          "what": "word opacity scrub .3->1",
+          "trigger": "ScrollTrigger start 'top bottom' (415) end 'top 25%' (1090), scrub 1",
+          "ms": 2150,
+          "perWord": 150,
+          "stagger": 100,
+          "easing": "power2.out",
+          "library": "GSAP+ST",
+          "samples": "all .3 @415; 4 lit @550; 8 lit @700; 13 @850; 18 @1000; 21 @1090"
+        }
+      ],
+      "interaction": {
+        "hover": "none"
+      }
+    },
+    {
+      "index": 6,
+      "robotBand": "product band (yellow, dot grid, pinned cards)",
+      "selector": "section.ProductsList_container.dotted-mask-section",
+      "arclinBand": 5,
+      "arclinName": "the robot (product block)",
+      "arclinKeys": [
+        "home.robot.eyebrow",
+        "home.robot.name",
+        "home.robot.sentences",
+        "home.robot.cta"
+      ],
+      "cutIfNoFact": false,
+      "note": "name exists; sentences carry GAPs; second card subject undecided (open question 5)",
+      "layout": {
+        "1440": {
+          "top": 1816.92,
+          "height": 1319,
+          "sectionPaddingTop": 4,
+          "sectionPaddingBottom": 0,
+          "header": {
+            "position": "absolute",
+            "zIndex": 10,
+            "h": 598.09,
+            "content": {
+              "x": 5,
+              "y": 1820.92,
+              "w": 1430,
+              "h": 242.11,
+              "radius": "26px 26px 0 0",
+              "padding": "30px 25px",
+              "bg": "#fff65d"
+            },
+            "dotsSvg": {
+              "x": 5,
+              "y": 2061.03,
+              "w": 1430,
+              "h": 357.98,
+              "viewBox": "0 0 1458 365",
+              "holes": 64,
+              "rows": 4,
+              "cols": 16,
+              "holeDiameter": 72.8,
+              "pitch": 91.6,
+              "fill": "currentColor #fff65d",
+              "radius": "0 0 12px 12px"
+            }
+          },
+          "pinSpacer": {
+            "x": 0,
+            "y": 1820.92,
+            "w": 1440,
+            "h": 1315,
+            "paddingBottom": 1079
+          },
+          "pinnedStrip": {
+            "h": 236,
+            "translateY": "0 -> 1079"
+          },
+          "cardsGrid": "24 x 55.75 gap 4",
+          "cards": [
+            {
+              "x": 5,
+              "w": 713,
+              "h": 713,
+              "landY": 2422.9
+            },
+            {
+              "x": 722,
+              "w": 713,
+              "h": 713
+            }
+          ],
+          "card": {
+            "radius": 24,
+            "padding": "18px 24px",
+            "bg": "#f8f6f3",
+            "overflow": "hidden",
+            "image": "713sq object-fit contain, transparent PNG"
+          },
+          "h2": {
+            "x": 30,
+            "y": 1850.92,
+            "w": 420
+          }
+        },
+        "768": {
+          "height": 815,
+          "twoColumns": true,
+          "content": {
+            "w": 758,
+            "h": 242.11
+          }
+        },
+        "390": {
+          "height": 1726,
+          "grid": "6 cols stacked",
+          "cards": "380x663.66, padding 17 sides",
+          "h2": "32px, block 330"
+        }
+      },
+      "type": [
+        {
+          "role": "band h2",
+          "1440": "52/600/52/-1.56",
+          "390": "32/600/32/-0.64"
+        },
+        {
+          "role": "band p",
+          "1440": "14/500/14.84/-0.28 (300 wide)",
+          "390": "14"
+        },
+        {
+          "role": "card h2 (+R glyph 21.3x20.47)",
+          "1440": "41/600/41/-0.82",
+          "390": "26"
+        },
+        {
+          "role": "card h3 @ opacity .5",
+          "1440": "41/600/41/-0.82",
+          "390": "26"
+        },
+        {
+          "role": "card p",
+          "1440": "14/500/16.24 (300 wide)",
+          "390": "14"
+        },
+        {
+          "role": "outline pill",
+          "1440": "14/600",
+          "390": "14"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#fff65d",
+          "role": "band + dots svg",
+          "kurogane": "highlight"
+        },
+        {
+          "robot": "#262626",
+          "role": "band h2",
+          "kurogane": "on-highlight"
+        },
+        {
+          "robot": "rgba(38,38,38,0.65)",
+          "role": "band p",
+          "kurogane": "ink-muted"
+        },
+        {
+          "robot": "#f8f6f3",
+          "role": "cards",
+          "kurogane": "surface-raised"
+        },
+        {
+          "robot": "#262626 / rgba(38,38,38,0.65)",
+          "role": "card text",
+          "kurogane": "ink / ink-muted"
+        },
+        {
+          "robot": "transparent, border 1px currentColor",
+          "role": "outline pill",
+          "kurogane": "border ink"
+        }
+      ],
+      "motion": [
+        {
+          "what": "pin + slide cards through holes",
+          "trigger": "ScrollTrigger start 'bottom-=358px bottom' (1161) end 'bottom+=721 bottom' (2240), scrub true, pin true",
+          "ms": 0,
+          "easing": "linear with scroll",
+          "library": "GSAP ST",
+          "values": "translateY 0 -> 1079px; no mask-image/clip-path"
+        },
+        {
+          "what": "band h2 line reveal",
+          "trigger": "IntersectionObserver .5 once",
+          "ms": 400,
+          "delay": "150/250",
+          "easing": "cubic-bezier(0.25,0.46,0.45,0.94)",
+          "library": "CSS"
+        },
+        {
+          "what": "card title words translateY(52px)->0",
+          "trigger": "same",
+          "ms": 400,
+          "easing": "cubic-bezier(0.25,0.46,0.45,0.94)",
+          "library": "CSS"
+        }
+      ],
+      "interaction": {
+        "hover": "outline pill roll-over"
+      }
+    },
+    {
+      "index": 7,
+      "robotBand": "scale / stats bento",
+      "selector": "section.ProductPerks_container > div.Container_container.ProductPerks_content",
+      "arclinBand": 7,
+      "arclinName": "founder quote (+ scale figures)",
+      "arclinKeys": [
+        "home.founder.quote",
+        "home.founder.name",
+        "home.founder.title",
+        "home.scale.figures"
+      ],
+      "cutIfNoFact": true,
+      "layout": {
+        "1440": {
+          "top": 3135.92,
+          "height": 358.63,
+          "sectionPaddingTop": 4,
+          "sectionPaddingBottom": 0,
+          "grid": "24 x 55.75 gap 4; rows 175.31 x 2",
+          "cards": [
+            {
+              "id": "A",
+              "gridColumn": "span 6",
+              "gridRow": "1 / span 2",
+              "x": 5,
+              "y": 3139.92,
+              "w": 354.5,
+              "h": 354.5,
+              "bg": "#262626"
+            },
+            {
+              "id": "B",
+              "gridColumn": "7 / span 6",
+              "gridRow": "1",
+              "x": 363.5,
+              "y": 3139.92,
+              "w": 354.5,
+              "h": 175.31,
+              "bg": "#fff65d"
+            },
+            {
+              "id": "C",
+              "gridColumn": "7 / span 6",
+              "gridRow": "2",
+              "x": 363.5,
+              "y": 3319.23,
+              "w": 354.5,
+              "h": 175.31,
+              "bg": "#f8f6f3"
+            },
+            {
+              "id": "D",
+              "gridColumn": "13 / span 6",
+              "gridRow": "1 / span 2",
+              "x": 722,
+              "y": 3139.92,
+              "w": 354.5,
+              "h": 354.5,
+              "bg": "#f8f6f3"
+            },
+            {
+              "id": "E",
+              "gridColumn": "19 / span 6",
+              "gridRow": "1 / span 2",
+              "x": 1080.5,
+              "y": 3139.92,
+              "w": 354.5,
+              "h": 354.5,
+              "bg": "#f8f6f3"
+            }
+          ],
+          "card": {
+            "radius": 24,
+            "padding": 24,
+            "overflow": "hidden"
+          },
+          "numerals": "SVG img 131.8 wide bottom-right"
+        },
+        "768": {
+          "height": 766,
+          "columns": 2,
+          "cardW": 377
+        },
+        "390": {
+          "height": 1344,
+          "grid": "6 x 60px gap 4",
+          "cards": "A 380sq; B 188sq + C 188sq side by side; D 380sq; E 380sq",
+          "padding": "20px 17px",
+          "iconWidths": "49-111"
+        }
+      },
+      "type": [
+        {
+          "role": "card title",
+          "1440": "18/600/19.08",
+          "390": "16/600/16.96"
+        },
+        {
+          "role": "A strong",
+          "1440": "24/600/25.44",
+          "390": "-"
+        },
+        {
+          "role": "A em",
+          "1440": "18/600 #8f8e8d @.5",
+          "390": "-"
+        },
+        {
+          "role": "C sub",
+          "1440": "14/500/14.84/-0.28",
+          "390": "14"
+        },
+        {
+          "role": "E byline em",
+          "1440": "18/600 #8f8e8d",
+          "390": "16"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#262626 / #fff",
+          "role": "card A",
+          "kurogane": "surface-brand / on-brand"
+        },
+        {
+          "robot": "#fff65d / #262626",
+          "role": "card B",
+          "kurogane": "highlight / on-highlight"
+        },
+        {
+          "robot": "#f8f6f3",
+          "role": "cards C D E",
+          "kurogane": "surface-raised"
+        },
+        {
+          "robot": "#8f8e8d",
+          "role": "byline / em",
+          "kurogane": "ink-subtle"
+        }
+      ],
+      "motion": [],
+      "interaction": {
+        "hover": "none"
+      }
+    },
+    {
+      "index": 8,
+      "robotBand": "product rows (kiwi / cargo)",
+      "selector": "section.ProductsList_container.light > div.Container_container.ProductsList_content",
+      "arclinBand": 8,
+      "arclinName": "safety and privacy",
+      "arclinKeys": [
+        "home.safety.sentences",
+        "home.safety.cta"
+      ],
+      "cutIfNoFact": true,
+      "layout": {
+        "1440": {
+          "top": 3494.55,
+          "height": 717,
+          "sectionPaddingTop": 4,
+          "sectionPaddingBottom": 0,
+          "grid": "24 x 55.75 gap 4, one 713 row",
+          "cards": [
+            {
+              "x": 5,
+              "y": 3498.55,
+              "w": 713,
+              "h": 713
+            },
+            {
+              "x": 722,
+              "y": 3498.55,
+              "w": 713,
+              "h": 713
+            }
+          ],
+          "card": {
+            "gridColumn": "span 12",
+            "radius": 24,
+            "padding": "18px 24px",
+            "bg": "#f8f6f3",
+            "overflow": "hidden",
+            "figure": "713sq absolute translateX(-356.5) right-half aligned"
+          },
+          "pill": {
+            "x": 29,
+            "y": 3711.08,
+            "w": 113.72,
+            "h": 41.14
+          }
+        },
+        "768": {
+          "height": 381,
+          "twoColumns": true
+        },
+        "390": {
+          "height": 1335.31,
+          "cards": "380x663.66 stacked, padding 17 sides",
+          "bodyWidth": 290
+        }
+      },
+      "type": [
+        {
+          "role": "h2 (+R glyph)",
+          "1440": "41/600/41/-0.82",
+          "390": "26/600/27.56/-0.52"
+        },
+        {
+          "role": "h3 @ opacity .5",
+          "1440": "41/600/41/-0.82",
+          "390": "26"
+        },
+        {
+          "role": "p",
+          "1440": "14/500/16.24 (300 wide)",
+          "390": "14/500/16.24 (290)"
+        },
+        {
+          "role": "outline pill",
+          "1440": "14/600",
+          "390": "14"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#f8f6f3",
+          "role": "cards",
+          "kurogane": "surface-raised"
+        },
+        {
+          "robot": "#262626",
+          "role": "h2",
+          "kurogane": "ink"
+        },
+        {
+          "robot": "#262626 @.5",
+          "role": "h3",
+          "kurogane": "ink-subtle"
+        },
+        {
+          "robot": "rgba(38,38,38,0.65)",
+          "role": "p",
+          "kurogane": "ink-muted"
+        }
+      ],
+      "motion": [
+        {
+          "what": "h2/h3 line reveal",
+          "trigger": "IntersectionObserver .5 once",
+          "ms": 400,
+          "delay": "150/250/350",
+          "easing": "cubic-bezier(0.25,0.46,0.45,0.94)",
+          "library": "CSS"
+        }
+      ],
+      "interaction": {
+        "hover": "outline pill roll-over"
+      }
+    },
+    {
+      "index": 9,
+      "robotBand": "markets accordion",
+      "selector": "section.UnfoldingContent_section.dark > div.Container_container.UnfoldingContent_container",
+      "arclinBand": 9,
+      "arclinName": "markets accordion",
+      "arclinKeys": [
+        "home.markets.eyebrow",
+        "home.markets.rows[].title",
+        "home.markets.rows[].sentences",
+        "home.markets.rows[].href",
+        "home.markets.rows[].cta"
+      ],
+      "cutIfNoFact": false,
+      "note": "titles + first sentences exist; second sentences carry GAPs and are dropped",
+      "layout": {
+        "1440": {
+          "top": 4211.55,
+          "height": 642.8,
+          "sectionPaddingTop": 4,
+          "sectionPaddingBottom": 0,
+          "grid": "24 x 55.75 gap 4",
+          "media": {
+            "x": 5,
+            "y": 4215.55,
+            "w": 713,
+            "h": 638.8,
+            "gridColumn": "span 12",
+            "radius": 24,
+            "bg": "#d9d7d5",
+            "overflow": "hidden"
+          },
+          "content": {
+            "x": 722,
+            "w": 713,
+            "gridColumn": "span 12",
+            "flex": "row gap 4"
+          },
+          "rows": [
+            {
+              "w": 591,
+              "active": true
+            },
+            {
+              "w": 57
+            },
+            {
+              "w": 57
+            }
+          ],
+          "row": {
+            "h": 638.8,
+            "radius": 24,
+            "bg": "#262626",
+            "overflow": "hidden",
+            "flexBasis": 57
+          },
+          "inner": {
+            "padding": 24,
+            "flex": "column gap 35",
+            "h3PaddingRight": 40,
+            "pWidth": 300
+          },
+          "preview": {
+            "indexX": [
+              1276,
+              1334.81,
+              1395.48
+            ],
+            "labelRotation": "matrix(-1,0,0,-1)",
+            "activeLabelOpacity": 0
+          },
+          "toggle": "absolute inset 0 z 3 button"
+        },
+        "768": {
+          "height": 945.66,
+          "media": {
+            "w": 758,
+            "h": 596.63,
+            "stackedAbove": true
+          },
+          "rows": "758 x 219.03 / 57 / 57"
+        },
+        "390": {
+          "height": 628.66,
+          "media": {
+            "w": 380,
+            "h": 299.09
+          },
+          "rows": "380 x 199.56 / 57 / 57",
+          "closedRadius": 48,
+          "openRadius": 24,
+          "innerPadding": 24
+        }
+      },
+      "type": [
+        {
+          "role": "h3",
+          "1440": "41/600/41/-0.82",
+          "390": "26/600/27.56/-0.52"
+        },
+        {
+          "role": "index numeral",
+          "1440": "41/600/41/-0.82",
+          "390": "hidden"
+        },
+        {
+          "role": "preview label",
+          "1440": "18/500/19.08",
+          "390": "-"
+        },
+        {
+          "role": "p @ opacity .65",
+          "1440": "16/500/18.56 (300 wide)",
+          "390": "14/500/16.24"
+        },
+        {
+          "role": "white pill",
+          "1440": "14/600",
+          "390": "14"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#262626 / #fff",
+          "role": "rows",
+          "kurogane": "surface-brand / on-brand"
+        },
+        {
+          "robot": "#fff @.65",
+          "role": "p",
+          "kurogane": "on-brand-muted"
+        },
+        {
+          "robot": "#d9d7d5",
+          "role": "media frame",
+          "kurogane": "surface-sunken"
+        },
+        {
+          "robot": "#fff / #262626",
+          "role": "white pill",
+          "kurogane": "surface-raised / ink"
+        }
+      ],
+      "motion": [
+        {
+          "what": "flexGrow 1<->0",
+          "trigger": "click",
+          "ms": 600,
+          "easing": "power3.inOut",
+          "library": "GSAP",
+          "samples": "progress .035@150 .107@200 .257@250 .526@300 .774@350 .909@400 .972@450; settle ~555"
+        },
+        {
+          "what": "new inner opacity 0->1",
+          "trigger": "click",
+          "ms": 600,
+          "delay": 500,
+          "easing": "cubic-bezier(0.215,0.61,0.355,1)",
+          "library": "CSS"
+        },
+        {
+          "what": "old inner opacity 1->0",
+          "trigger": "click",
+          "ms": 300,
+          "delay": 0,
+          "easing": "cubic-bezier(0.215,0.61,0.355,1)",
+          "library": "CSS"
+        },
+        {
+          "what": "preview label opacity",
+          "trigger": "click",
+          "ms": 300,
+          "delay": "0 opening / 500 closing",
+          "easing": "cubic-bezier(0.215,0.61,0.355,1)",
+          "library": "CSS"
+        },
+        {
+          "what": "preview index all",
+          "trigger": "click",
+          "ms": 300,
+          "delay": 500,
+          "easing": "cubic-bezier(0.215,0.61,0.355,1)",
+          "library": "CSS"
+        },
+        {
+          "what": "media crossfade",
+          "trigger": "click",
+          "ms": 600,
+          "easing": "easeInOut",
+          "library": "framer-motion AnimatePresence",
+          "samples": ".24@200 .77@400 .95@500; old removed at 600"
+        },
+        {
+          "what": "h3 words translateY(41px)->0",
+          "trigger": "click",
+          "ms": 400,
+          "delay": 450,
+          "easing": "cubic-bezier(0.25,0.46,0.45,0.94)",
+          "library": "CSS"
+        },
+        {
+          "what": "collapsed row hover ::before rgba(0,0,0,.5)",
+          "trigger": "hover",
+          "ms": 300,
+          "easing": "-",
+          "library": "CSS"
+        },
+        {
+          "what": "mobile height 57->199.6 / radius 48->24",
+          "trigger": "tap",
+          "ms": "600 / 300",
+          "easing": "power3.inOut / CSS",
+          "library": "GSAP / CSS"
+        }
+      ],
+      "interaction": {
+        "singleOpen": true,
+        "toggleClose": false,
+        "activeToggle": "pointer-events none",
+        "aria": "aria-label 'Unfold section: X' only; Arclin adds aria-expanded, aria-controls, region"
+      }
+    },
+    {
+      "index": 10,
+      "robotBand": "interlude video",
+      "selector": "section.AssetOnly_section.dark.section--fullwidthAsset",
+      "arclinBand": 10,
+      "arclinName": "interlude video",
+      "arclinKeys": [
+        "home.interlude.line",
+        "home.interlude.cta"
+      ],
+      "cutIfNoFact": false,
+      "note": "video asset missing (open question 4)",
+      "layout": {
+        "1440": {
+          "top": 4854.34,
+          "height": 904,
+          "sectionPaddingTop": 4,
+          "sectionPaddingBottom": 0,
+          "slab": {
+            "x": 5,
+            "y": 4858.34,
+            "w": 1430,
+            "h": 900,
+            "radius": 24,
+            "bg": "#262626",
+            "overflow": "hidden"
+          },
+          "bgImage": {
+            "w": 1573,
+            "h": 990,
+            "scale": 1.1
+          },
+          "h2": {
+            "x": 29,
+            "y": 4882.34,
+            "w": 359.61
+          },
+          "contentInner": {
+            "gridColumn": "11 / span 13",
+            "w": 772.75,
+            "y": 5600.98,
+            "flex": "row gap 16",
+            "titleCol": 309.8,
+            "textCol": 447
+          },
+          "thumb": {
+            "gridColumn": "9 / span 8",
+            "x": 483,
+            "y": 5142.64,
+            "w": 474,
+            "h": 331.41,
+            "aspect": "492/344",
+            "radius": 24,
+            "bg": "#262626",
+            "translateY": -165.7
+          },
+          "playBox": {
+            "w": 40,
+            "h": 40,
+            "radius": 6,
+            "offset": 17,
+            "icon": "11x15"
+          }
+        },
+        "768": {
+          "slab": {
+            "w": 758,
+            "h": 505.67
+          },
+          "thumb": {
+            "w": 250,
+            "h": 174.78
+          }
+        },
+        "390": {
+          "slab": {
+            "w": 380,
+            "h": 839.77
+          },
+          "flex": "column gap 24",
+          "thumb": {
+            "x": 29,
+            "w": 332,
+            "h": 232.13
+          },
+          "textWidth": 332
+        }
+      },
+      "type": [
+        {
+          "role": "h2",
+          "1440": "38/600/38/-0.933",
+          "390": "30/600/30/-0.933"
+        },
+        {
+          "role": "h3",
+          "1440": "24/600/24/-0.48",
+          "390": "-"
+        },
+        {
+          "role": "p",
+          "1440": "14/500/15.4/-0.28 (447 wide)",
+          "390": "14 (332)"
+        },
+        {
+          "role": "white-outline pill",
+          "1440": "14/600",
+          "390": "14"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#262626",
+          "role": "slab",
+          "kurogane": "surface-brand"
+        },
+        {
+          "robot": "#ffffff",
+          "role": "text",
+          "kurogane": "on-brand"
+        },
+        {
+          "robot": "#262626 box on white",
+          "role": "play button",
+          "kurogane": "surface-brand"
+        },
+        {
+          "robot": "rgba(0,0,0,0.6)",
+          "role": "lightbox scrim",
+          "kurogane": "literal"
+        }
+      ],
+      "motion": [
+        {
+          "what": "bg image parallax translate3d",
+          "trigger": "scroll",
+          "ms": 0,
+          "easing": "linear",
+          "library": "JS",
+          "values": "-3rem..+3rem across one viewport height (-26.8@4054 -0.14@4854 +19.9@5454), clamped -30 far below"
+        },
+        {
+          "what": "h2 line reveal",
+          "trigger": "IntersectionObserver .5 once",
+          "ms": 400,
+          "delay": "150/250",
+          "easing": "cubic-bezier(0.25,0.46,0.45,0.94)",
+          "library": "CSS"
+        },
+        {
+          "what": "thumb hover image scale 1.05",
+          "trigger": "hover",
+          "ms": 300,
+          "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+          "library": "CSS"
+        },
+        {
+          "what": "lightbox opacity 0->1",
+          "trigger": "click",
+          "ms": 300,
+          "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+          "library": "CSS",
+          "samples": ".23@104 .70@187 .97@270"
+        }
+      ],
+      "interaction": {
+        "lightbox": "fixed inset 0 z 1000 rgba(0,0,0,.6) padding 3.8vw (54.72@1440, 20px mobile); VideoEmbed_container 1330.6x748.4 radius 24; native video playsinline controls autoplay (Bunny CDN 240/360/480 + 720); close 40x40 at (1380,20); Escape closes; Lenis stopped; overlay stays in DOM"
+      }
+    },
+    {
+      "index": 11,
+      "robotBand": "closing CTA (yellow)",
+      "selector": "section.ScrollTextSection_container.yellow.contact-cta > div.Container_container > a.ScrollTextSection_inner",
+      "arclinBand": 11,
+      "arclinName": "closing CTA (surface-brand)",
+      "arclinKeys": [
+        "home.closing.line",
+        "home.closing.cta"
+      ],
+      "cutIfNoFact": false,
+      "note": "brief recolours to surface-brand (open question 2)",
+      "layout": {
+        "1440": {
+          "top": 5758.34,
+          "height": 200.27,
+          "sectionPaddingTop": 4,
+          "sectionPaddingBottom": 0,
+          "slab": {
+            "x": 5,
+            "y": 5762.34,
+            "w": 1430,
+            "h": 196.27,
+            "radius": 26,
+            "padding": "26px 24px 125px",
+            "bg": "#fff65d",
+            "isLink": true
+          },
+          "h3": {
+            "x": 29,
+            "y": 5788.34,
+            "w": 1382
+          },
+          "inlinePill": {
+            "x": 635.9,
+            "y": 5789.5,
+            "w": 128.4,
+            "h": 41.14,
+            "padding": "11px 13px",
+            "radius": 22
+          }
+        },
+        "768": {
+          "slab": {
+            "w": 758,
+            "h": 243.94
+          }
+        },
+        "390": {
+          "slab": {
+            "w": 380,
+            "h": 323.14,
+            "padding": "20px sides"
+          },
+          "containerFont": "42/40.32/-1.26",
+          "h3": "unmeasured"
+        }
+      },
+      "type": [
+        {
+          "role": "h3 words",
+          "1440": "38/600/41.8/-0.76",
+          "390": "unmeasured (container 42/40.32/-1.26)"
+        },
+        {
+          "role": "inline black pill",
+          "1440": "14/600",
+          "390": "14"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#fff65d",
+          "role": "slab",
+          "kurogane": "highlight (brief: surface-brand)"
+        },
+        {
+          "robot": "#262626",
+          "role": "words",
+          "kurogane": "on-highlight (on-brand if brand slab)"
+        },
+        {
+          "robot": "#262626 / #fff",
+          "role": "inline pill",
+          "kurogane": "surface-brand / on-brand (highlight / on-highlight on a brand slab)"
+        }
+      ],
+      "motion": [
+        {
+          "what": "word opacity scrub .3->1",
+          "trigger": "ScrollTrigger start 4858 end 5533 scrub 1",
+          "ms": 650,
+          "perWord": 150,
+          "stagger": 100,
+          "easing": "power2.out",
+          "library": "GSAP+ST",
+          "values": "6 animated words, 8 static"
+        }
+      ],
+      "interaction": {
+        "click": "whole slab links to /contact",
+        "hover": "slab is .button-container: inline pill rolls on hover anywhere"
+      }
+    },
+    {
+      "index": 12,
+      "robotBand": "partner slab (Formic, dark)",
+      "selector": "section.section--htmlBlock > div > section.formic-section",
+      "arclinBand": null,
+      "arclinName": "cut (no partner band in v3 list)",
+      "arclinKeys": [],
+      "cutIfNoFact": true,
+      "layout": {
+        "1440": {
+          "top": 5958.61,
+          "height": 804,
+          "sectionPaddingTop": 0,
+          "sectionPaddingBottom": 0,
+          "slab": {
+            "x": 4,
+            "y": 5962.61,
+            "w": 1432,
+            "h": 800,
+            "radius": 26,
+            "padding": 24,
+            "bg": "#262626",
+            "overflow": "hidden"
+          },
+          "inner": "flex column gap 32",
+          "textBlock": {
+            "x": 28,
+            "w": 1384,
+            "h": 345
+          },
+          "imageBox": {
+            "w": 186,
+            "h": 180,
+            "radius": 10,
+            "bg": "#2d2d2d"
+          },
+          "logo": {
+            "w": 245.78,
+            "h": 45
+          },
+          "pill": {
+            "w": 119.14,
+            "h": 41,
+            "radius": 9999,
+            "padding": "19px 20px",
+            "bg": "#fff"
+          }
+        },
+        "768": {
+          "slab": {
+            "w": 760,
+            "h": 324.56,
+            "padding": 28
+          }
+        },
+        "390": {
+          "slab": {
+            "w": 382,
+            "h": 516.52,
+            "padding": 28
+          }
+        }
+      },
+      "type": [
+        {
+          "role": "statement",
+          "1440": "72/500/72/-2.16",
+          "390": "-"
+        },
+        {
+          "role": "pill",
+          "1440": "15/600/17.4",
+          "390": "-"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#262626",
+          "role": "slab",
+          "kurogane": "surface-brand"
+        },
+        {
+          "robot": "#f2f1ee",
+          "role": "text",
+          "kurogane": "on-brand"
+        }
+      ],
+      "motion": [],
+      "interaction": {
+        "hover": "plain link, no roll-over"
+      }
+    },
+    {
+      "index": 13,
+      "robotBand": "footer with dot matrix",
+      "selector": "footer.Footer_footer > div.dark > div.Container_container > div.Footer_topBg",
+      "arclinBand": 12,
+      "arclinName": "footer",
+      "arclinKeys": [
+        "footerName",
+        "company",
+        "site.footerColumns",
+        "site.legal",
+        "privacy"
+      ],
+      "cutIfNoFact": false,
+      "layout": {
+        "1440": {
+          "top": 6762.61,
+          "height": 911.16,
+          "footerPaddingTop": 4,
+          "footerPaddingBottom": 4,
+          "slab": {
+            "x": 5,
+            "y": 6766.61,
+            "w": 1430,
+            "h": 903.16,
+            "radius": 24,
+            "padding": "26px 40px 40px",
+            "bg": "#262626",
+            "overflow": "hidden"
+          },
+          "grid": {
+            "w": 1350,
+            "columns": 24,
+            "track": 52.406,
+            "gap": 4,
+            "rows": [
+              218.48,
+              162,
+              448.67
+            ]
+          },
+          "logoColumn": {
+            "gridColumn": "span 16",
+            "x": 45,
+            "w": 898.66,
+            "svg": "146x22.7"
+          },
+          "navColumns": [
+            {
+              "gridColumn": "span 4",
+              "x": 947.66,
+              "w": 221.67,
+              "links": 6
+            },
+            {
+              "gridColumn": "span 4",
+              "x": 1173.33,
+              "w": 221.67,
+              "links": 9
+            }
+          ],
+          "legals": {
+            "gridColumn": "span 24",
+            "y": 7165.09,
+            "h": 12,
+            "left": "span 12",
+            "right": "19 / span 6 right-aligned"
+          },
+          "dotsWrapper": {
+            "gridColumn": "span 24",
+            "x": 45,
+            "y": 7201.09,
+            "w": 1350,
+            "h": 428.67,
+            "aspect": "1414/449",
+            "marginTop": "2rem"
+          }
+        },
+        "768": {
+          "slab": {
+            "w": 758,
+            "h": 701.77
+          },
+          "navColW": 109.67,
+          "dots": {
+            "w": 677.98,
+            "h": 215.28
+          }
+        },
+        "390": {
+          "slab": {
+            "w": 380,
+            "h": 760.19,
+            "padding": 24
+          },
+          "grid": "6 cols",
+          "navColumns": "164 wide at x 29 and 197",
+          "legals": "332x47.8 stacked",
+          "dotsWrapper": "332x164.97, imgs display:none"
+        }
+      },
+      "type": [
+        {
+          "role": "nav link",
+          "1440": "16/500/18.56",
+          "390": "16/500/17.6/-0.16"
+        },
+        {
+          "role": "secondary link @ opacity .55",
+          "1440": "12/500/13.2/-0.12",
+          "390": "12"
+        },
+        {
+          "role": "legals",
+          "1440": "12/500/12/-0.12",
+          "390": "10/500/11.8"
+        }
+      ],
+      "colours": [
+        {
+          "robot": "#262626",
+          "role": "slab",
+          "kurogane": "surface-brand"
+        },
+        {
+          "robot": "#ffffff",
+          "role": "links, wordmark",
+          "kurogane": "on-brand"
+        },
+        {
+          "robot": "#fff @.55 / rgba(255,255,255,0.3)",
+          "role": "secondary links / legals",
+          "kurogane": "on-brand-muted"
+        },
+        {
+          "robot": "#000000 holes over #262626 / #ffffff lit",
+          "role": "dot matrix unlit / lit",
+          "kurogane": "surface-sunken(night) or literal black / on-brand"
+        }
+      ],
+      "motion": [
+        {
+          "what": "eyes GIF src swap static->animated",
+          "trigger": "ScrollTrigger onEnter start 'bottom bottom' (6720), matchMedia >=768",
+          "ms": 57,
+          "easing": "-",
+          "library": "ST callback + React state"
+        },
+        {
+          "what": "eyes GIF restore static",
+          "trigger": "ScrollTrigger onLeaveBack start 'top bottom' (6291)",
+          "ms": 0,
+          "easing": "-",
+          "library": "ST callback"
+        },
+        {
+          "what": "eyes GIF loop",
+          "trigger": "on swap, from frame 0",
+          "ms": 8630,
+          "easing": "stepped",
+          "library": "GIF",
+          "frames": 112,
+          "frameDelays": "30ms x110 + 1430 + 3900",
+          "timeline": "0-510 open; 510-990 bob down; 990-1470 up; 1470-1620 blink; 1620-1770 arcs; 1770-3300 wiggle 180-210ms; 3300-8630 hold"
+        },
+        {
+          "what": "main link roll-over",
+          "trigger": "hover",
+          "ms": 300,
+          "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+          "library": "CSS",
+          "values": "travel 18.55, snap back"
+        },
+        {
+          "what": "secondary link opacity .55->1",
+          "trigger": "hover in/out",
+          "ms": 300,
+          "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+          "library": "CSS",
+          "samples": "in .69-.74@150 .93-.96@250 1@350; out .81@150 .59@250 .55@350"
+        }
+      ],
+      "interaction": {
+        "dotMatrix": {
+          "implementation": "two stacked <img>: GIF under a #262626 PNG mask with transparent holes",
+          "sourceGrid": "2828x898, 47 cols x 15 rows, pitch 60 (60/61), hole 48, bar 12",
+          "renderedAt1350": {
+            "pitch": 28.72,
+            "dot": 22.9,
+            "gap": 5.8,
+            "rowPitch": 28.58
+          },
+          "pointer": "no reaction",
+          "mobile": "hidden <768"
+        }
+      }
+    }
+  ],
+  "motion": [
+    {
+      "id": "M1",
+      "what": "smooth wheel scroll",
+      "trigger": "wheel/touch",
+      "ms": 1200,
+      "easing": "expo-out t=>min(1,1.001-2^(-10t))",
+      "library": "Lenis",
+      "measured": "500px: first move 67ms, 86% by 400ms, settle 1116-1132ms"
+    },
+    {
+      "id": "M2",
+      "what": "preloader cover removal",
+      "trigger": "hydration",
+      "ms": 0,
+      "easing": "none",
+      "library": "GSAP autoAlpha",
+      "measured": "gone 1680-1747ms after commit cold, ~400 reload"
+    },
+    {
+      "id": "M3",
+      "what": "nav bar height sync on load",
+      "trigger": "mount",
+      "ms": 1000,
+      "easing": "expo.out",
+      "library": "GSAP"
+    },
+    {
+      "id": "M4",
+      "what": "heading line reveal translateY(100%)->0",
+      "trigger": "IntersectionObserver .5 once",
+      "ms": 400,
+      "delay": "50 + 100*line (150/250/350/450)",
+      "easing": "cubic-bezier(0.25,0.46,0.45,0.94)",
+      "library": "CSS"
+    },
+    {
+      "id": "M5",
+      "what": "statement word scrub .3->1",
+      "trigger": "ST top bottom (415) -> top 25% (1090), scrub 1",
+      "ms": 2150,
+      "easing": "power2.out",
+      "library": "GSAP+ST"
+    },
+    {
+      "id": "M6",
+      "what": "CTA word scrub .3->1",
+      "trigger": "ST 4858 -> 5533, scrub 1",
+      "ms": 650,
+      "easing": "power2.out",
+      "library": "GSAP+ST"
+    },
+    {
+      "id": "M7",
+      "what": "scrub smoothing",
+      "trigger": "internal",
+      "ms": 1000,
+      "easing": "expo",
+      "library": "GSAP ST",
+      "measured": "settle ~627ms after jump"
+    },
+    {
+      "id": "M8",
+      "what": "product band pin + translateY 0->1079",
+      "trigger": "ST bottom-=358px bottom (1161) -> bottom+=721 bottom (2240), scrub, pin",
+      "ms": 0,
+      "easing": "linear scroll",
+      "library": "GSAP ST"
+    },
+    {
+      "id": "M9",
+      "what": "product card title words translateY(52px)->0",
+      "trigger": "as M4",
+      "ms": 400,
+      "easing": "cubic-bezier(0.25,0.46,0.45,0.94)",
+      "library": "CSS"
+    },
+    {
+      "id": "M10",
+      "what": "interlude bg parallax +/-3rem",
+      "trigger": "scroll",
+      "ms": 0,
+      "easing": "linear",
+      "library": "JS translate3d"
+    },
+    {
+      "id": "M11",
+      "what": "header bar y 60->16",
+      "trigger": "scroll 0-44",
+      "ms": 0,
+      "easing": "linear",
+      "library": "CSS var --announcement-offset"
+    },
+    {
+      "id": "M12",
+      "what": "header bar bg theme swap",
+      "trigger": "section enter",
+      "ms": 0,
+      "easing": "none",
+      "library": "class swap"
+    },
+    {
+      "id": "M13",
+      "what": "header CTA bg + colour",
+      "trigger": "theme swap",
+      "ms": 450,
+      "easing": "cubic-bezier(0.16,1,0.3,1)",
+      "library": "CSS"
+    },
+    {
+      "id": "M14",
+      "what": "logo / toggle colour",
+      "trigger": "theme swap",
+      "ms": 350,
+      "easing": "cubic-bezier(0.16,1,0.3,1)",
+      "library": "CSS"
+    },
+    {
+      "id": "M15",
+      "what": "menu open height 48->458",
+      "trigger": "mouseenter/tap",
+      "ms": 1000,
+      "easing": "expo.out",
+      "library": "GSAP",
+      "measured": "settle ~810ms"
+    },
+    {
+      "id": "M16",
+      "what": "menu backdrop opacity 0->1",
+      "trigger": "open",
+      "ms": 300,
+      "easing": "ease",
+      "library": "CSS"
+    },
+    {
+      "id": "M17",
+      "what": "chevron scaleY(-1)",
+      "trigger": "open",
+      "ms": 600,
+      "easing": "cubic-bezier(0.16,1,0.3,1)",
+      "library": "CSS"
+    },
+    {
+      "id": "M18",
+      "what": "submenu dots opacity 0->1",
+      "trigger": "open",
+      "ms": 300,
+      "delay": 700,
+      "easing": "expo.out",
+      "library": "GSAP"
+    },
+    {
+      "id": "M19",
+      "what": "menu close height ->48",
+      "trigger": "mouseleave/tap/Escape",
+      "ms": 1000,
+      "easing": "expo.out",
+      "library": "GSAP"
+    },
+    {
+      "id": "M20",
+      "what": "submenu slide crossfade",
+      "trigger": "dot click",
+      "ms": 1000,
+      "easing": "cubic-bezier(0.16,1,0.3,1)",
+      "library": "CSS"
+    },
+    {
+      "id": "M21",
+      "what": "submenu tile hover overlay + scale 1.05",
+      "trigger": "hover",
+      "ms": 300,
+      "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+      "library": "CSS"
+    },
+    {
+      "id": "M22",
+      "what": "pill label roll-over",
+      "trigger": ":hover",
+      "ms": 300,
+      "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+      "library": "CSS",
+      "measured": "-7.10@151 -12.08@202 -17.14@351; out snaps <=18ms"
+    },
+    {
+      "id": "M23",
+      "what": "pill colour/bg transition (declared, unused)",
+      "trigger": "none",
+      "ms": 250,
+      "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+      "library": "CSS"
+    },
+    {
+      "id": "M24",
+      "what": "header CTA label roll-over",
+      "trigger": ":hover",
+      "ms": 300,
+      "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+      "library": "CSS",
+      "measured": "travel 15.39"
+    },
+    {
+      "id": "M25",
+      "what": "footer main link roll-over",
+      "trigger": ":hover",
+      "ms": 300,
+      "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+      "library": "CSS",
+      "measured": "travel 18.55, snap back"
+    },
+    {
+      "id": "M26",
+      "what": "footer secondary link opacity .55->1",
+      "trigger": ":hover in/out",
+      "ms": 300,
+      "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+      "library": "CSS"
+    },
+    {
+      "id": "M27",
+      "what": "accordion flexGrow 1<->0",
+      "trigger": "click",
+      "ms": 600,
+      "easing": "power3.inOut",
+      "library": "GSAP",
+      "measured": "settle ~555ms"
+    },
+    {
+      "id": "M28",
+      "what": "accordion new inner opacity 0->1",
+      "trigger": "click",
+      "ms": 600,
+      "delay": 500,
+      "easing": "cubic-bezier(0.215,0.61,0.355,1)",
+      "library": "CSS"
+    },
+    {
+      "id": "M29",
+      "what": "accordion old inner opacity 1->0",
+      "trigger": "click",
+      "ms": 300,
+      "easing": "cubic-bezier(0.215,0.61,0.355,1)",
+      "library": "CSS"
+    },
+    {
+      "id": "M30",
+      "what": "accordion preview label opacity",
+      "trigger": "click",
+      "ms": 300,
+      "delay": "0 opening / 500 closing",
+      "easing": "cubic-bezier(0.215,0.61,0.355,1)",
+      "library": "CSS"
+    },
+    {
+      "id": "M31",
+      "what": "accordion preview index all",
+      "trigger": "click",
+      "ms": 300,
+      "delay": 500,
+      "easing": "cubic-bezier(0.215,0.61,0.355,1)",
+      "library": "CSS"
+    },
+    {
+      "id": "M32",
+      "what": "accordion media crossfade",
+      "trigger": "click",
+      "ms": 600,
+      "easing": "easeInOut",
+      "library": "framer-motion"
+    },
+    {
+      "id": "M33",
+      "what": "accordion title words translateY(41px)->0",
+      "trigger": "click",
+      "ms": 400,
+      "delay": 450,
+      "easing": "cubic-bezier(0.25,0.46,0.45,0.94)",
+      "library": "CSS"
+    },
+    {
+      "id": "M34",
+      "what": "accordion collapsed row hover ::before rgba(0,0,0,.5)",
+      "trigger": "hover",
+      "ms": 300,
+      "easing": "-",
+      "library": "CSS"
+    },
+    {
+      "id": "M35",
+      "what": "accordion mobile height 57->199.6 / radius 48->24",
+      "trigger": "tap",
+      "ms": "600 / 300",
+      "easing": "power3.inOut / CSS",
+      "library": "GSAP / CSS"
+    },
+    {
+      "id": "M36",
+      "what": "interlude thumb hover scale 1.05",
+      "trigger": "hover",
+      "ms": 300,
+      "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+      "library": "CSS"
+    },
+    {
+      "id": "M37",
+      "what": "video lightbox opacity 0<->1",
+      "trigger": "click / Escape",
+      "ms": 300,
+      "easing": "cubic-bezier(0.455,0.03,0.515,0.955)",
+      "library": "CSS"
+    },
+    {
+      "id": "M38",
+      "what": "footer eyes GIF swap + 8630ms loop",
+      "trigger": "ST onEnter bottom bottom (6720) / onLeaveBack top bottom (6291)",
+      "ms": 8630,
+      "easing": "stepped",
+      "library": "ST callback + GIF"
+    },
+    {
+      "id": "M39",
+      "what": "skip link reveal",
+      "trigger": "focus",
+      "ms": 200,
+      "easing": "ease-in-out",
+      "library": "CSS"
+    },
+    {
+      "id": "M40",
+      "what": "hero video loop",
+      "trigger": "JS play() ~2.4s after commit",
+      "ms": 37930,
+      "easing": "-",
+      "library": "HTMLMediaElement"
+    },
+    {
+      "id": "M41",
+      "what": "image LQIP src swap",
+      "trigger": "load",
+      "ms": 0,
+      "easing": "none",
+      "library": "react-datocms"
+    }
+  ],
+  "reducedMotion": {
+    "robot": "Lenis smooth (settle ~1030ms), scrubs/pin/parallax still run, preloader identical; SplitText skipped so 8 .animated-title headings stay opacity 0",
+    "arclin": "headings static at opacity 1, scrubs at end state, Lenis disabled, transitions <=1ms"
+  },
+  "tokensToAdd": {
+    "durations": {
+      "--dur-reveal": 400,
+      "--dur-roll": 300,
+      "--dur-unfold": 600,
+      "--dur-menu": 1000,
+      "--dur-scroll": 1200
+    },
+    "easings": {
+      "--ease-reveal": "cubic-bezier(0.25,0.46,0.45,0.94)",
+      "--ease-roll": "cubic-bezier(0.455,0.03,0.515,0.955)",
+      "--ease-expo-out": "cubic-bezier(0.16,1,0.3,1)",
+      "--ease-out-cubic": "cubic-bezier(0.215,0.61,0.355,1)",
+      "--ease-unfold": "power3.inOut ~ cubic-bezier(0.65,0,0.35,1)"
+    },
+    "radii": {
+      "--radius-xl": 24
+    },
+    "surfaces": {
+      "--glass-on-brand": "rgba(255,255,255,0.1) + backdrop-filter blur(26px)",
+      "--glass-on-page": "rgba(16,46,36,0.075) + backdrop-filter blur(26px)"
+    }
+  },
+  "typeScale": [
+    {
+      "role": "formic statement",
+      "1440": "72/500/72/-2.16",
+      "390": null,
+      "nearest": "t-display-l",
+      "verdict": "band cut"
+    },
+    {
+      "role": "statement slab h3",
+      "1440": "52/600/57.2/-1.04",
+      "390": "26/600/26/-0.52",
+      "nearest": "t-statement",
+      "verdict": "use t-statement"
+    },
+    {
+      "role": "product band h2",
+      "1440": "52/600/52/-1.56",
+      "390": "32/600/32/-0.64",
+      "nearest": "t-statement",
+      "verdict": "new style needed: t-title-xxl 52/1.0/-0.03em/600, 32 at <768"
+    },
+    {
+      "role": "hero h1",
+      "1440": "42/600/46.2/-0.84",
+      "390": "32/600/35.2/-0.64",
+      "nearest": "t-display-m",
+      "verdict": "use t-display-m (Italiana by decision)"
+    },
+    {
+      "role": "title h3 (cards, accordion, trusted-by)",
+      "1440": "41/600/41/-0.82",
+      "390": "26/600/27.56/-0.52",
+      "nearest": "t-title-l",
+      "verdict": "new style needed: t-title-xl 41/1.0/-0.02em/600, 26/1.06 at <768"
+    },
+    {
+      "role": "interlude h2",
+      "1440": "38/600/38/-0.933",
+      "390": "30/600/30",
+      "nearest": "t-title-l",
+      "verdict": "t-title-xl at 38 (new)"
+    },
+    {
+      "role": "CTA h3",
+      "1440": "38/600/41.8/-0.76",
+      "390": null,
+      "nearest": "t-title-l",
+      "verdict": "t-title-xl at 38/1.1 (new)"
+    },
+    {
+      "role": "title h4",
+      "1440": "24/600/24/-0.48",
+      "390": "20",
+      "nearest": "t-title-m",
+      "verdict": "use t-title-m"
+    },
+    {
+      "role": "title h5 (stats)",
+      "1440": "18/600/19.08",
+      "390": "16/600/16.96",
+      "nearest": "t-title-s",
+      "verdict": "use t-title-s"
+    },
+    {
+      "role": "stats strong",
+      "1440": "24/600/25.44",
+      "390": null,
+      "nearest": "t-title-m",
+      "verdict": "use t-title-m"
+    },
+    {
+      "role": "accordion preview label",
+      "1440": "18/500/19.08",
+      "390": null,
+      "nearest": "t-title-s",
+      "verdict": "use t-title-s weight 500"
+    },
+    {
+      "role": "accordion body / footer link",
+      "1440": "16/500/18.56",
+      "390": "14/16.24 body, 16/17.6 link",
+      "nearest": "t-body",
+      "verdict": "use t-body at 500; leading gap 1.6 vs 1.16"
+    },
+    {
+      "role": "announcement message",
+      "1440": "14/600/14.84/-0.28",
+      "390": "14",
+      "nearest": "t-label",
+      "verdict": "use t-label"
+    },
+    {
+      "role": "pill label",
+      "1440": "14/600/17.15/-0.28",
+      "390": "14",
+      "nearest": "t-label",
+      "verdict": "use t-label; set label line-height 1.225 to keep 17.14 travel"
+    },
+    {
+      "role": "body-s (card copy)",
+      "1440": "14/500/16.24",
+      "390": "14",
+      "nearest": "t-body-s",
+      "verdict": "use t-body-s at 500 or new t-body-xs 14/1.16/500"
+    },
+    {
+      "role": "text-s (subs)",
+      "1440": "14/500/14.84/-0.28",
+      "390": "14",
+      "nearest": "t-body-s",
+      "verdict": "as above"
+    },
+    {
+      "role": "interlude p",
+      "1440": "14/500/15.4/-0.28",
+      "390": "14",
+      "nearest": "t-body-s",
+      "verdict": "as above"
+    },
+    {
+      "role": "footer secondary / legals",
+      "1440": "12/500/13.2/-0.12",
+      "390": "10/11.8",
+      "nearest": "t-caption",
+      "verdict": "use t-caption"
+    },
+    {
+      "role": "nav tile label",
+      "1440": "10/500/11.6",
+      "390": "10",
+      "nearest": "t-overline",
+      "verdict": "new style needed if tiled menu kept: 10/1.16/500"
+    }
+  ],
+  "checklist": [
+    {
+      "id": "V01",
+      "assertion": "page gutter 5px both sides at 1440/768/390",
+      "expected": "container left 5, width innerWidth-10 (1430/758/380)",
+      "measure": "setViewportSize per size; getBoundingClientRect on slab container",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V02",
+      "assertion": "no horizontal overflow at 1440/768/390",
+      "expected": "documentElement.scrollWidth === innerWidth",
+      "measure": "evaluate after full scroll-through, scrollTo(0,0)",
+      "tolerance": "0"
+    },
+    {
+      "id": "V03",
+      "assertion": "announcement bar box",
+      "expected": "1430x38.83 at (5,5), radius 24, padding 12px 20px, bg = --highlight",
+      "measure": "rect + computed style on announce <a>",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V04",
+      "assertion": "announcement bar scrolls away",
+      "expected": "wrapper position static; rect.top -1495 at scrollY 1500",
+      "measure": "scrollTo(0,1500); computed position; rect",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V05",
+      "assertion": "header bar at rest",
+      "expected": "368x48 at x 536 y 60; radius 24; backdrop-filter blur(26px); bg glass-on-brand",
+      "measure": "rect + computed style at scrollY 0",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V06",
+      "assertion": "header bar follows announcement offset",
+      "expected": "y 60/40/20/16 at scrollY 0/20/40/44; 16 at 600; 60 back at 0",
+      "measure": "scrollTo sweep with 150ms waits; read --announcement-offset and bar rect.y",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V07",
+      "assertion": "header bar never shrinks/hides",
+      "expected": "368x48 r24 transform none at scrollY 0/200/600/1500",
+      "measure": "same sweep",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V08",
+      "assertion": "header theme swap timing",
+      "expected": "bar bg swaps <=1 frame; CTA bg/colour 450ms cubic-bezier(.16,1,.3,1); logo 350ms",
+      "measure": "scrollTo across a brand/page boundary; getAnimations() effect.getTiming()",
+      "tolerance": "10%"
+    },
+    {
+      "id": "V09",
+      "assertion": "hero slab",
+      "expected": "1430x890 at (5,48.83) r24 padding 24; height innerHeight-10 at all viewports (890/1014/834)",
+      "measure": "rect + computed height per viewport",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V10",
+      "assertion": "hero video attributes and playback",
+      "expected": "muted loop playsinline preload=none poster set, no autoplay attr; paused false; currentTime advances >=1s in 1.2s; object-fit cover; readyState 4",
+      "measure": "evaluate twice 1200ms apart",
+      "tolerance": "-"
+    },
+    {
+      "id": "V11",
+      "assertion": "hero text has no entrance",
+      "expected": "h1 and CTA opacity 1 transform none every 25ms 0-3s",
+      "measure": "addInitScript rAF sampler",
+      "tolerance": "0"
+    },
+    {
+      "id": "V12",
+      "assertion": "24-column grid",
+      "expected": "24 tracks x 55.75, gap 4, width 1430; span 6 = 354.5, span 12 = 713",
+      "measure": "computed grid-template-columns on trusted-by/stats/rows/accordion/interlude containers; child widths",
+      "tolerance": "0.5px"
+    },
+    {
+      "id": "V13",
+      "assertion": "product cards",
+      "expected": "713x713 at x 5 and 722; r24; bg --surface-raised; padding 18px 24px",
+      "measure": "rect + computed style",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V14",
+      "assertion": "4px seam",
+      "expected": "padding-top 4 / bottom 0 on statement, product, stats, rows, accordion, interlude, CTA sections; trusted-by 0/0 with container padding-top 5; footer 4/4; section bg --surface-page",
+      "measure": "computed style per section",
+      "tolerance": "0"
+    },
+    {
+      "id": "V15",
+      "assertion": "slab radii",
+      "expected": "24 on hero/cards/accordion rows/interlude/footer; 26 on statement and CTA; 22 pill content; 4 nav toggle",
+      "measure": "computed border-radius",
+      "tolerance": "0"
+    },
+    {
+      "id": "V16",
+      "assertion": "surface roles",
+      "expected": "brand: statement, accordion rows, interlude, footer, stats A; highlight: product band, announce, stats B; raised: cards C/D/E, product, partner; sunken: accordion media",
+      "measure": "computed background-color vs token computed value",
+      "tolerance": "exact"
+    },
+    {
+      "id": "V17",
+      "assertion": "text roles",
+      "expected": "ink headings on page; ink-muted body; on-brand on brand; on-brand-muted secondary; on-highlight on highlight",
+      "measure": "computed color per role element",
+      "tolerance": "exact"
+    },
+    {
+      "id": "V18",
+      "assertion": "pill roll-over DOM",
+      "expected": "2 label copies, 2nd aria-hidden absolute translateY(100%); container overflow hidden; label height = line box",
+      "measure": "$$eval on pills",
+      "tolerance": "-"
+    },
+    {
+      "id": "V19",
+      "assertion": "pill roll-over timing in",
+      "expected": "copy1 translateY -7.1@150 -12.1@200 -17.1@350; transition transform .3s cubic-bezier(.455,.03,.515,.955) while hovered",
+      "measure": "hover(); rAF sample computed transform every 50ms",
+      "tolerance": "1px / 10%"
+    },
+    {
+      "id": "V20",
+      "assertion": "pill hover-out snaps",
+      "expected": "both copies at rest within 20ms of leave; rest transition none/0s",
+      "measure": "sample at 18 and 50ms after mouse.move away",
+      "tolerance": "0"
+    },
+    {
+      "id": "V21",
+      "assertion": "pill bg/colour unchanged on hover",
+      "expected": "background-color and color identical before/during/after",
+      "measure": "compare computed values",
+      "tolerance": "exact"
+    },
+    {
+      "id": "V22",
+      "assertion": "footer secondary link fade",
+      "expected": ".55 rest; ~.69-.74@150 ~.93-.96@250 1@350; out ~.81@150 ~.59@250 .55@350",
+      "measure": "hover/unhover; rAF sample opacity",
+      "tolerance": "0.05"
+    },
+    {
+      "id": "V23",
+      "assertion": "heading reveal rule",
+      "expected": ".line > * transition transform .4s cubic-bezier(.25,.46,.45,.94); delays 150/250/350/450; translateY(100%)->0; fires once",
+      "measure": "fresh load, 300px sweep polling getAnimations every 40ms; second sweep sees none",
+      "tolerance": "10%"
+    },
+    {
+      "id": "V24",
+      "assertion": "statement word scrub",
+      "expected": "all .3 at <=415; 4 lit at 550; all 1 at >=1090; ST start bandTop-innerHeight, end bandTop-0.25*innerHeight",
+      "measure": "scrollTo 300/415/550/700/850/1000/1090/1300; per-word opacity",
+      "tolerance": "0.05"
+    },
+    {
+      "id": "V25",
+      "assertion": "CTA word scrub",
+      "expected": "6 animated words .3->1 between bandTop-900 and bandTop-225; others 1",
+      "measure": "same method",
+      "tolerance": "0.05"
+    },
+    {
+      "id": "V26",
+      "assertion": "product band pin",
+      "expected": "pin-spacer 1315 tall padding-bottom 1079; strip translateY 0 at <=1161, 1079 at >=2240; cards land at bandTop+606",
+      "measure": "scrollTo 1000/1900/2300/2900; transform + card rect",
+      "tolerance": "2px"
+    },
+    {
+      "id": "V27",
+      "assertion": "dot mask",
+      "expected": "svg 1430x358 viewBox 0 0 1458 365, 64 holes 4x16, fill --highlight; no mask-image/clip-path",
+      "measure": "$eval svg viewBox/rect/path C-command count/4; computed mask props",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V28",
+      "assertion": "stats bento layout",
+      "expected": "A (5,+0,354.5sq) B (363.5,+0,354.5x175.31) C (363.5,+179.31,354.5x175.31) D (722,+0,354.5sq) E (1080.5,+0,354.5sq) rel. bandTop+4; r24 padding 24",
+      "measure": "rects on five articles",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V29",
+      "assertion": "accordion initial state",
+      "expected": "widths 591/57/57 h 638.8; media 713x638.8 r24; aria-expanded true/false/false; single-open",
+      "measure": "rects + attributes",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V30",
+      "assertion": "accordion open timing",
+      "expected": "row2 width progress ~.526@300 >=.97@450 settled by 600; row1 symmetric; inner opacity ~.44@605 >=.99@1005",
+      "measure": "click; rAF sample widths + opacity",
+      "tolerance": "0.05 / 10%"
+    },
+    {
+      "id": "V31",
+      "assertion": "accordion no toggle-close",
+      "expected": "clicking open row leaves widths unchanged after 700ms",
+      "measure": "click active; wait; compare",
+      "tolerance": "1px"
+    },
+    {
+      "id": "V32",
+      "assertion": "accordion mobile",
+      "expected": "at 390 media 380x299 above; rows stacked open ~200 r24, closed 57 r48; tween settles ~550ms",
+      "measure": "setViewportSize(390,844); rects; click; sample",
+      "tolerance": "2px / 10%"
+    },
+    {
+      "id": "V33",
+      "assertion": "interlude parallax",
+      "expected": "bg translateY ~-30 one viewport below, ~0 at band top, ~+20 at bandTop+600; monotonic",
+      "measure": "sample transform at bandTop-800/-300/0/+300/+600",
+      "tolerance": "3px"
+    },
+    {
+      "id": "V34",
+      "assertion": "interlude thumb + lightbox",
+      "expected": "thumb 474x331 at x 483 r24; play box 40x40 r6; overlay fixed inset 0 z>=1000 rgba(0,0,0,.6) opacity >=.97 by 270ms; native video controls playsinline autoplays; Escape closes; wheel blocked while open",
+      "measure": "rects; click; rAF opacity; mouse.wheel + scrollY; Escape",
+      "tolerance": "1px / 10%"
+    },
+    {
+      "id": "V35",
+      "assertion": "footer slab and grid",
+      "expected": "1430x903 r24 padding 26px 40px 40px bg --surface-brand; grid 1350 = 24 x 52.406 gap 4; logo span 16; nav cols span 4 at x 947.66 / 1173.33; legals span 24 12px",
+      "measure": "rects + computed grid",
+      "tolerance": "2px"
+    },
+    {
+      "id": "V36",
+      "assertion": "dot matrix",
+      "expected": "47x15 dots at 1350 wide, pitch ~28.7, dot ~22.9; hidden at 390; animated state within 60ms of wrapper bottom reaching viewport bottom; static again when wrapper top passes below viewport; arcs state at 1620-1770ms; open-eyes hold 3300-8630ms",
+      "measure": "count dots / measure pitch; scrollTo(bottom) sample state at 60ms, 1700ms, 5000ms",
+      "tolerance": "1px / 100ms"
+    },
+    {
+      "id": "V37",
+      "assertion": "smooth scroll",
+      "expected": "500px wheel: 0->500; first move <=90ms; >=86% by 400ms; settled +/-0.5 between 1000-1250ms; two ticks 150ms apart accumulate to 600",
+      "measure": "mouse.wheel(0,500) + rAF scrollY sampler",
+      "tolerance": "10%"
+    },
+    {
+      "id": "V38",
+      "assertion": "skip link",
+      "expected": "first Tab focuses [href=#main]; box fixed (24,32) 135.7x48 r24 bg --surface-brand colour --on-brand 1px inner white outline; Enter focuses main#main",
+      "measure": "keyboard.press Tab; rect/style; Enter; activeElement",
+      "tolerance": "2px"
+    },
+    {
+      "id": "V39",
+      "assertion": "focus ring",
+      "expected": ":focus-visible outline 2px solid --focus-ring offset 3px; --focus-ring-inverse inside .on-brand; wordmark link height >=14",
+      "measure": "Tab through first 8 focusables; computed outline + rect",
+      "tolerance": "exact"
+    },
+    {
+      "id": "V40",
+      "assertion": "reduced motion",
+      "expected": "headings opacity 1 transform none without scrolling; scrub words 1; no CSSTransition >1ms; 500px wheel jumps in <=2 frames",
+      "measure": "context({reducedMotion:'reduce'}); evaluate",
+      "tolerance": "-"
+    }
+  ],
+  "disputes": [
+    {
+      "id": "structure-01",
+      "claim": "13 bands",
+      "resolved": "12 in-flow bands + fixed header; lightbox button is a 10th index_container child, not a band"
+    },
+    {
+      "id": "motion-01",
+      "claim": "first wheel movement ~82ms",
+      "resolved": "67ms (one rAF earlier); settle 1116-1132ms confirmed"
+    },
+    {
+      "id": "responsive-02",
+      "claim": "390 scrollHeight 9578",
+      "resolved": "9572 (6px lazy-media variance)"
+    },
+    {
+      "id": "assets-type-01",
+      "claim": "fluid rule uses literal 1492",
+      "resolved": "calc(10*100vw/var(--size)) with --size 1492"
+    },
+    {
+      "id": "assets-type-03",
+      "claim": "every content section has padding-top 4px",
+      "resolved": "7 of 9 in-flow sections; partner section 0 (container padding-top 5); html-block 0"
+    },
+    {
+      "id": "interactions-03",
+      "claim": "footer fade 0.74 @150",
+      "resolved": "LinkedIn 0.737, Privacy 0.693 (one frame behind); endpoints/duration/easing confirmed"
+    }
+  ],
+  "openQuestions": [
+    "Band order 5/6: spec maps robot -> yellow product band and scale figures -> dark statement slab (swaps the brief's 5/6 numbering); alternative is robot in the dark slab and scale in a brand-recoloured product band.",
+    "Closing CTA surface: robot.com --highlight; brief says --surface-brand for band 11; pill colours invert accordingly.",
+    "Content gaps: bands 4, 5/6, 7, 8 and the second market sentences are all [GAP]; cutting them leaves bands 1, 2, 3, 9 (titles), 10, 11, 12.",
+    "Video assets for bands 3 and 10 do not exist; poster-only fallback until then.",
+    "Second product card subject (one robot vs two 713sq cards): span-24 card or Mimamori + CareOS.",
+    "Card tone: robot.com cards are darker than page; Kurogane surface-raised is lighter; surface-sunken preserves the relationship but reads darker.",
+    "Radius: 24/26 vs Kurogane --radius-lg 20; --radius-xl 24 token needed.",
+    "Motion tokens: Kurogane 240/320ms envelope contains none of 300/400/450/600/1000/1200; add tokens or relax 'same as robot.com'; 09-22 design spec says accordion 240ms.",
+    "Glass header: no token for rgba + blur(26px); add --glass-on-brand/--glass-on-page.",
+    "Header submenu: robot.com hover dropdown vs brief's visible 4 links; M15-M19 only apply if a dropdown remains at 390.",
+    "Fluid root scale above 1492px: match or not.",
+    "Unmeasured at 390: section paddings (seam inferred from contiguous band tops), CTA h3 size, footer link roll-over, accordion timings at 768.",
+    "Interlude parallax driver unidentified (custom scroll listener); mapping reconstructed from 6 samples.",
+    "Preloader: robot.com shows a ~1.7s white cover; not required for Arclin."
+  ]
+}

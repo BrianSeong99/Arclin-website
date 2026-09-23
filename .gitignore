@@ -55,3 +55,6 @@ ds-bundle/
 dist/
 .design-sync/*.log
 .design-sync/*.err
+
+# dev-only generated media (never shipped)
+public/dev/
