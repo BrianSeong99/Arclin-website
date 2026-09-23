@@ -136,9 +136,12 @@ body {
   outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
 }
-.on-brand :focus-visible,
-.on-highlight :focus-visible {
+.on-brand :focus-visible {
   outline-color: var(--focus-ring-inverse);
+}
+/* focus-ring-inverse is the highlight yellow itself (1:1 on highlight), so the ring on highlight is on-highlight. */
+.on-highlight :focus-visible {
+  outline-color: var(--on-highlight);
 }
 
 /* ---- type styles (tokens.json → classes) ---- */
@@ -154,13 +157,16 @@ body {
 .t-label      { font-family: var(--font-ui); font-size: 14px; line-height: 1.3; font-weight: 600; }
 .t-overline   { font-family: var(--font-ui); font-size: 12px; line-height: 1.4; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; }
 .t-caption    { font-size: 13px; line-height: 1.5; font-weight: 400; }
-.t-numeral    { font-family: var(--font-ui); font-size: clamp(40px, 5vw, 64px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; }
+.t-numeral    { font-family: var(--font-ui); font-size: 40px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; }
 /* CJK display: Zen Maru / Noto Sans SC via --font-body */
 .t-jp-display-xl { font-family: var(--font-body); font-size: clamp(36px, 5.4vw, 72px); line-height: 1.2; font-weight: 500; }
 .t-jp-display-l  { font-family: var(--font-body); font-size: clamp(30px, 4vw, 56px); line-height: 1.3; font-weight: 500; }
 .t-jp-display    { font-family: var(--font-body); font-size: clamp(24px, 2.6vw, 32px); line-height: 1.5; font-weight: 500; }
 .t-jp-body-l     { font-size: 19px; line-height: 1.9; font-weight: 400; }
 .t-jp-body       { font-size: 17px; line-height: 1.85; font-weight: 400; }
+/* Chinese: Noto Sans SC via --font-zh (Zen Maru Gothic has no Simplified Chinese glyphs) */
+.t-zh-display-xl { font-family: var(--font-zh); font-size: clamp(36px, 5.4vw, 72px); line-height: 1.2; font-weight: 500; }
+.t-zh-body       { font-family: var(--font-zh); font-size: 17px; line-height: 1.85; font-weight: 400; }
 
 /* Statement / hero sentences in Chillax, tight leading — robot.com's big-type register. */
 .t-statement { font-family: var(--font-ui); font-size: clamp(28px, 3.6vw, 52px); line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; }
