@@ -36,11 +36,11 @@ const CSS = `
 .mkt .mkt__inner { display: flex; flex-direction: column; gap: var(--space-6); width: 100%; padding: var(--space-6); opacity: 0; pointer-events: none; transition: opacity var(--dur-roll) var(--ease-out-cubic); }
 .mkt .mkt__row.is-active .mkt__inner { opacity: 1; pointer-events: auto; transition: opacity var(--dur-unfold) var(--ease-out-cubic) 500ms; }
 .mkt .mkt__head { display: flex; justify-content: space-between; gap: var(--space-1); }
-/* §4 "Title h3 (cards, accordion, trusted-by)": t-title-xl 41 / 1.0 / -0.02em / 600, 26 / 1.06 below 768, pending as a Kurogane style. */
-.mkt .mkt__title { font-size: 26px; line-height: 1.06; letter-spacing: -0.02em; }
-@media (min-width: 768px) { .mkt .mkt__title { font-size: 41px; line-height: 1; } }
+/* Row title: the display face, set on the h3 from the locale (.t-display-m for en, .t-jp-display for ja and zh; easehealth
+   brief §3 move 1, replacing §4's Chillax 41/600). The stacked head index keeps robot.com's 26px (STACK block below). */
 .mkt .mkt__title-clip { display: block; overflow: hidden; padding-bottom: 0.15ch; }
-.mkt .mkt__title-move { display: block; transform: translateY(41px); transition: transform var(--dur-reveal) var(--ease-reveal); }
+/* M33: the title rises one line box on open (robot.com's 41px is its one-line 41/1 title; 46px for Italiana 40/1.15). */
+.mkt .mkt__title-move { display: block; transform: translateY(100%); transition: transform var(--dur-reveal) var(--ease-reveal); }
 .mkt .mkt__row.is-active .mkt__title-move { transform: none; transition-delay: 450ms; }
 /* §2 row 9 / §4 "Body-s (card copy)": p 16/500/18.56 side by side, 14/500/16.24 stacked (.t-body-s at 500, leading pinned to
    robot.com's 1.16 so the stacked open row lands on its 199.56, V32). */
@@ -77,6 +77,7 @@ const CSS = `
   .mkt .mkt__row.is-active { height: var(--open-height, auto); border-radius: var(--radius-xl); }
   .mkt .mkt__preview { align-items: center; height: 54.5px; padding: 0 20px; }
   .mkt .mkt__preview-index { margin-right: var(--space-1); font-size: 26px; }
+  .mkt .mkt__head-index { font-size: 26px; }
   .mkt .mkt__row.is-active .mkt__preview-index { opacity: 0; transition-delay: 0s; }
 }
 `;
@@ -93,7 +94,7 @@ export interface MarketsAccordionProps {
  * content column (span 12) holding three brand-coloured rows side by side, the open one growing from 57 to 591
  * over var(--dur-unfold) var(--ease-unfold) (M27) while the old one shrinks; the new inner fades in over 600ms
  * after 500ms (M28), the old out over 300ms (M29); preview label and index per M30/M31; the media crossfades
- * through AnimatePresence over 600ms easeInOut (M32); the title rises 41px on open (M33); a collapsed row darkens
+ * through AnimatePresence over 600ms easeInOut (M32); the title rises one line box on open (M33); a collapsed row darkens
  * on hover (M34). At or below 900 the media stacks above and the rows stack, tapping tweens height 57 to the
  * measured content height and radius 48 to 24 (M35). Single-open: the open row's toggle is inert (V31).
  * Stacked, the open row holds one short p at robot.com's 14/1.16 so the row lands on its 199.56 (V32): a sentence carrying
@@ -109,6 +110,8 @@ export function MarketsAccordion({ id, initial = 0, className }: MarketsAccordio
   const media = DEV_MEDIA[MEDIA[active] ?? MEDIA[0]];
   // Latin copy needs a space between the two sentences; CJK copy does not.
   const separator = locale === "en" ? " " : "";
+  // Row titles in the display face (easehealth brief §3 move 1), branched on the locale as the hero and interlude do.
+  const titleClass = locale === "en" ? "t-display-m" : "t-jp-display";
 
   return (
     <Band tone="brand" slab={false} id={id} className={cn("mkt", className)}>
@@ -136,7 +139,7 @@ export function MarketsAccordion({ id, initial = 0, className }: MarketsAccordio
         </Col>
         <Col span={12} className="mkt__content">
           {rows.map((row, i) => (
-            <Row key={i} index={i} title={row.title} sentences={row.sentences} separator={separator} href={row.href} cta={row.cta} active={i === active} uid={uid} onOpen={() => setActive(i)} />
+            <Row key={i} index={i} title={row.title} titleClass={titleClass} sentences={row.sentences} separator={separator} href={row.href} cta={row.cta} active={i === active} uid={uid} onOpen={() => setActive(i)} />
           ))}
         </Col>
       </Grid24>
@@ -147,6 +150,8 @@ export function MarketsAccordion({ id, initial = 0, className }: MarketsAccordio
 interface RowProps {
   index: number;
   title: string;
+  /** The display class for the locale: .t-display-m (en) or .t-jp-display (ja, zh). */
+  titleClass: string;
   sentences: readonly string[];
   separator: string;
   href: string;
@@ -156,7 +161,7 @@ interface RowProps {
   onOpen: () => void;
 }
 
-function Row({ index, title, sentences, separator, href, cta, active, uid, onOpen }: RowProps) {
+function Row({ index, title, titleClass, sentences, separator, href, cta, active, uid, onOpen }: RowProps) {
   const innerRef = useRef<HTMLDivElement>(null);
   const [openHeight, setOpenHeight] = useState<number | null>(null);
   const panelId = `${uid}-panel-${index}`;
@@ -204,14 +209,15 @@ function Row({ index, title, sentences, separator, href, cta, active, uid, onOpe
       </button>
       <div ref={innerRef} id={panelId} role="region" aria-labelledby={titleId} inert={inert} className="mkt__inner">
         <div className="mkt__head">
-          <h3 id={titleId} className="t-title-l mkt__title">
+          <h3 id={titleId} className={titleClass}>
             <span className="mkt__title-clip">
               <span className="mkt__title-move">
                 <Copy text={title} />
               </span>
             </span>
           </h3>
-          <span className="t-title-l mkt__title mkt__head-index" aria-hidden="true">
+          {/* Stacked only: the row number in Chillax (a numeral is functional text), at the preview index's 26px. */}
+          <span className="t-numeral mkt__head-index" aria-hidden="true">
             {index + 1}
           </span>
         </div>
@@ -222,7 +228,7 @@ function Row({ index, title, sentences, separator, href, cta, active, uid, onOpe
             </span>
           ))}
         </p>
-        <PillLink href={href} label={cta} variant="on-brand" className="mkt__cta" tabIndex={active ? 0 : -1} />
+        <PillLink href={href} label={cta} variant="on-brand" icon="arrow" className="mkt__cta" tabIndex={active ? 0 : -1} />
       </div>
       <div className="mkt__preview" aria-hidden="true">
         <span className="t-numeral mkt__preview-index">{index + 1}</span>

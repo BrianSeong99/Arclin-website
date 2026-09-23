@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { animate, motion, useMotionValue, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "motion/react";
-import { useEffect, useRef, type CSSProperties, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { EASE, usePrefersReducedMotion } from "@/lib/motion";
 import { useLocale } from "@/lib/i18n/context";
 import { cn } from "@/lib/utils";
@@ -21,10 +22,9 @@ const RESTING = 0.3;
 const SCRUB_S = 1;
 const SCROLL_OFFSET: ["start end", "start 25%"] = ["start end", "start 25%"];
 
-/* §4 row "CTA h3 (text-small)": robot.com 38/600/41.8/-0.76 from 768 up and 26/1.06 below (`.text-small .title-h3`).
-   Kurogane's nearest style is .t-title-l 30/1.25/600 and §4 calls for a new t-title-xl at 38/1.1, which globals.css
-   does not have yet, so the size is set here: 26px at 390, 38px at 768 and above (4.95vw reaches 38 at 768). */
-const CTA_TYPE: CSSProperties = { fontSize: "clamp(26px, 4.95vw, 38px)", lineHeight: 1.1 };
+/* §4 row "CTA h3 (text-small)": robot.com 38/600/41.8 from 768 up and 26/1.06 below. Replaced by the display face
+   (easehealth brief §3 move 1): .t-display-m for en (Italiana 40/1.15, held at 40 on phones since Italiana never goes
+   below 40), .t-jp-display for ja and zh with its own clamp. */
 
 /** Matches `[GAP: …]` / `[PLACEHOLDER…]` so a marker stays one word. */
 const MARKER = /(\[(?:GAP:|PLACEHOLDER)[^\]]*\])/;
@@ -112,16 +112,22 @@ function ScrubWords({ target, words, cjk }: { target: RefObject<HTMLElement | nu
  * The inline CTA pill (§3.3 ButtonPill at 11px 13px, 128x41 on robot.com). The slab around it is the link,
  * so this is a presentational span with the pill's two stacked label copies; `.pill-hover-parent` on the slab
  * rolls them on hover anywhere in the slab (M22). The label is read once as part of the link's name.
+ * The trailing arrow is pill.tsx's `icon="arrow"` markup (easehealth brief §3 move 7): lucide ArrowRight at the 1.5px
+ * icon stroke and the label's cap height, inside the track so it rolls with the two copies.
  */
 function InlinePill({ label }: { label: string }) {
+  const copy = (
+    <span className="inline-flex items-center gap-2">
+      <Copy text={label} />
+      <ArrowRight aria-hidden="true" size={12} strokeWidth={1.5} className="shrink-0" />
+    </span>
+  );
   return (
     <span className="pill t-label pill--on-page pill--inline align-middle">
       <span className="pill__track">
-        <span className="pill__label">
-          <Copy text={label} />
-        </span>
+        <span className="pill__label">{copy}</span>
         <span className="pill__label" aria-hidden="true">
-          <Copy text={label} />
+          {copy}
         </span>
       </span>
     </span>
@@ -143,6 +149,7 @@ export function ClosingCta({ className }: { className?: string }) {
   const cjk = locale === "ja" || locale === "zh";
   const line = t.home.closing.line;
   const words = splitWords(line, locale, cjk);
+  const titleClass = locale === "en" ? "t-display-m" : "t-jp-display";
 
   return (
     // `.on-highlight` on the section so the link's focus ring is --on-highlight on the yellow (globals.css).
@@ -152,7 +159,7 @@ export function ClosingCta({ className }: { className?: string }) {
         href={`/${locale}/contact/`}
         className="pill-hover-parent block overflow-hidden rounded-xl bg-highlight px-5 pt-5 pb-50 text-on-highlight md:px-6 md:pt-6.5 md:pb-31.25"
       >
-        <h3 lang={locale} className="t-title-l" style={CTA_TYPE}>
+        <h3 lang={locale} className={titleClass}>
           {reduce ? <Copy text={line} /> : <ScrubWords target={slab} words={words} cjk={cjk} />} <InlinePill label={t.home.closing.cta} />
         </h3>
       </Link>

@@ -77,7 +77,8 @@ export function AnnounceBar() {
         className="on-highlight group t-label flex items-center gap-4 rounded-xl bg-highlight px-5 py-3 text-on-highlight"
         style={{ lineHeight: 1.06 /* §4 "Announcement message" 14/600/14.84: the 38.83 slab needs the 1.06 leading, not t-label's 1.3 */ }}
       >
-        <span className="shrink-0 whitespace-nowrap">
+        {/* Wraps on phones (the JA copy already needs two lines at 390); one line from 768, where the 38.83 slab holds. */}
+        <span className="min-w-0 md:shrink-0 md:whitespace-nowrap">
           <Copy text={t.home.announce.text} />
         </span>
         {/* me-8 keeps the label clear of the dismiss control. */}

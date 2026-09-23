@@ -88,7 +88,7 @@ export function Hero() {
             <Copy text={t.home.hero.cjkLine} />
           </span>
         </h1>
-        <PillLink href={`/${locale}/robot/`} label={t.home.hero.cta} variant="highlight" />
+        <PillLink href={`/${locale}/robot/`} label={t.home.hero.cta} variant="highlight" icon="arrow" />
       </div>
     </Band>
   );

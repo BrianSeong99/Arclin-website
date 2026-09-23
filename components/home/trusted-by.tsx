@@ -22,11 +22,15 @@ export interface TrustedByProps {
  * with padding-top 5: the header card spans 6 (353.5 x 371.53 at 1440) and the facility list sits at cols 7 / span 19
  * as a flex row of five cards (211.3 x 371.53, aspect 182/320). Below 1024 the header card is full width and the
  * list is a grid of squares, 3 across at 768 and 2 across at 390, as robot.com's own breakpoints do.
- * The h2 reveals per M4; the CTA pill rolls per M22. Reduced motion: heading static, no roll (both handled upstream).
+ * The h2 is in the display face (easehealth brief §3 move 1: .t-display-m for en, Italiana 40 held at 390 since Italiana
+ * never goes below 40; .t-jp-display for ja and zh), replacing §4's Chillax 41/600 card title. It reveals per M4; the CTA
+ * pill rolls per M22 and stays an arrowless outline (secondary). Reduced motion, and below 768: heading static, no roll
+ * (both handled upstream).
  */
 export function TrustedBy({ className }: TrustedByProps) {
   const { locale, t } = useLocale();
   const { eyebrow, sentence, facilities, cta } = t.home.trustedBy;
+  const titleClass = locale === "en" ? "t-display-m" : "t-jp-display";
 
   return (
     <Band id="trusted-by" tone="page" seam={false} slab={false} className={className}>
@@ -39,15 +43,7 @@ export function TrustedBy({ className }: TrustedByProps) {
           <Kicker className="mb-6 self-start">
             <Copy text={eyebrow} />
           </Kicker>
-          <RevealHeading
-            as="h2"
-            lang={locale}
-            text={sentence}
-            className="t-title-l"
-            // §4 row "Title h3 (cards, accordion, trusted-by)": 41/600/41/-0.82 at 1440, 26/600/27.56 at 390; no Kurogane
-            // style yet (t-title-xl proposed). 5.34vw reaches 41px at 768 and clamps to 26px below 487.
-            style={{ fontSize: "clamp(26px, 5.34vw, 41px)", lineHeight: 1, letterSpacing: "-0.02em" }}
-          />
+          <RevealHeading as="h2" lang={locale} text={sentence} className={titleClass} />
           <div className="mt-auto pt-4">
             <PillLink href={`/${locale}/contact/`} label={cta} variant="outline" />
           </div>
