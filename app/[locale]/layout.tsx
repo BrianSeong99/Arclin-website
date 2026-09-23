@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { getMessages, isLocale, locales, type Locale } from "@/lib/i18n";
 import { LocaleProvider } from "@/lib/i18n/context";
 import "../globals.css";
+import "../locale-en.css";
 
 // Kurogane faces: Italiana (display), Chillax (UI), Zen Maru Gothic (JA), Noto Sans SC (ZH).
 const fontDisplay = localFont({ src: "../../public/fonts/Italiana-Regular.woff2", weight: "400", variable: "--font-display", display: "swap" });
@@ -38,16 +39,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: t.metaDesc,
     alternates: {
       canonical: `/${locale}/`,
-      languages: { ja: "/ja/", zh: "/zh/", "x-default": "/ja/" },
+      languages: { ja: "/ja/", en: "/en/", zh: "/zh/", "x-default": "/ja/" },
     },
     openGraph: {
       type: "website",
-      locale: locale === "ja" ? "ja_JP" : "zh_CN",
+      locale: { ja: "ja_JP", en: "en_US", zh: "zh_CN" }[locale],
       url: `/${locale}/`,
       siteName: "Arclin K.K.",
       title: t.ogTitle,
       description: t.ogDesc,
-      images: [{ url: `/og-${locale}.png`, width: 1200, height: 630, alt: t.ogTitle }],
+      images: [{ url: `/og-${locale === "en" ? "ja" : locale}.png`, width: 1200, height: 630, alt: t.ogTitle }],
     },
     twitter: { card: "summary_large_image" },
     robots: { index: true, follow: true },

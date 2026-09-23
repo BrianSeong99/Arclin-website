@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/site/page-header";
 import { Section } from "@/components/site/section";
 import { Copy } from "@/components/site/copy";
 
-const PATH = "/privacy/";
+const PATH = "/terms/";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -15,14 +15,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  return { title: `${getMessages(locale).privacyPage.title} — Arclin K.K.`, robots: { index: false }, alternates: { canonical: `/${locale}${PATH}`, languages: Object.fromEntries(locales.map((l) => [l, `/${l}${PATH}`])) } };
+  const m = getMessages(locale).terms.meta;
+  return { title: m.title, description: m.description, robots: { index: false }, alternates: { canonical: `/${locale}${PATH}`, languages: Object.fromEntries(locales.map((l) => [l, `/${l}${PATH}`])) } };
 }
 
-/** Placeholder privacy policy — every clause awaits legal review. */
-export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
+/** Placeholder terms of use — every clause awaits legal review, mirroring the privacy page. */
+export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) return null;
-  const p = getMessages(locale).privacyPage;
+  const p = getMessages(locale).terms;
   return (
     <>
       <Nav />

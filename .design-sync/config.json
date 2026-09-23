@@ -68,6 +68,17 @@
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
+    },
+    "Copy": {
+      "cardMode": "column"
+    },
+    "VideoFrame": {
+      "cardMode": "column"
+    },
+    "PageHeader": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x600"
     }
   },
   "storyImports": {

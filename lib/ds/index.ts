@@ -5,6 +5,7 @@
  */
 export { LocaleProvider, useLocale } from "../i18n/context";
 export { ja } from "../i18n/messages/ja";
+export { en } from "../i18n/messages/en";
 export { zh } from "../i18n/messages/zh";
 export type { Messages } from "../i18n/messages/ja";
 export type { Locale } from "../i18n";
@@ -21,6 +22,10 @@ export { Announce } from "../../components/site/announce";
 export { Nav } from "../../components/site/nav";
 export { Footer } from "../../components/site/footer";
 export { Section, SectionHeading, Kicker, Heading } from "../../components/site/section";
+export { Copy } from "../../components/site/copy";
+export { VideoFrame } from "../../components/site/video-frame";
+export type { VideoFrameProps } from "../../components/site/video-frame";
+export { PageHeader } from "../../components/site/page-header";
 export { Reveal, Stagger, StaggerItem } from "../../components/site/reveal";
 
 export { CountUp } from "../../components/viz/count-up";
