@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n/context";
 import { FOOTER_COLUMNS, type PageLink } from "@/lib/site";
-import { usePreviewVariant } from "@/lib/preview-variant";
 import { Band, Col, Grid24 } from "@/components/home/band";
 import { Copy } from "@/components/site/copy";
 import { FooterArt } from "@/components/viz/footer-art";
@@ -13,16 +12,16 @@ const LEGAL_KEYS: ReadonlySet<PageLink["key"]> = new Set(["privacy", "terms"]);
 
 /**
  * Footer-only layout (spec §2 row 13, V35). Grid rows 218.48 / 162 / 448.67 at ≥768 (the third is
- * 20px + the dots wrapper), auto / auto / 162 / auto below it; the dots wrapper keeps robot.com's
+ * 20px + the art strip), auto / auto / 162 / auto below it; the art strip keeps robot.com's
  * 1414/449 aspect from 768 and its empty 332x165 box at 390. Hoisted once by React (href + precedence).
  */
 const FOOTER_CSS = `
 .footer-grid { grid-template-rows: auto auto 162px auto; }
 .footer-link, .footer-small { font-weight: 500; } /* §4: .t-body / .t-caption "at 500"; unlayered so it wins over the .t-* weight */
-.footer-dots { margin-top: 20px; aspect-ratio: 2 / 1; }
+.footer-art { margin-top: 20px; aspect-ratio: 2 / 1; }
 @media (width >= 48rem) {
   .footer-grid { grid-template-rows: 218.48px 162px auto; }
-  .footer-dots { aspect-ratio: 1414 / 449; }
+  .footer-art { aspect-ratio: 1414 / 449; }
 }
 `;
 
@@ -63,8 +62,8 @@ const legalsType = { fontSize: 12, lineHeight: 1 } as const;
  * Band 13, the footer (spec §2 row 13, §3.7, V35, V36): footer padding 4/4 on the page, the brand slab
  * (radius --radius-xl, padding 26px 40px 40px, overflow hidden) holding the 24-column grid: wordmark
  * span 16, two nav columns span 4, the legals row span 24 (entity left, © right-aligned from column 19),
- * then the dot-matrix wrapper span 24 with <DotEyes>. Below 768: 6 columns, padding 24, nav columns
- * side by side, legals stacked, dots hidden.
+ * then the art strip span 24 with <FooterArt> (the camellia line drawing that replaced robot.com's
+ * dot-matrix eyes). Below 768: 6 columns, padding 24, nav columns side by side, legals stacked, art hidden.
  */
 export function Footer() {
   const { t, locale } = useLocale();
@@ -76,7 +75,6 @@ export function Footer() {
     { key: "terms", label: c.legal.terms, href: `/${locale}/terms/` },
   ];
   const socials = [c.socials.x, c.socials.linkedin, c.socials.youtube];
-  const art = usePreviewVariant("art", "camellia", ["camellia", "blossoms"] as const);
 
   return (
     <>
@@ -129,8 +127,8 @@ export function Footer() {
             </Grid24>
           </Col>
 
-          <Col span={24} spanSm={6} className="footer-dots text-on-brand-muted">
-            <FooterArt variant={art} className="hidden md:block" />
+          <Col span={24} spanSm={6} className="footer-art text-on-brand-muted">
+            <FooterArt className="hidden md:block" />
           </Col>
         </Grid24>
       </Band>

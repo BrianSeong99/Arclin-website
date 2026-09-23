@@ -2744,9 +2744,9 @@
     },
     {
       "id": "V27",
-      "assertion": "dot mask",
-      "expected": "svg 1430x358 viewBox 0 0 1458 365, 64 holes 4x16, fill --highlight; no mask-image/clip-path",
-      "measure": "$eval svg viewBox/rect/path C-command count/4; computed mask props",
+      "assertion": "unveiling mask (decided: blossom cut-outs, not robot.com's LED holes)",
+      "expected": "svg 1430x358 viewBox 0 0 1458 365, fill --highlight; a luminance <mask> with 12 five-petal blossom cut-outs (2x6, each 5 pill rects rx=w/2 + a core circle); no mask-image/clip-path; pin distance unchanged (V26)",
+      "measure": "$eval svg[data-unveil-mask]: viewBox, rect size, mask > g count = 12, rects per g = 5, circle per g = 1, computed fill of the plate rect resolves to --highlight",
       "tolerance": "1px"
     },
     {
@@ -2807,9 +2807,9 @@
     },
     {
       "id": "V36",
-      "assertion": "dot matrix",
-      "expected": "47x15 dots at 1350 wide, pitch ~28.7, dot ~22.9; hidden at 390; animated state within 60ms of wrapper bottom reaching viewport bottom; static again when wrapper top passes below viewport; arcs state at 1620-1770ms; open-eyes hold 3300-8630ms",
-      "measure": "count dots / measure pitch; scrollTo(bottom) sample state at 60ms, 1700ms, 5000ms",
+      "assertion": "footer art (decided: camellia line drawing, not robot.com's dot matrix)",
+      "expected": "footer strip 1350 wide (aspect 1414/449) holds one svg with 44 stroked paths, stroke currentColor = --on-brand-muted, stroke-width 3 in drawing units, fill none; data-phase \"hidden\" before entry, \"entering\" then transition to drawn within ~1.7s of the strip reaching 40% in view; static \"drawn\" under reduced motion; hidden at 390",
+      "measure": "count svg path under .footer-art; read data-phase at scrollTo(bottom) at 0ms and 1800ms; check stroke-dashoffset settles at 0; emulateMedia reduce → data-phase drawn with no dasharray",
       "tolerance": "1px / 100ms"
     },
     {

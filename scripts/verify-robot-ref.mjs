@@ -82,7 +82,7 @@ const FILES = {
   V33: "components/home/interlude.tsx",
   V34: "components/home/interlude.tsx",
   V35: "components/site/footer.tsx",
-  V36: "components/viz/dot-eyes.tsx",
+  V36: "components/viz/footer-art.tsx",
   V37: "components/home/smooth-scroll.tsx",
   V38: "components/site/nav.tsx",
   V39: "app/globals.css",
@@ -817,7 +817,7 @@ items.V26 = async (r) => {
   const { page, context } = await open();
   const g = await ev(page, () => {
     const spacer = document.querySelector("[data-pin-spacer]"); const dots = document.querySelector("[data-dots]"); const band = window.__vr.band("products");
-    return { spacerH: window.__vr.rect(spacer).h, spacerPb: getComputedStyle(spacer).paddingBottom, dotsTop: window.__vr.rect(dots).top, maskH: window.__vr.rect(document.querySelector("svg[data-dot-mask]")).h, bandTop: window.__vr.rect(band).top, H: innerHeight, landingH: window.__vr.rect(document.querySelector("[data-landing]")).h };
+    return { spacerH: window.__vr.rect(spacer).h, spacerPb: getComputedStyle(spacer).paddingBottom, dotsTop: window.__vr.rect(dots).top, maskH: window.__vr.rect(document.querySelector("svg[data-unveil-mask]")).h, bandTop: window.__vr.rect(band).top, H: innerHeight, landingH: window.__vr.rect(document.querySelector("[data-landing]")).h };
   });
   const start = g.dotsTop - g.H, end = start + 1079;
   r.set("geometry", { spacerH: g.spacerH, spacerPaddingBottom: g.spacerPb, landingH: g.landingH, start: r2(start), end: r2(end), bandTop: r2(g.bandTop) });
@@ -842,16 +842,18 @@ items.V26 = async (r) => {
 
 items.V27 = async (r) => {
   const { page, context } = await open();
+  // Decided 2026-09-23: the cut-outs are Kurogane's blossom motif (2x6 five-petal pills + core), not robot.com's 64 LED holes.
   const m = await ev(page, () => {
-    const svg = document.querySelector("svg[data-dot-mask]"); const path = svg.querySelector("path"); const d = path.getAttribute("d");
+    const svg = document.querySelector("svg[data-unveil-mask]"); const plate = svg.querySelector(":scope > rect"); const mask = svg.querySelector("mask");
+    const blossoms = mask ? [...mask.querySelectorAll(":scope > g")] : [];
     const wrap = svg.parentElement; const band = window.__vr.band("products");
-    const fill = getComputedStyle(path).fill;
-    return { rect: window.__vr.rect(svg), viewBox: svg.getAttribute("viewBox"), holes: (d.match(/C/g) || []).length / 4, fill, fillIsHighlight: window.__vr.eq(fill, window.__vr.tok("--highlight")), maskImage: [getComputedStyle(wrap).maskImage, getComputedStyle(band).maskImage, getComputedStyle(svg).maskImage], clipPath: [getComputedStyle(wrap).clipPath, getComputedStyle(band).clipPath, getComputedStyle(svg).clipPath] };
+    const fill = getComputedStyle(plate).fill;
+    return { rect: window.__vr.rect(svg), viewBox: svg.getAttribute("viewBox"), blossoms: blossoms.length, petals: blossoms.map((g) => g.querySelectorAll("rect").length), cores: blossoms.map((g) => g.querySelectorAll("circle").length), masked: (plate.getAttribute("mask") || "").startsWith("url(#"), fill, fillIsHighlight: window.__vr.eq(fill, window.__vr.tok("--highlight")), maskImage: [getComputedStyle(wrap).maskImage, getComputedStyle(band).maskImage, getComputedStyle(svg).maskImage], clipPath: [getComputedStyle(wrap).clipPath, getComputedStyle(band).clipPath, getComputedStyle(svg).clipPath] };
   });
   r.check(near(m.rect.w, 1430) && near(m.rect.h, 358), "svg 1430x358", { w: m.rect.w, h: m.rect.h });
   r.check(m.viewBox === "0 0 1458 365", "viewBox 0 0 1458 365", m.viewBox);
-  r.check(m.holes === 64, "64 circle holes", m.holes);
-  r.check(m.fillIsHighlight, "fill --highlight", m.fill);
+  r.check(m.blossoms === 12 && m.petals.every((n) => n === 5) && m.cores.every((n) => n === 1) && m.masked, "12 blossom cut-outs (5 pill petals + core each) via an SVG luminance mask", { blossoms: m.blossoms, petals: m.petals, cores: m.cores, masked: m.masked });
+  r.check(m.fillIsHighlight, "plate fill --highlight", m.fill);
   r.check(m.maskImage.every((v) => v === "none") && m.clipPath.every((v) => v === "none"), "no mask-image / clip-path", { maskImage: m.maskImage, clipPath: m.clipPath });
   await context.close();
 };
@@ -1027,37 +1029,35 @@ items.V35 = async (r) => {
 };
 
 items.V36 = async (r) => {
+  // Decided 2026-09-23: the strip holds the camellia line drawing (draws itself on entry), not robot.com's dot matrix.
   const { page, context } = await open();
   const g = await ev(page, () => {
-    const svg = document.querySelector("footer svg"); const groups = svg.querySelectorAll("g"); const dots = [...groups[0].querySelectorAll("circle")];
-    const rc = (c) => c.getBoundingClientRect();
-    const a = rc(dots[0]), b = rc(dots[1]), c = rc(dots[47]);
-    const wrap = document.querySelector(".footer-dots");
-    return { count: dots.length, w: window.__vr.rect(svg).w, pitchX: +(b.x - a.x).toFixed(2), pitchY: +(c.y - a.y).toFixed(2), dot: +a.width.toFixed(2), wrapTop: window.__vr.rect(wrap).top, wrapBottom: window.__vr.rect(wrap).top + window.__vr.rect(wrap).h, H: innerHeight, maxScroll: document.documentElement.scrollHeight - innerHeight };
+    const wrap = document.querySelector(".footer-art"); const svg = wrap.querySelector("svg"); const paths = [...svg.querySelectorAll("path")];
+    const cs = getComputedStyle(paths[0]);
+    return { paths: paths.length, w: window.__vr.rect(svg).w, phase: svg.dataset.phase, stroke: cs.stroke, strokeIsMuted: window.__vr.eq(cs.stroke, window.__vr.tok("--on-brand-muted")), fill: cs.fill, width: svg.getAttribute("stroke-width"), wrapTop: window.__vr.rect(wrap).top, wrapBottom: window.__vr.rect(wrap).top + window.__vr.rect(wrap).h, H: innerHeight, maxScroll: document.documentElement.scrollHeight - innerHeight };
   });
-  r.check(g.count === 47 * 15, "47 x 15 dots", g.count);
-  r.check(near(g.w, 1350) && near(g.pitchX, 28.72, 1) && near(g.dot, 22.9, 1), "1350 wide, pitch ≈28.7, dot ≈22.9", { w: g.w, pitchX: g.pitchX, pitchY: g.pitchY, dot: g.dot });
-  // Entry: wrapper bottom at the viewport bottom.
-  const enterY = Math.min(g.maxScroll, g.wrapBottom - g.H);
-  await scrollTo(page, enterY - 400, 300);
+  r.check(g.paths === 44, "44 stroked paths", g.paths);
+  r.check(near(g.w, 1350) && g.strokeIsMuted && g.fill === "none" && g.width === "3", "1350 wide, stroke --on-brand-muted, fill none, stroke-width 3", { w: g.w, stroke: g.stroke, fill: g.fill, width: g.width });
+  r.check(g.phase === "hidden", "off screen at rest: phase hidden (paths dashed out)", g.phase);
+  // Entry: 40% of the strip in view starts the draw; the last path settles ~1.6s later.
+  const enterY = Math.min(g.maxScroll, g.wrapTop + g.H * 0.4 - g.H + 0.4 * (g.wrapBottom - g.wrapTop));
+  await scrollTo(page, Math.max(0, enterY - 400), 300);
   await armEvent(page, "scroll");
-  const sampler = startSampler(page, `() => { const s = document.querySelector("footer svg"); return { playing: s.hasAttribute("data-playing"), frame: +s.dataset.frame }; }`, 5300);
+  const sampler = startSampler(page, `() => { const s = document.querySelector(".footer-art svg"); const last = s.querySelectorAll("path"); const p = last[last.length - 1]; return { phase: s.dataset.phase, offset: parseFloat(getComputedStyle(p).strokeDashoffset) || 0 }; }`, 2200);
   await ev(page, (y) => window.scrollTo(0, y), enterY);
   const { samples } = await sampler;
   const t0 = await eventT0(page);
-  const startT = firstT(samples, (v) => v.playing, t0);
-  r.check(startT !== null && startT <= 60 + 16, "animated state within 60ms of entry", { startMs: r2(startT) });
-  const arcs = samples.filter((s) => s.abs - t0 >= 1520 && s.abs - t0 <= 1870).map((s) => s.v.frame);
-  r.check(arcs.includes(4), "arcs state (frame 4) at 1620–1770ms", { framesSeen1520to1870: [...new Set(arcs)] });
-  const f5000 = at(samples, 5000, t0);
-  r.check(f5000 && f5000.frame === 13 && f5000.playing, "open-eyes hold (frame 13) at 5000ms", f5000);
-  const leaveY = Math.max(0, g.wrapTop - g.H - 50);
-  await scrollTo(page, leaveY, 300);
-  const left = await ev(page, () => { const s = document.querySelector("footer svg"); return { playing: s.hasAttribute("data-playing"), frame: +s.dataset.frame }; });
-  r.check(!left.playing && left.frame === 0, "static again once the wrapper top is below the viewport", left);
+  const startT = firstT(samples, (v) => v.phase === "entering", t0);
+  r.check(startT !== null && startT <= 120, "entering within 120ms of the strip reaching 40% in view", { startMs: r2(startT) });
+  const settled = samples.filter((s) => s.abs - t0 >= 1800).map((s) => s.v.offset);
+  r.check(settled.length > 0 && settled.every((o) => Math.abs(o) < 0.5), "last path fully drawn (dashoffset 0) by 1800ms", { offsetsAfter1800: [...new Set(settled.map((o) => r2(o)))] });
   await context.close();
+  const rm = await open({ reduce: true });
+  const still = await ev(rm.page, () => { const s = document.querySelector(".footer-art svg"); const p = s.querySelector("path"); return { phase: s.dataset.phase, dash: p.style.strokeDasharray || "" }; });
+  r.check(still.phase === "drawn" && still.dash === "", "reduced motion: drawn, no dash pattern", still);
+  await rm.context.close();
   const ph = await open({ vp: VP.phone });
-  const hidden = await ev(ph.page, () => { const s = document.querySelector("footer svg"); return s ? getComputedStyle(s).display : "absent"; });
+  const hidden = await ev(ph.page, () => { const s = document.querySelector(".footer-art svg"); return s ? getComputedStyle(s).display : "absent"; });
   r.check(hidden === "none" || hidden === "absent", "hidden at 390", hidden);
   await ph.context.close();
 };

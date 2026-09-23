@@ -4,15 +4,11 @@ import { useInView } from "motion/react";
 import { usePrefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-/** The footer strip both candidates fill (footer.tsx `.footer-dots`): 1350 wide at 1440, robot.com's 1414/449 aspect. */
+/** The footer strip the drawing fills (footer.tsx `.footer-art`): 1350 wide at 1440, robot.com's 1414/449 aspect. */
 const VIEW_W = 1350;
 const VIEW_H = 428.67;
 
-export type FooterArtVariant = "camellia" | "blossoms";
-
 export interface FooterArtProps {
-  /** camellia: the traced line drawing, drawing itself on entry. blossoms: the cover motif as a scattered field. */
-  variant: FooterArtVariant;
   className?: string;
 }
 
@@ -28,7 +24,7 @@ function onScreen(el: Element) {
 }
 
 /**
- * The once-only entrance both candidates share. The server render and hydration are the end state, so the static HTML
+ * The once-only entrance. The server render and hydration are the end state, so the static HTML
  * shows the finished art. After hydration and before the first client paint (useLayoutEffect, a no-op on the server),
  * the art goes to its start state only when the strip is off screen and motion is not reduced (read from matchMedia
  * directly: the hook still holds the server's `false` at that moment); `prepare` measures whatever the start state
@@ -51,7 +47,7 @@ function useEntrance(ref: RefObject<SVGSVGElement | null>, prepare?: (svg: SVGSV
   return phase;
 }
 
-/* ---- Candidate 1: the camellia ------------------------------------------------------------------------------- */
+/* ---- The camellia (decided 2026-09-23 over a pill-petal blossom field) --------------------------------------- */
 
 /**
  * public/dev/drawings/camellia-recraft_v4_1-1.svg (viewBox 0 0 480 581.9, traced at stroke 2), inlined because dev
@@ -110,8 +106,8 @@ const CAMELLIA_PATHS: readonly string[] = [
 /**
  * Composition, per the brand rule that a plant sits alone in its own space: the drawing's box is 380 tall in the
  * 428.67 strip and centred right of centre at x 930 (the trace carries ~38 units of margin, so the marks themselves
- * span ~330 x 263 with air on every side); nothing else is in the strip. The stroke stays 2 in the drawing's own
- * units, so it scales with the plant like every other line drawing.
+ * span ~330 x 263 with air on every side); nothing else is in the strip. The stroke is 3 in the drawing's units, which
+ * at this scale (0.653) is the 2px the hero drawing uses at 1440; the trace itself was made at 2.
  */
 const PLANT_H = 380;
 const PLANT_SCALE = PLANT_H / DRAWING_H;
@@ -157,7 +153,7 @@ function Camellia({ className }: { className?: string }) {
       className={cn("block h-auto w-full", className)}
       fill="none"
       stroke="currentColor"
-      strokeWidth={2}
+      strokeWidth={3}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -172,63 +168,11 @@ function Camellia({ className }: { className?: string }) {
   );
 }
 
-/* ---- Candidate 2: the blossoms ------------------------------------------------------------------------------- */
-
 /**
- * The cover motif as a field. A blossom is five pill petals (w x 1.85w, rx = w/2: the flower and the button are the
- * same shape) at 72° steps about a circular core of r 0.42w, petals --highlight and core --on-brand: the cover's own
- * colour use, a brand mark rather than a drawing, which is why the highlight is allowed here.
- * Seven of them on a loose lower-left to upper-right diagonal, as [cx, cy, petal width, tilt°]: no two the same size,
- * no row, no mirror; the outer radius is 1.85w and every pair keeps at least 40 clear between petal tips.
+ * The footer strip's art, replacing robot.com's dot-matrix eyes: one camellia line drawing filling the 1350 x 428.67
+ * wrapper on the brand slab, per the brand rule of one plant per composition. Ink comes from the wrapper
+ * (`text-on-brand-muted`), never the highlight. Desktop only through className (the footer passes `hidden md:block`).
  */
-const BLOSSOMS: readonly (readonly [number, number, number, number])[] = [
-  [130, 362, 27, 12],
-  [335, 318, 44, -18],
-  [500, 212, 38, 25],
-  [720, 245, 58, 0],
-  [900, 130, 33, -30],
-  [1090, 205, 51, 15],
-  [1262, 72, 22, -8],
-];
-const PETAL_ANGLES = [0, 72, 144, 216, 288] as const;
-/** Entrance: each petal group scales .6 → 1 and turns −24° → 0 over --dur-slow on --ease-out-cubic, 70ms apart by blossom. */
-const BLOSSOM_STAGGER_MS = 70;
-
-function Blossoms({ className }: { className?: string }) {
-  const ref = useRef<SVGSVGElement>(null);
-  const phase = useEntrance(ref);
-
-  const petalsStyle = (i: number): CSSProperties | undefined => {
-    if (phase === "hidden") return { transform: "scale(0.6) rotate(-24deg)" };
-    if (phase === "entering") return { transform: "none", transition: `transform var(--dur-slow) var(--ease-out-cubic) ${i * BLOSSOM_STAGGER_MS}ms` };
-    return undefined;
-  };
-
-  return (
-    <svg ref={ref} viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} className={cn("block h-auto w-full", className)} aria-hidden="true" data-phase={phase}>
-      {BLOSSOMS.map(([cx, cy, w, tilt], i) => {
-        const h = 1.85 * w;
-        return (
-          <g key={i} transform={`translate(${cx} ${cy}) rotate(${tilt})`}>
-            {/* The petals' CSS transform turns about this group's own origin, the blossom centre (SVG's default transform-origin 0 0). */}
-            <g className="fill-highlight" style={petalsStyle(i)}>
-              {PETAL_ANGLES.map((a) => (
-                <rect key={a} x={-w / 2} y={-h} width={w} height={h} rx={w / 2} transform={`rotate(${a})`} />
-              ))}
-            </g>
-            <circle r={0.42 * w} className="fill-on-brand" />
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
-/**
- * The footer strip's art: one of the two Kurogane-native candidates replacing robot.com's dot-matrix eyes, filling the
- * 1350 x 428.67 wrapper on the brand slab. Ink comes from the wrapper (`text-on-brand-muted`), never the highlight.
- * Desktop only through className (the footer passes `hidden md:block`, as the eyes were).
- */
-export function FooterArt({ variant, className }: FooterArtProps) {
-  return variant === "camellia" ? <Camellia className={className} /> : <Blossoms className={className} />;
+export function FooterArt({ className }: FooterArtProps) {
+  return <Camellia className={className} />;
 }

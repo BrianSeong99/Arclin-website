@@ -37,7 +37,7 @@ export { SceneIllustration } from "../../components/viz/mimamori-scenes";
 export type { SceneId } from "../../components/viz/mimamori-scenes";
 export { IsoStack } from "../../components/viz/iso-stack";
 export type { IsoLayer } from "../../components/viz/iso-stack";
-export { DotEyes } from "../../components/viz/dot-eyes";
+export { FooterArt } from "../../components/viz/footer-art";
 
 // Homepage bands (components/home, robot.com order; reference spec docs/superpowers/specs/2026-09-23-robot-com-reference.md).
 export { Band, Grid24, Col } from "../../components/home/band";
