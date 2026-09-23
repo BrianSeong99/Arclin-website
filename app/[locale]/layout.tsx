@@ -5,6 +5,7 @@ import { Noto_Sans_SC, Zen_Maru_Gothic } from "next/font/google";
 import { notFound } from "next/navigation";
 import { getMessages, isLocale, locales, type Locale } from "@/lib/i18n";
 import { LocaleProvider } from "@/lib/i18n/context";
+import { SmoothScroll } from "@/components/home/smooth-scroll";
 import "../globals.css";
 import "../locale-en.css";
 
@@ -61,7 +62,9 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   return (
     <html lang={locale as Locale} className={`${fontDisplay.variable} ${fontUi.variable} ${fontJp.variable} ${fontZh.variable} h-full`}>
       <body className="flex min-h-full flex-col">
-        <LocaleProvider locale={locale}>{children}</LocaleProvider>
+        <LocaleProvider locale={locale}>
+          <SmoothScroll>{children}</SmoothScroll>
+        </LocaleProvider>
       </body>
     </html>
   );

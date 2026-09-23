@@ -10,6 +10,7 @@ import { TypeSpecimen } from "@/components/styleguide/type-specimen";
 import { SpacingRuler } from "@/components/styleguide/spacing-ruler";
 import { RadiusTile } from "@/components/styleguide/radius-tile";
 import { ShadowCard } from "@/components/styleguide/shadow-card";
+import { MotionTable } from "@/components/styleguide/motion-table";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -94,8 +95,8 @@ export default async function StyleguidePage({ params }: { params: Promise<{ loc
           </div>
         </StyleguideSection>
 
-        <StyleguideSection number="06" title="Motion">
-          <p className="t-body text-attention">Transitions and durations follow the v2 motion specification, which is pending. No values are shown until it is supplied.</p>
+        <StyleguideSection number="06" title="Motion" description="Kurogane's two durations and one ease, plus the five durations and five easings the v3 homepage takes from robot.com.">
+          <MotionTable />
         </StyleguideSection>
       </main>
     </div>

@@ -446,3 +446,64 @@ export const shadowTokens: ShadowToken[] = [
     usage: "Modal sheets and dialogs. The only shadow permitted at this strength.",
   },
 ];
+
+/* ---- v3 site additions ------------------------------------------------
+   Not part of Kurogane v2. Measured from robot.com (docs/superpowers/specs/2026-09-23-robot-com-reference.md §5,
+   tokensToAdd) so the v3 homepage can match its choreography; the pending v2 motion specification supersedes them. */
+
+export interface DurationToken {
+  id: string;
+  name: string;
+  value: string;
+  /** The easing token this duration is normally paired with. */
+  pairsWith: string;
+  usage: string;
+  source: string;
+}
+
+export interface EasingToken {
+  id: string;
+  name: string;
+  value: string;
+  usage: string;
+  source: string;
+}
+
+export interface SiteToken {
+  id: string;
+  name: string;
+  value: string;
+  usage: string;
+  source: string;
+}
+
+const kurogane = "Kurogane tokens.json v2";
+const robot = "measured from robot.com";
+
+export const siteAdditions = {
+  note: "The v2 motion specification is still pending and will supersede these values when it is supplied.",
+  durations: [
+    { id: "D01", name: "dur-enter", value: "240ms", pairsWith: "ease-enter", usage: "Kurogane default transition: hovers, fades, the v2 product pages.", source: kurogane },
+    { id: "D02", name: "dur-slow", value: "320ms", pairsWith: "ease-enter", usage: "Kurogane fade-up on entering the viewport (Reveal, Stagger).", source: kurogane },
+    { id: "D03", name: "dur-reveal", value: "400ms", pairsWith: "ease-reveal", usage: "Heading line reveal, product card title words, accordion title on open (M4, M9, M33).", source: robot },
+    { id: "D04", name: "dur-roll", value: "300ms", pairsWith: "ease-roll", usage: "Pill label roll-over, footer link fades, thumb hover, video lightbox, menu backdrop (M16, M22–M26, M36, M37).", source: robot },
+    { id: "D05", name: "dur-unfold", value: "600ms", pairsWith: "ease-unfold / ease-out-cubic", usage: "Accordion row grow and shrink, new panel fade, media crossfade, chevron flip (M17, M27, M28, M32).", source: robot },
+    { id: "D06", name: "dur-menu", value: "1000ms", pairsWith: "ease-expo-out", usage: "Menu open and close height, submenu slide crossfade (M15, M19, M20).", source: robot },
+    { id: "D07", name: "dur-scroll", value: "1200ms", pairsWith: "ease-expo-out", usage: "Lenis wheel scroll: one wheel tick settles in 1.2s (M1).", source: robot },
+  ] satisfies DurationToken[],
+  easings: [
+    { id: "E01", name: "ease-enter", value: "cubic-bezier(0.2, 0, 0, 1)", usage: "The one Kurogane ease. Nothing bounces.", source: kurogane },
+    { id: "E02", name: "ease-reveal", value: "cubic-bezier(0.25, 0.46, 0.45, 0.94)", usage: "Line and word reveals.", source: robot },
+    { id: "E03", name: "ease-roll", value: "cubic-bezier(0.455, 0.03, 0.515, 0.955)", usage: "Hover roll-overs, opacity fades, lightbox.", source: robot },
+    { id: "E04", name: "ease-expo-out", value: "cubic-bezier(0.16, 1, 0.3, 1)", usage: "Menu height, header CTA and logo colour on theme swap, Lenis scroll (as a function).", source: robot },
+    { id: "E05", name: "ease-out-cubic", value: "cubic-bezier(0.215, 0.61, 0.355, 1)", usage: "Accordion panel, preview label and index fades.", source: robot },
+    { id: "E06", name: "ease-unfold", value: "cubic-bezier(0.65, 0, 0.35, 1)", usage: "Accordion flex-grow tween (GSAP power3.inOut, approximated).", source: robot },
+  ] satisfies EasingToken[],
+  radius: [
+    { id: "R05", name: "radius-xl", value: "24px", usage: "Home slabs and cards. robot.com's 26px on the statement and CTA slabs collapses to this.", source: robot },
+  ] satisfies SiteToken[],
+  surfaces: [
+    { id: "G01", name: "glass-on-brand", value: "rgba(255, 255, 255, 0.1)", usage: "Header bar over brand bands, with .glass (backdrop blur 26px).", source: robot },
+    { id: "G02", name: "glass-on-page", value: "rgba(16, 46, 36, 0.075)", usage: "Header bar over page and highlight bands: the ink at 7.5%, with .glass.", source: robot },
+  ] satisfies SiteToken[],
+};

@@ -1,60 +1,137 @@
 "use client";
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n/context";
-import { FOOTER_COLUMNS } from "@/lib/site";
+import { FOOTER_COLUMNS, type PageLink } from "@/lib/site";
+import { Band, Col, Grid24 } from "@/components/home/band";
+import { Copy } from "@/components/site/copy";
 import { DotEyes } from "@/components/viz/dot-eyes";
 import { Wordmark } from "./wordmark";
 
-/** Brand-slab footer: wordmark, two page columns, socials, legal row, entity line, then the LED eyes. */
+/** Privacy and terms leave the main list: robot.com sets them as the small links under column 1 (§2 row 13). */
+const LEGAL_KEYS: ReadonlySet<PageLink["key"]> = new Set(["privacy", "terms"]);
+
+/**
+ * Footer-only layout (spec §2 row 13, V35). Grid rows 218.48 / 162 / 448.67 at ≥768 (the third is
+ * 20px + the dots wrapper), auto / auto / 162 / auto below it; the dots wrapper keeps robot.com's
+ * 1414/449 aspect from 768 and its empty 332x165 box at 390. Hoisted once by React (href + precedence).
+ */
+const FOOTER_CSS = `
+.footer-grid { grid-template-rows: auto auto 162px auto; }
+.footer-link, .footer-small { font-weight: 500; } /* §4: .t-body / .t-caption "at 500"; unlayered so it wins over the .t-* weight */
+.footer-dots { margin-top: 20px; aspect-ratio: 2 / 1; }
+@media (width >= 48rem) {
+  .footer-grid { grid-template-rows: 218.48px 162px auto; }
+  .footer-dots { aspect-ratio: 1414 / 449; }
+}
+`;
+
+/**
+ * Main footer link (M25): the same two-copy roll-over as the pills, on bare text. `.pill-hover-parent`,
+ * `.pill__track` and `.pill__label` (globals.css) carry the 300ms var(--ease-roll) travel, the snap-back
+ * and the reduced-motion no-roll. Type: .t-body at 500 per §4 ("footer nav link"); the track's 1.225
+ * line box makes the travel 17 x 1.225 = 20.8px against robot.com's 18.55.
+ */
+function RollLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="pill-hover-parent footer-link t-body inline-block text-on-brand">
+      <span className="pill__track">
+        <span className="pill__label">
+          <Copy text={label} />
+        </span>
+        <span className="pill__label" aria-hidden="true">
+          <Copy text={label} />
+        </span>
+      </span>
+    </Link>
+  );
+}
+
+/**
+ * Secondary link (M26): --on-brand at opacity .55 (robot.com: #fff at .55, the same ink as the main links, muted by the
+ * opacity alone), fading to 1 over var(--dur-roll) var(--ease-roll) in and out. On --on-brand the .55 rest reads 5.2:1
+ * against --surface-brand; on --on-brand-muted it fell to 3.8:1 (A-5), and no rest opacity satisfies V17's
+ * --on-brand-muted role, M26's measured .55 (V22) and A-5's 4.5:1 at once. Kept on --on-brand: the role table's
+ * --on-brand-muted line for the footer secondaries is the entry to amend.
+ */
+const secondaryClass = "footer-small t-caption inline-block text-on-brand opacity-55 transition-opacity duration-roll ease-roll hover:opacity-100";
+
+/** §4 "Footer legals" 12/500/12: .t-caption (13/1.5) is the nearest style, so the size and leading are pinned here (V35). */
+const legalsType = { fontSize: 12, lineHeight: 1 } as const;
+
+/**
+ * Band 13, the footer (spec §2 row 13, §3.7, V35, V36): footer padding 4/4 on the page, the brand slab
+ * (radius --radius-xl, padding 26px 40px 40px, overflow hidden) holding the 24-column grid: wordmark
+ * span 16, two nav columns span 4, the legals row span 24 (entity left, © right-aligned from column 19),
+ * then the dot-matrix wrapper span 24 with <DotEyes>. Below 768: 6 columns, padding 24, nav columns
+ * side by side, legals stacked, dots hidden.
+ */
 export function Footer() {
   const { t, locale } = useLocale();
   const c = t.common;
+  const year = new Date().getFullYear();
   const headings = [c.footerColumns.product, c.footerColumns.company];
+  const legal = [
+    { key: "privacy", label: c.legal.privacy, href: `/${locale}/privacy/` },
+    { key: "terms", label: c.legal.terms, href: `/${locale}/terms/` },
+  ];
   const socials = [c.socials.x, c.socials.linkedin, c.socials.youtube];
+
   return (
-    <footer className="on-brand mx-2 mb-2 overflow-hidden rounded-lg bg-brand text-on-brand-muted sm:mx-3 sm:mb-3">
-      <div className="container-x grid gap-10 pb-10 pt-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-        <div>
-          <Wordmark tone="brand" size="lg" />
-          {/* botanical drawing: pending asset */}
-          <div aria-hidden className="mt-6 h-24 max-w-[16rem]" />
-        </div>
-        {FOOTER_COLUMNS.map((col, i) => (
-          <nav key={headings[i]} aria-label={headings[i]} className="flex flex-col gap-2">
-            <p className="t-overline mb-1 text-on-brand-muted/70">{headings[i]}</p>
-            {col.map((p) => (
-              <Link key={p.key} href={`/${locale}${p.path}`} className="t-body hover:text-on-brand">
-                {c.pageLabels[p.key]}
-              </Link>
-            ))}
-          </nav>
-        ))}
-        <nav aria-label={c.socials.heading} className="flex flex-col gap-2">
-          <p className="t-overline mb-1 text-on-brand-muted/70">{c.socials.heading}</p>
-          {socials.map((label) => (
-            <a key={label} href="#" className="t-body hover:text-on-brand">
-              {label}
-            </a>
+    <>
+      <style href="footer-band" precedence="default">
+        {FOOTER_CSS}
+      </style>
+      <Band as="footer" tone="brand" style={{ paddingBottom: "var(--seam)" }} slabClassName="p-6 md:px-10 md:pb-10 md:pt-6.5">
+        <Grid24 className="footer-grid">
+          <Col span={16} spanSm={6} className="pb-12 md:pb-0">
+            <Wordmark tone="brand" size="lg" />
+          </Col>
+
+          {FOOTER_COLUMNS.map((col, i) => (
+            <Col key={headings[i]} span={4} spanSm={3}>
+              <nav aria-label={headings[i]} className="flex flex-col items-start gap-1">
+                {col
+                  .filter((p) => !LEGAL_KEYS.has(p.key))
+                  .map((p) => (
+                    <RollLink key={p.key} href={`/${locale}${p.path}`} label={c.pageLabels[p.key]} />
+                  ))}
+                {i === 0 ? (
+                  <div className="mt-6 flex flex-col items-start gap-1">
+                    {legal.map((l) => (
+                      <Link key={l.key} href={l.href} className={secondaryClass}>
+                        <Copy text={l.label} />
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div role="group" aria-label={c.socials.heading} className="mt-6 flex flex-col items-start gap-1">
+                    {socials.map((label) => (
+                      <a key={label} href="#" className={secondaryClass}>
+                        <Copy text={label} />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </nav>
+            </Col>
           ))}
-        </nav>
-      </div>
-      <div className="container-x">
-        <div className="t-caption flex flex-wrap justify-between gap-3 border-t border-on-brand-muted/25 pt-5">
-          <span>© 2026 {c.entity}</span>
-          <div className="flex gap-5">
-            <Link href={`/${locale}/privacy/`} className="hover:text-on-brand">
-              {c.legal.privacy}
-            </Link>
-            <Link href={`/${locale}/terms/`} className="hover:text-on-brand">
-              {c.legal.terms}
-            </Link>
-          </div>
-        </div>
-        <p className="t-caption mt-3 text-on-brand-muted/70">{c.entity}</p>
-      </div>
-      <div className="mt-8 border-t border-on-brand-muted/25 bg-ink/40 px-6 py-6 text-highlight">
-        <DotEyes className="mx-auto max-w-3xl" />
-      </div>
-    </footer>
+
+          <Col span={24} spanSm={6} className="self-end">
+            <Grid24>
+              <Col span={12} spanSm={6} as="p" className="footer-small t-caption text-on-brand-muted" style={legalsType}>
+                <Copy text={c.entity} />
+              </Col>
+              <Col span={6} start={19} spanSm={6} as="p" className="footer-small t-caption text-on-brand-muted md:text-right" style={legalsType}>
+                <Copy text={`© ${year} ${c.siteName}`} />
+              </Col>
+            </Grid24>
+          </Col>
+
+          <Col span={24} spanSm={6} className="footer-dots">
+            <DotEyes className="hidden md:block" />
+          </Col>
+        </Grid24>
+      </Band>
+    </>
   );
 }

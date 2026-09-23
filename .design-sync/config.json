@@ -29,7 +29,17 @@
       "primaryStory": "Default",
       "viewport": "1280x200"
     },
+    "AnnounceBar": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x80"
+    },
     "Hero": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "TrustedBy": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
@@ -39,27 +49,37 @@
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "Products": {
+    "ProductBand": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "Stats": {
+    "StatsBento": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "Process": {
+    "AudienceRows": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "Cta": {
+    "MarketsAccordion": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"
     },
-    "Partners": {
+    "Interlude": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "ClosingCta": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1280x1600"
+    },
+    "CareersSlab": {
       "cardMode": "single",
       "primaryStory": "Default",
       "viewport": "1280x1600"

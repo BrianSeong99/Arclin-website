@@ -19,7 +19,8 @@ for Chinese care-robotics companies. Static export, no backend.
 
 ```bash
 pnpm install
-pnpm dev              # http://localhost:3000 → redirects to /ja/ or /zh/
+pnpm dev              # http://localhost:3000 → redirects to /ja/, /en/ or /zh/
+pnpm dev:media        # same, with the gitignored placeholder video clips
 pnpm build            # static export to ./out
 pnpm lint
 pnpm storybook        # http://localhost:6006
@@ -31,20 +32,37 @@ node scripts/og.mjs   # regenerate public/og-{ja,zh}.png after changing hero cop
 
 ```
 app/
-  (redirect)/page.tsx   root: remembers / detects locale, redirects to /ja/ or /zh/
-  [locale]/             /ja/ and /zh/ — per-locale <html lang>, metadata, OG
+  (redirect)/page.tsx   root: remembers / detects locale, redirects to /ja/, /en/ or /zh/
+  [locale]/             /ja/, /en/ and /zh/ — per-locale <html lang>, metadata, OG; layout wraps the page in <SmoothScroll>
+  [locale]/page.tsx     homepage: AnnounceBar, Nav, then the components/home bands in robot.com order, Footer
   sitemap.ts robots.ts icon.svg
 lib/i18n/
-  messages/ja.ts        all Japanese copy (source of truth for the shape)
-  messages/zh.ts        all Chinese copy (typed against ja)
+  messages/ja.ts        all Japanese copy (source of truth for the shape); home.* holds the v3 bands
+  messages/en.ts zh.ts  English and Chinese copy (typed against ja)
   context.tsx           LocaleProvider / useLocale()
+lib/dev-media.ts        placeholder video/poster slots per band (gitignored under public/dev-media/)
 components/
   ui/        button, badge, demo-tag, footnote
-  site/      announce, nav, footer, wordmark, section chrome, reveal
+  site/      nav, footer, wordmark, copy ([GAP] markers), video-frame, section chrome, reveal
+  home/      the homepage bands, one file each, in page order: announce-bar, hero, trusted-by, statement,
+             product-band, stats-bento, audience-rows, markets-accordion, interlude, closing-cta, careers-slab;
+             plus the shared pieces: band (slab + 24-col grid), band-theme (header theme per band),
+             smooth-scroll (Lenis), pill (roll-over label), reveal-heading (line reveal)
   viz/       count-up, trend-line, donut-gauge, iso-stack, dot-eyes, illustrations
-  sections/  hero, statement, products, stats, process, cta, partners (in page order)
 scripts/     og.mjs (OG images), shot*.mjs (Playwright screenshot helpers)
+docs/superpowers/specs/2026-09-23-robot-com-reference.md   the homepage reference spec (band table, components,
+             type map, motion table, verification checklist); robot-com-reference.json is the machine-readable copy
 ```
+
+The homepage is built to match robot.com band for band (order, dimensions, grid, radii, motion), with Kurogane
+tokens and Arclin copy substituted. Every band is a `<Band>` (5px page gutter, 4px seam, `--radius-xl` slab) laid
+out on the shared 24-column grid; copy strings render through `<Copy>` so `[GAP: …]` placeholders stay visible.
+
+### Dev media
+
+Video slots render a labelled pending frame by default. `pnpm dev:media` (or the `dev-media` launch configuration)
+sets `NEXT_PUBLIC_DEV_MEDIA=1`, and `<VideoFrame>` then plays the gitignored placeholder clips from
+`lib/dev-media.ts`. Production builds never include them.
 
 ## Editing copy
 
