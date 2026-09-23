@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Copy } from "@/components/site/copy";
 
@@ -25,18 +26,28 @@ interface PillOwnProps {
   variant?: PillVariant;
   /** md = 11px 21px (ButtonPill), lg = 19px 20px (header CTA, 48 tall), inline = 11px 13px (statement CTA). */
   size?: PillSize;
+  /**
+   * Trailing line arrow (borrowed from easehealth.com's `.button.is-icon`, 2026-09-23): says "this goes somewhere"
+   * without a verb. Lucide ArrowRight at Kurogane's 1.5px icon stroke, sized to the 14px label's cap height, inside
+   * the label track so it rolls with the two copies; it never moves on hover. Opt in on primary CTAs only.
+   */
+  icon?: "arrow";
   className?: string;
 }
 
 /** Two stacked copies of the label; the second is presentational and rides in from below on hover (M22). */
-function Label({ label }: { label: string }) {
+function Label({ label, icon }: { label: string; icon?: "arrow" }) {
+  const copy = (
+    <span className="inline-flex items-center gap-2">
+      <Copy text={label} />
+      {icon === "arrow" && <ArrowRight aria-hidden="true" size={12} strokeWidth={1.5} className="shrink-0" />}
+    </span>
+  );
   return (
     <span className="pill__track">
-      <span className="pill__label">
-        <Copy text={label} />
-      </span>
+      <span className="pill__label">{copy}</span>
       <span className="pill__label" aria-hidden="true">
-        <Copy text={label} />
+        {copy}
       </span>
     </span>
   );
@@ -49,10 +60,10 @@ export type PillLinkProps = PillOwnProps & Omit<ComponentProps<"a">, "children" 
  * var(--dur-roll) var(--ease-roll); hover-out snaps; background and colour never change on hover.
  * Type is .t-label with the label line box at 1.225 so the travel is 17.15px. Reduced motion: no roll.
  */
-export function PillLink({ label, variant = "on-page", size = "md", className, ...rest }: PillLinkProps) {
+export function PillLink({ label, variant = "on-page", size = "md", icon, className, ...rest }: PillLinkProps) {
   return (
     <a className={cn("pill t-label", variantClass[variant], sizeClass[size], className)} {...rest}>
-      <Label label={label} />
+      <Label label={label} icon={icon} />
     </a>
   );
 }
@@ -60,10 +71,10 @@ export function PillLink({ label, variant = "on-page", size = "md", className, .
 export type PillButtonProps = PillOwnProps & Omit<ComponentProps<"button">, "children" | "className">;
 
 /** The same pill as a <button>. */
-export function PillButton({ label, variant = "on-page", size = "md", className, type = "button", ...rest }: PillButtonProps) {
+export function PillButton({ label, variant = "on-page", size = "md", icon, className, type = "button", ...rest }: PillButtonProps) {
   return (
     <button type={type} className={cn("pill t-label", variantClass[variant], sizeClass[size], className)} {...rest}>
-      <Label label={label} />
+      <Label label={label} icon={icon} />
     </button>
   );
 }

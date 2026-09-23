@@ -5,6 +5,7 @@ import { Band, Grid24 } from "@/components/home/band";
 import { PillLink } from "@/components/home/pill";
 import { RevealHeading } from "@/components/home/reveal-heading";
 import { Copy } from "@/components/site/copy";
+import { Kicker } from "@/components/site/section";
 
 /** robot.com's partner list is five cards (spec §2 row 4). Slots the copy does not fill stay empty raised cards. */
 const SLOTS = 5;
@@ -35,9 +36,9 @@ export function TrustedBy({ className }: TrustedByProps) {
             card is 371.53 tall with a two-line h2; ours runs taller while the sentence carries [GAP] chips — a content
             deviation that closes when the facts arrive. Never clip the sentence. */}
         <div className={cn(card, "col-span-full flex flex-col lg:col-span-6")}>
-          <p className="t-overline mb-3 text-ink-muted">
+          <Kicker className="mb-6 self-start">
             <Copy text={eyebrow} />
-          </p>
+          </Kicker>
           <RevealHeading
             as="h2"
             lang={locale}

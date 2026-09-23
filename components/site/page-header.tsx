@@ -15,7 +15,7 @@ export function PageHeader({ overline, heading, lead, children, className }: { o
   return (
     <Section className={className}>
       <Kicker>{overline}</Kicker>
-      <h1 className={cn(locale === "en" ? "t-display-l" : "t-jp-display-l", "mt-4 max-w-[18em] text-balance")}>
+      <h1 className={cn(locale === "en" ? "t-display-l" : "t-jp-display-l", "mt-6 max-w-[18em] text-balance")}>
         <Copy text={heading} />
       </h1>
       {lead && (
