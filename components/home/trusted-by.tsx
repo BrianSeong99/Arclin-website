@@ -31,18 +31,18 @@ export function TrustedBy({ className }: TrustedByProps) {
     <Band id="trusted-by" tone="page" seam={false} slab={false} className={className}>
       {/* §2 row 4 / V14: the section has no seam; the grid container itself carries padding-top 5. */}
       <Grid24 style={{ paddingTop: 5 }}>
-        {/* V26: at ≥1024 the card takes the row height the facility cards set (371.53, the 182/320 aspect) instead of
-            growing with the gapped sentence: h-0 keeps it out of the row sizing, min-h-full stretches it back. */}
-        <div className={cn(card, "col-span-full flex flex-col lg:col-span-6 lg:h-0 lg:min-h-full")}>
+        {/* The card grows with its sentence and the facility cards stretch to match (flex row, align stretch). robot.com's
+            card is 371.53 tall with a two-line h2; ours runs taller while the sentence carries [GAP] chips — a content
+            deviation that closes when the facts arrive. Never clip the sentence. */}
+        <div className={cn(card, "col-span-full flex flex-col lg:col-span-6")}>
           <p className="t-overline mb-3 text-ink-muted">
             <Copy text={eyebrow} />
           </p>
-          {/* The h2 clips inside the capped card so the pill stays in place; the [GAP] marks lead the sentence and remain visible. */}
           <RevealHeading
             as="h2"
             lang={locale}
             text={sentence}
-            className="t-title-l lg:min-h-0 lg:flex-1 lg:overflow-hidden"
+            className="t-title-l"
             // §4 row "Title h3 (cards, accordion, trusted-by)": 41/600/41/-0.82 at 1440, 26/600/27.56 at 390; no Kurogane
             // style yet (t-title-xl proposed). 5.34vw reaches 41px at 768 and clamps to 26px below 487.
             style={{ fontSize: "clamp(26px, 5.34vw, 41px)", lineHeight: 1, letterSpacing: "-0.02em" }}

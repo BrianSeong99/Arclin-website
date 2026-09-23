@@ -176,10 +176,10 @@ export function Interlude() {
           </motion.div>
         </div>
 
-        {/* Pending media only: the background frame is --surface-sunken, so --on-brand copy needs brand behind it everywhere
-            (the copy sits top-left, centre and bottom across the three viewports). Opaque, because even at 94% the frame's own
-            pending label ghosted through the h2 at 390; the thumb repeats that label for the same clip. Gone once a real clip plays. */}
-        {!dev && <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-brand" />}
+        {/* Scrim. robot.com's background image is dark by nature; ours is whatever clip is supplied, so brand at 60% keeps the
+            --on-brand copy at 4.5:1 over any footage. With no media the pending frame is --surface-sunken and the scrim goes
+            opaque (even at 94% the frame's own pending label ghosted through the h2 at 390). */}
+        <div aria-hidden="true" className={cn("pointer-events-none absolute inset-0", dev ? "bg-brand/60" : "bg-brand")} />
 
         {/* §2 row 10 thumb wrapper: in flow (padding 0 24) below 768; absolute, vertically centred at ≥768. */}
         <div className="relative z-2 px-6 md:absolute md:top-1/2 md:left-0 md:w-full md:-translate-y-1/2 md:px-0">
