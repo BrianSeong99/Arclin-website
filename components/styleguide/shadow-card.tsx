@@ -7,8 +7,8 @@ export function ShadowCard({ token, theme }: { token: ShadowToken; theme: ThemeI
       <p className="t-label">
         <span className="text-ink-subtle">{token.id}</span> {token.name}
       </p>
-      <p className="t-caption text-ink-subtle">{token.value[theme]}</p>
-      <p className="t-caption mt-1 text-pretty text-ink-muted">{token.usage}</p>
+      <p className="t-caption text-ink-muted">{token.value[theme]}</p>
+      <p className="t-body-s mt-1 text-pretty text-ink-muted">{token.usage}</p>
     </div>
   );
 }

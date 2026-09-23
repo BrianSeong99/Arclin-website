@@ -42,8 +42,8 @@ export function TypeSpecimen({ style, family }: { style: TypeStyle; family: Type
       <p lang={langOf[family]} className={cn(cls, "text-balance text-ink")} style={{ fontFamily: familyVar[family] }}>
         {sample}
       </p>
-      <p className="t-caption mt-3 text-ink-subtle">{spec.join(" · ")}</p>
-      {style.usage && <p className="t-caption mt-1 text-pretty text-ink-muted">{style.usage}</p>}
+      <p className="t-caption mt-3 text-ink-muted">{spec.join(" · ")}</p>
+      {style.usage && <p className="t-body-s mt-1 text-pretty text-ink-muted">{style.usage}</p>}
     </div>
   );
 }

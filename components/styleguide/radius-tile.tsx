@@ -8,8 +8,8 @@ export function RadiusTile({ token }: { token: RadiusToken }) {
       <p className="t-label mt-3">
         <span className="text-ink-subtle">{token.id}</span> {token.name}
       </p>
-      <p className="t-caption text-ink-subtle">{token.value}</p>
-      <p className="t-caption mt-1 text-pretty text-ink-muted">{token.usage}</p>
+      <p className="t-caption text-ink-muted">{token.value}</p>
+      <p className="t-body-s mt-1 text-pretty text-ink-muted">{token.usage}</p>
     </div>
   );
 }

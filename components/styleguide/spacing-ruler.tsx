@@ -10,8 +10,8 @@ export function SpacingRuler({ token }: { token: SpacingToken }) {
       <p className="t-label w-32 shrink-0">
         <span className="text-ink-subtle">{token.id}</span> {token.name}
       </p>
-      <p className="t-caption w-12 shrink-0 text-ink-subtle">{token.value}</p>
-      <p className="t-caption text-ink-muted">{token.usage}</p>
+      <p className="t-caption w-12 shrink-0 text-ink-muted">{token.value}</p>
+      <p className="t-body-s text-ink-muted">{token.usage}</p>
     </div>
   );
 }
