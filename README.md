@@ -7,8 +7,8 @@ for Chinese care-robotics companies. Static export, no backend.
 
 - Next.js 16 (App Router, `output: "export"`) · React 19 · TypeScript
 - Tailwind CSS v4; tokens in `app/globals.css` come from the **Kurogane** design system
-  (claude.ai/artifact/LPV5WVcV8esMeHutAnp4XP): Kurogane green, Soga yellow, Italiana + Chillax,
-  Zen Maru Gothic (JA) / Noto Sans SC (ZH). Fonts vendored in `public/fonts/`.
+  (claude.ai/artifact/LPV5WVcV8esMeHutAnp4XP): Kurogane green, Soga yellow, Coustard Black + Chillax,
+  Zen Maru Gothic (JA) / Resource Han Rounded SC (ZH, subset with `scripts/subset-zh-font.py`). Fonts vendored in `public/fonts/`.
 - Page rhythm after robot.com: floating nav pill, brand/highlight slabs, stats bento, numbered accordion
 - `motion` for in-view animation (240–320ms, all honour `prefers-reduced-motion`)
 - All visuals are SVG line drawings at one stroke weight; no WebGL
