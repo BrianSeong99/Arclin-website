@@ -1,70 +1,43 @@
 "use client";
 import { useLocale } from "@/lib/i18n/context";
 import { cn } from "@/lib/utils";
-import { Band, Grid24 } from "@/components/home/band";
+import { Band } from "@/components/home/band";
 import { PillLink } from "@/components/home/pill";
-import { RevealHeading } from "@/components/home/reveal-heading";
 import { Copy } from "@/components/site/copy";
-import { Kicker } from "@/components/site/section";
 
-/** robot.com's partner list is five cards (spec §2 row 4). Slots the copy does not fill stay empty raised cards. */
+/** Logo slots; the copy's facility names fill them in order, the rest stay quiet placeholders. */
 const SLOTS = 5;
-
-/** Header and facility cards share one surface: bg-raised, radius 24, padding 24 (§2 row 4). */
-const card = "relative overflow-hidden rounded-xl bg-raised p-6 text-ink";
 
 export interface TrustedByProps {
   className?: string;
 }
 
 /**
- * Band 4, trusted by (spec §2 row 4, §3.3, M4, M41). A page-coloured band whose container is the 24-column grid
- * with padding-top 5: the header card spans 6 (353.5 x 371.53 at 1440) and the facility list sits at cols 7 / span 19
- * as a flex row of five cards (211.3 x 371.53, aspect 182/320). Below 1024 the header card is full width and the
- * list is a grid of squares, 3 across at 768 and 2 across at 390, as robot.com's own breakpoints do.
- * The h2 is in the display face (easehealth brief §3 move 1: .t-display-m for en, Italiana 40 held at 390 since Italiana
- * never goes below 40; .t-jp-display for ja and zh), replacing §4's Chillax 41/600 card title. It reveals per M4; the CTA
- * pill rolls per M22 and stays an arrowless outline (secondary). Reduced motion, and below 768: heading static, no roll
- * (both handled upstream).
+ * Band 2, trusted by. Night shift (2026-09-28): one paper strip instead of robot.com's header card and five logo cards
+ * (Mobbin: quiet logo rows). Sentence left, logo row centre, outline pill right; below 768 the three stack.
+ * The sentence keeps its [GAP] chips until the facts arrive; the logo slots are 110x30 sunken blocks until marks exist.
  */
 export function TrustedBy({ className }: TrustedByProps) {
   const { locale, t } = useLocale();
-  const { eyebrow, sentence, facilities, cta } = t.home.trustedBy;
-  const titleClass = locale === "en" ? "t-display-m" : "t-jp-display";
+  const { sentence, facilities, cta } = t.home.trustedBy;
 
   return (
-    <Band id="trusted-by" tone="page" seam={false} slab={false} className={className}>
-      {/* §2 row 4 / V14: the section has no seam; the grid container itself carries padding-top 5. */}
-      <Grid24 style={{ paddingTop: 5 }}>
-        {/* The card grows with its sentence and the facility cards stretch to match (flex row, align stretch). robot.com's
-            card is 371.53 tall with a two-line h2; ours runs taller while the sentence carries [GAP] chips — a content
-            deviation that closes when the facts arrive. Never clip the sentence. */}
-        <div className={cn(card, "col-span-full flex flex-col lg:col-span-6")}>
-          <Kicker className="mb-6 self-start">
-            <Copy text={eyebrow} />
-          </Kicker>
-          <RevealHeading as="h2" lang={locale} text={sentence} className={titleClass} />
-          <div className="mt-auto pt-4">
-            <PillLink href={`/${locale}/contact/`} label={cta} variant="outline" />
-          </div>
-        </div>
-
-        <ul className="col-span-full grid grid-cols-2 gap-1 md:grid-cols-3 lg:col-span-19 lg:col-start-7 lg:flex">
-          {Array.from({ length: SLOTS }, (_, i) => facilities.at(i)).map((name, i) => (
-            <li
-              key={i}
-              aria-hidden={name ? undefined : true}
-              className={cn(card, "flex aspect-square items-center justify-center text-center lg:aspect-[182/320] lg:flex-1")}
-            >
-              {name && (
-                <p className="t-title-s">
-                  <Copy text={name} />
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </Grid24>
+    <Band id="trusted-by" tone="page" className={className} slabClassName="flex flex-col gap-4 p-5 md:min-h-40 md:flex-row md:items-center md:justify-between md:gap-8 md:p-6">
+      <p className="t-body max-w-[380px] text-ink">
+        <Copy text={sentence} />
+      </p>
+      <ul className="flex flex-wrap items-center gap-4 md:gap-10" aria-label={t.home.trustedBy.eyebrow}>
+        {Array.from({ length: SLOTS }, (_, i) => facilities.at(i)).map((name, i) => (
+          <li key={i} aria-hidden={name ? undefined : true} className={cn("flex h-7.5 w-27.5 items-center justify-center rounded-sm bg-sunken", name && "px-2")}>
+            {name && (
+              <span className="t-caption truncate text-ink-subtle">
+                <Copy text={name} />
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+      <PillLink href={`/${locale}/contact/`} label={cta} variant="outline" className="self-start md:self-auto" />
     </Band>
   );
 }

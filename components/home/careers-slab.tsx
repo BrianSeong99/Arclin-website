@@ -24,22 +24,22 @@ export function CareersSlab({ className }: { className?: string }) {
 
   return (
     // §2 row 12: the slab sits 4px from each viewport edge (1432 / 760 / 382 wide), one token narrower than --gutter-page.
-    <Band tone="brand" id="careers" className={className} style={{ paddingInline: "var(--space-1)" }} slabClassName="flex flex-col gap-8 p-7 lg:h-200 lg:p-6">
+    <Band tone="raised" id="careers" className={className} style={{ paddingInline: "var(--space-1)" }} slabClassName="flex flex-col gap-8 p-7 lg:h-200 lg:p-6">
       {/* flow-root so a short line never lets the float run into the pill below. */}
       <div className="flow-root">
         {/* robot.com's floated image box: line 1 and 2 start beside it, later lines run under it. */}
-        <div className="float-left mb-2.5 me-4 size-30 overflow-hidden rounded-md bg-on-brand/10 lg:me-6 lg:h-45 lg:w-46.5">
+        <div className="float-left mb-2.5 me-4 size-30 overflow-hidden rounded-md bg-sunken lg:me-6 lg:h-45 lg:w-46.5">
           <VideoFrame src={dev ? media.src : undefined} poster={dev ? media.poster : undefined} label={media.label} ratio="186 / 180" className="h-full rounded-md" />
         </div>
         {/* The partner-logo slot (45 tall, 12 below): Arclin's own mark, since the slab is about Arclin hiring. */}
         <div className="mb-3">
-          <Wordmark tone="brand" />
+          <Wordmark tone="page" />
         </div>
-        <p lang={locale} className="t-statement text-on-brand">
+        <p lang={locale} className="t-statement text-ink">
           <Copy text={t.careers.hero.line} />
         </p>
       </div>
-      <PillLink href={`/${locale}/careers/`} label={t.common.pageLabels.careers} variant="on-brand" className="w-full lg:w-fit" />
+      <PillLink href={`/${locale}/careers/`} label={t.common.pageLabels.careers} variant="outline" className="w-full lg:w-fit" />
     </Band>
   );
 }

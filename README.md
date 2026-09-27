@@ -54,8 +54,10 @@ docs/superpowers/specs/2026-09-23-robot-com-reference.md   the homepage referenc
              type map, motion table, verification checklist); robot-com-reference.json is the machine-readable copy
 ```
 
-The homepage is built to match robot.com band for band (order, dimensions, grid, radii, motion), with Kurogane
-tokens and Arclin copy substituted. Every band is a `<Band>` (5px page gutter, 4px seam, `--radius-xl` slab) laid
+The homepage keeps robot.com's skeleton (band order, 5px gutter, 4px seams, radius-24 slabs, the glass nav pill, motion) but is
+styled as "night shift" (Figma, Website mock page, 2026-09-28): a night ground with alternating night and paper slabs, video as the
+material on night slabs, leaf-gold accents, white Coustard headlines, and its own trusted-by strip, media-top product cards,
+frosted stats row, hairline accordion, centred closing card and camellia footer. Every band is a `<Band>` (5px page gutter, 4px seam, `--radius-xl` slab) laid
 out on the shared 24-column grid; copy strings render through `<Copy>` so `[GAP: …]` placeholders stay visible.
 
 ### Dev media

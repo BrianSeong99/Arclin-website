@@ -178,6 +178,7 @@ export const zh: Messages = {
     localeSwitch: "语言",
     gapNotice: "方括号中的 [GAP: …] 是尚未确定的事实的占位。确定后逐一替换为实际数值。",
     talkToUs: "和我们谈谈",
+    tagline: "更温暖的明天",
   },
 
   home: {

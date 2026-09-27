@@ -2,11 +2,9 @@
 import { animate, motion, useMotionValue, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useEffect, useRef, type RefObject } from "react";
 import { EASE, usePrefersReducedMotion } from "@/lib/motion";
-import { DEV_MEDIA } from "@/lib/dev-media";
 import { useLocale } from "@/lib/i18n/context";
 import { Band } from "@/components/home/band";
 import { Copy } from "@/components/site/copy";
-import { VideoFrame } from "@/components/site/video-frame";
 
 /* Word scrub timing, spec §5 M5: each word tweens opacity .3 → 1 over 150ms, words start 100ms apart
    (power2.out), and the whole tween is scrubbed by scroll from "slab top at viewport bottom" to
@@ -100,12 +98,9 @@ function ScrubWords({ target, words, cjk }: { target: RefObject<HTMLElement | nu
 }
 
 /**
- * Band 5, the statement slab (spec §2 row 5, §3, M5, M7, V24): a brand slab, radius --radius-xl,
- * padding 26px 24px 300px (20px sides, 200 below at <768), holding one h3 that runs the two safety
- * sentences (home.safety.sentences). No CTA: robot.com's band 5 has none (§2 row 5, interaction "None") and the
- * spec's Arclin mapping for the slab is the scrubbed sentence only (S05-1).
- * A 200x151.58 (118 wide at <768) rounded frame floats at the start of line 1 like robot.com's
- * inline image; it shows the robot-company clip in dev media mode and the pending frame otherwise.
+ * Band 3, the statement slab (spec §2 row 5, §3, M5, M7, V24): a night slab with the leaf shade, radius --radius-xl,
+ * holding one h3 that runs the two safety sentences (home.safety.sentences). No CTA: robot.com's band 5 has none.
+ * Night shift (2026-09-28) drops robot.com's inline 200x151 thumbnail and centres the sentence.
  * Words rest at opacity .3 of --on-brand and light up per word as the slab scrolls up (M5).
  * Reduced motion: every word static at opacity 1, no scrub (usePrefersReducedMotion, so the server tree and the
  * first client render agree; A-2).
@@ -117,26 +112,20 @@ export function Statement({ className }: { className?: string }) {
   const cjk = locale === "ja" || locale === "zh";
   const [first, second] = t.home.safety.sentences;
   const words = [...splitWords(first, locale, cjk), ...splitWords(second, locale, cjk)];
-  const media = DEV_MEDIA["robot-company"];
-  const dev = process.env.NEXT_PUBLIC_DEV_MEDIA === "1";
 
   return (
     <Band
-      tone="brand"
+      tone="night"
       id="statement"
       className={className}
-      /* §2 row 5 slab heights: 1430x497.56 at 1440, 380x402 at 390 (34.55vw = 497.5 at 1440). robot.com's three 57.2px lines set
-         them; this floor keeps the band's height, and band 6's pin start at 1161 (V26), while the copy is shorter than three lines. */
-      slabStyle={{ minHeight: "clamp(402px, 34.55vw, 497.56px)" }}
+      /* Night shift (2026-09-28): the leaf shade on the slab, no inline thumbnail, the sentence vertically centred.
+         Heights: 520 at 1440, 402 at 390 (robot.com's 497.56 / 402 kept as the floor). */
+      slabClassName="bg-night-shade flex items-center"
+      slabStyle={{ minHeight: "clamp(402px, 36vw, 520px)" }}
     >
-      <div ref={slab} className="px-5 pt-5 pb-50 md:px-6 md:pt-6.5 md:pb-75">
-        {/* robot.com's inline image: floats so line 1 starts beside it and later lines run under it. */}
-        <div className="float-left mr-5 mb-2 w-29.5 md:mr-8 md:w-50">
-          <VideoFrame src={dev ? media.src : undefined} poster={dev ? media.poster : undefined} label={media.label} ratio="200 / 151.58" className="rounded-md" />
-        </div>
-        {/* §4 row "Statement slab h3": .t-statement clamp(28px,3.6vw,52px)/1.15/500/-0.02em; robot.com 52/600/57.2/-1.04.
-            The leading is pinned to robot.com's 1.1 (57.2 at 52px) so the slab is 497.56 tall and band 6 starts at 1161 (V26). */}
-        <h3 lang={locale} className="t-statement text-on-brand" style={{ lineHeight: 1.1 }}>
+      <div ref={slab} className="px-5 py-10 md:px-6 md:py-16">
+        {/* §4 row "Statement slab h3": .t-statement clamp(28px,3.6vw,52px)/1.15/500/-0.02em, in --on-brand (white on night). */}
+        <h3 lang={locale} className="t-statement max-w-[1100px] text-on-brand" style={{ lineHeight: 1.1 }}>
           {reduce ? (
             <>
               <Copy text={first} />

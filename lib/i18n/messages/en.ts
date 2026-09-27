@@ -243,6 +243,7 @@ export const en: Messages = {
     localeSwitch: "Language",
     gapNotice: "A bracketed [GAP: …] marks a fact that is not yet confirmed. Each one is replaced with the confirmed value.",
     talkToUs: "Talk to us",
+    tagline: "A warmer tomorrow",
   },
 
   home: {

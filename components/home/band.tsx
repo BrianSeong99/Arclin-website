@@ -1,7 +1,7 @@
 import type { CSSProperties, ElementType, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-export type BandTone = "page" | "brand" | "highlight" | "raised";
+export type BandTone = "page" | "brand" | "highlight" | "raised" | "night";
 
 /** Surface + text roles per tone. `.on-brand` / `.on-highlight` also switch the focus ring (globals.css). */
 const toneClass: Record<BandTone, string> = {
@@ -9,6 +9,8 @@ const toneClass: Record<BandTone, string> = {
   raised: "bg-raised text-ink",
   brand: "on-brand bg-brand text-on-brand",
   highlight: "on-highlight bg-highlight text-on-highlight",
+  /* Night shift: the dark slab of the v3 homepage. Text roles are the on-brand pair (the same paper and muted paper). */
+  night: "on-brand bg-night text-on-brand",
 };
 
 export interface BandProps {
@@ -41,7 +43,7 @@ export function Band({ tone = "page", seam = true, radius = "xl", slab = true, a
     <Tag
       id={id}
       data-band-tone={tone}
-      className={cn("bg-page", className)}
+      className={cn("bg-body", className)}
       style={{ paddingInline: "var(--gutter-page)", paddingTop: seam ? "var(--seam)" : 0, ...style }}
     >
       {slab ? (

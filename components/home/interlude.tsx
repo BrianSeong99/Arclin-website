@@ -157,12 +157,13 @@ export function Interlude() {
     }
   };
 
-  const headingClass = locale === "en" ? "t-display-m" : "t-jp-display";
+  // Night shift: the interlude line is the band's headline, so it takes display-l (white on night).
+  const headingClass = locale === "en" ? "t-display-l" : "t-jp-display-l";
 
   return (
     <>
       <Band
-        tone="brand"
+        tone="night"
         id="interlude"
         /* §2 row 10: ≥768 the 3:2 image sets the height, capped at 100vh (900 at 1440x900; 505.67 at 768). Below 768 a centred
            column, gap 24, padding 24 0, at least one viewport tall (robot.com 839.77 at 390x844, see deviations). */
@@ -179,7 +180,7 @@ export function Interlude() {
         {/* Scrim. robot.com's background image is dark by nature; ours is whatever clip is supplied, so brand at 60% keeps the
             --on-brand copy at 4.5:1 over any footage. With no media the pending frame is --surface-sunken and the scrim goes
             opaque (even at 94% the frame's own pending label ghosted through the h2 at 390). */}
-        <div aria-hidden="true" className={cn("pointer-events-none absolute inset-0", dev ? "bg-brand/60" : "bg-brand")} />
+        <div aria-hidden="true" className={cn("pointer-events-none absolute inset-0", dev ? "bg-night/55" : "bg-night")} />
 
         {/* §2 row 10 thumb wrapper: in flow (padding 0 24) below 768; absolute, vertically centred at ≥768. */}
         <div className="relative z-2 px-6 md:absolute md:top-1/2 md:left-0 md:w-full md:-translate-y-1/2 md:px-0">
@@ -228,7 +229,7 @@ export function Interlude() {
             {/* §4 interlude h2 row: 38/600 Yellix → .t-display-m (en) / .t-jp-display (ja, zh). Absolute at (24, 24) from ≥768
                 with max-width 300 (robot.com ≤1200) and 404 at ≥1024 (robot.com 403 at ≥1200, see deviations); in flow with
                 padding 24 below 768. Line reveal per M4/M9, static under reduced motion. */}
-            <div className="pointer-events-auto relative z-2 col-span-full px-6 pb-6 md:absolute md:top-6 md:left-6 md:max-w-75 md:p-0 lg:max-w-101">
+            <div className="pointer-events-auto relative z-2 col-span-full px-6 pb-6 md:absolute md:top-6 md:left-6 md:max-w-105 md:p-0 lg:max-w-155">
               <RevealHeading as="h2" lang={locale} className={headingClass} text={t.home.interlude.line} />
             </div>
 
@@ -253,7 +254,7 @@ export function Interlude() {
                   <Copy text={t.deployment.hero.line} />
                 </p>
                 {/* §3.3 white-outline pill → outline-on-brand; content-spacers p + pill: margin-top 20. */}
-                <PillLink href={`/${locale}/deployment/`} label={t.home.interlude.cta} variant="outline-on-brand" className="mt-5" />
+                <PillLink href={`/${locale}/deployment/`} label={t.home.interlude.cta} variant="gold" className="mt-5" />
               </div>
             </div>
           </Grid24>

@@ -2,7 +2,7 @@
  * Header theme per band (spec §3.1, M12). robot.com swaps `Header_dark` / `Header_light` / `Header_yellow`
  * the moment a section enters; here an IntersectionObserver watches every `[data-band-tone]` section
  * (<Band> writes the attribute) against a one-pixel line at the header bar's y, and the tone under that line
- * becomes the header theme: brand bands → "brand" (glass-on-brand, on-brand text), everything else → "page".
+ * becomes the header theme: brand and night bands → "brand" (glass-on-brand, on-brand text), everything else → "page".
  * The result is written to `<html data-header-theme>` for CSS consumers and pushed to subscribers (useSyncExternalStore).
  */
 import type { BandTone } from "./band";
@@ -18,7 +18,8 @@ const listeners = new Set<() => void>();
 let current: HeaderTheme | null = null;
 
 export function toneToTheme(tone: string | null | undefined): HeaderTheme {
-  return (tone as BandTone) === "brand" ? "brand" : "page";
+  const t = tone as BandTone;
+  return t === "brand" || t === "night" ? "brand" : "page";
 }
 
 /** The current theme, or `fallback` before the observer has resolved one (server render, first paint). */

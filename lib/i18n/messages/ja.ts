@@ -181,6 +181,7 @@ export const ja = {
     localeSwitch: "言語",
     gapNotice: "角括弧の [GAP: …] は、まだ確定していない事実の置き場所です。確定した値に順次差し替えます。",
     talkToUs: "相談する",
+    tagline: "あたたかい明日へ",
   },
 
   home: {

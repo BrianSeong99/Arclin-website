@@ -1,4 +1,3 @@
-import { AnnounceBar } from "@/components/home/announce-bar";
 import { Nav, SkipLink } from "@/components/site/nav";
 import { Footer } from "@/components/site/footer";
 import { Hero } from "@/components/home/hero";
@@ -13,7 +12,8 @@ import { ClosingCta } from "@/components/home/closing-cta";
 import { CareersSlab } from "@/components/home/careers-slab";
 
 /**
- * The homepage in robot.com band order (reference spec §2): announcement, fixed header, then the in-flow bands.
+ * The homepage in robot.com band order (reference spec §2) minus the announcement bar (cut 2026-09-28 with the night-shift
+ * design): fixed header, then the in-flow bands. `.home` on <main> switches the seams and gutter to the night ground.
  * Every band brings its own 5px page gutter and 4px seam through <Band>, so <main> carries no gap of its own;
  * the trusted-by grid has the 5px container padding instead of a seam (§2 row 4). The first band under the header is
  * the brand hero, so the nav starts on its brand theme to avoid a flash before the band observer resolves.
@@ -24,9 +24,8 @@ export default function Page() {
   return (
     <>
       <SkipLink />
-      <AnnounceBar />
       <Nav initialTheme="brand" skipLink={false} />
-      <main id="main" tabIndex={-1} className="flex flex-1 flex-col outline-none">
+      <main id="main" tabIndex={-1} className="home flex flex-1 flex-col outline-none">
         <Hero />
         <TrustedBy />
         <Statement />

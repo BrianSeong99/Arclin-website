@@ -70,7 +70,19 @@
   --ease-unfold: cubic-bezier(0.65, 0, 0.35, 1); /* ≈ power3.inOut */
   --glass-on-brand: rgba(255, 255, 255, 0.1);    /* header bar over brand bands, with .glass */
   --glass-on-page: rgba(16, 46, 36, 0.075);      /* header bar over page/highlight bands: the ink at 7.5% */
+
+  /* ---- Night shift (2026-09-28): the homepage alternates night and paper slabs on a night ground ----
+     Night values are the Kurogane Night theme's surfaces, usable on the Paper page without a theme switch. */
+  --surface-night: #0b1c16;                      /* night ground and night slabs */
+  --surface-night-raised: #13261e;               /* cards on night */
+  --night-hairline: #2a3b32;                     /* hairlines on night */
+  --night-shade: linear-gradient(135deg, #1a3a2e 0%, #0b1c16 100%); /* the leaf shade, lit from the top-left */
+  --glass-on-night: rgba(255, 255, 255, 0.06);   /* frosted cards over night video */
+  --surface-body: var(--surface-page);           /* the ground behind the slabs: page by default, night on .home */
 }
+
+/* The homepage ground: seams and gutter read as night. Set on <main class="home">. */
+.home { --surface-body: var(--surface-night); }
 
 [data-theme="night"] {
   --surface-page: #0b1c16;
@@ -97,6 +109,10 @@
   --color-raised: var(--surface-raised);
   --color-sunken: var(--surface-sunken);
   --color-brand: var(--surface-brand);
+  --color-body: var(--surface-body);
+  --color-night: var(--surface-night);
+  --color-night-raised: var(--surface-night-raised);
+  --color-night-hairline: var(--night-hairline);
   --color-leaf-gold: var(--leaf-gold);
   --color-leaf-sage: var(--leaf-sage);
   --color-leaf-dark: var(--leaf-dark);
@@ -234,6 +250,10 @@ body {
 @utility duration-unfold { transition-duration: var(--dur-unfold); }
 @utility duration-menu { transition-duration: var(--dur-menu); }
 @utility duration-scroll { transition-duration: var(--dur-scroll); }
+/* Night-shift surfaces. */
+.bg-night-shade { background: var(--night-shade); }
+.glass-night { background: var(--glass-on-night); border: 1px solid rgba(255, 255, 255, 0.14); }
+
 /* Header glass: pair with bg via --glass-on-brand / --glass-on-page. */
 @utility glass {
   -webkit-backdrop-filter: blur(26px);
@@ -283,6 +303,7 @@ body {
 .pill--on-page { background: var(--surface-brand); color: var(--on-brand); }
 .pill--on-brand { background: var(--surface-page); color: var(--ink); }
 .pill--highlight { background: var(--highlight); color: var(--on-highlight); }
+.pill--gold { background: var(--leaf-gold); color: var(--ink); } /* night-shift primary: leaf gold, ink label (8.9:1) */
 .pill--outline { background: transparent; color: var(--ink); border-color: currentColor; }
 .pill--outline-on-brand { background: transparent; color: var(--on-brand); border-color: currentColor; }
 .pill--on-brand:focus-visible, .pill--outline-on-brand:focus-visible { outline-color: var(--focus-ring-inverse); }

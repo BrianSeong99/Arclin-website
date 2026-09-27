@@ -3,18 +3,20 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Copy } from "@/components/site/copy";
 
-export type PillVariant = "on-page" | "on-brand" | "highlight" | "outline" | "outline-on-brand";
+export type PillVariant = "on-page" | "on-brand" | "highlight" | "gold" | "outline" | "outline-on-brand";
 export type PillSize = "md" | "lg" | "inline";
 
 /**
  * Colour roles (spec §3.3 Kurogane mapping):
  * on-page = ink pill on the page (robot.com black); on-brand = page-coloured pill on a brand slab (white);
- * highlight = the accent pill (yellow); outline / outline-on-brand = transparent with a currentColor border.
+ * highlight = the accent pill (yellow); gold = the leaf-gold primary on night slabs; outline / outline-on-brand = transparent
+ * with a currentColor border.
  */
 const variantClass: Record<PillVariant, string> = {
   "on-page": "pill--on-page",
   "on-brand": "pill--on-brand",
   highlight: "pill--highlight",
+  gold: "pill--gold",
   outline: "pill--outline",
   "outline-on-brand": "pill--outline-on-brand",
 };
