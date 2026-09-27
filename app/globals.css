@@ -9,6 +9,10 @@
   --surface-raised: #ffffff;
   --surface-sunken: #f2ecdf;
   --surface-brand: #102e24;
+  /* Logo leaves (mid stops). Brand illustration accents only — never UI fills or text. */
+  --leaf-gold: #e3c06a;
+  --leaf-sage: #7fa085;
+  --leaf-dark: #0d3a2f;
   --hairline: #e2daca;
   --border-strong: #8e8676;
   --ink: #102e24;
@@ -23,6 +27,7 @@
   --focus-ring-inverse: #f7ed92;
   --success: #246b49;
   --attention: #7d5a0c;
+  --attention-on-brand: #e0c170;     /* --attention on --surface-brand (the night value): 7.7:1 */
   --danger: #94331f;
 
   --shadow-soft: 0 1px 2px rgba(16, 46, 36, 0.06), 0 4px 12px rgba(16, 46, 36, 0.05);
@@ -46,7 +51,38 @@
   --dur-enter: 240ms;
   --dur-slow: 320ms;
   --ease-enter: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ---- v3 site additions (measured from robot.com, spec §5 + tokensToAdd) ----
+     Kurogane's 240/320ms envelope holds none of robot.com's timings; these sit
+     beside it until the v2 motion specification supersedes them. */
+  --radius-xl: 24px;                 /* slabs and cards (robot.com 24; 26 on statement/CTA collapsed to 24) */
+  --gutter-page: 5px;                /* page gutter, both sides, every viewport (§2) */
+  --seam: 4px;                       /* padding-top on in-flow slab sections (§2, V14) */
+  --dur-reveal: 400ms;               /* heading line reveal (M4, M9, M33) */
+  --dur-roll: 300ms;                 /* pill label roll-over, hover fades, lightbox (M22–M26, M36, M37) */
+  --dur-unfold: 600ms;               /* accordion grow/shrink and media crossfade (M27, M28, M32) */
+  --dur-menu: 1000ms;                /* menu open/close height, slide crossfade (M15, M19, M20) */
+  --dur-scroll: 1200ms;              /* Lenis wheel scroll (M1) */
+  --ease-reveal: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-roll: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-unfold: cubic-bezier(0.65, 0, 0.35, 1); /* ≈ power3.inOut */
+  --glass-on-brand: rgba(255, 255, 255, 0.1);    /* header bar over brand bands, with .glass */
+  --glass-on-page: rgba(16, 46, 36, 0.075);      /* header bar over page/highlight bands: the ink at 7.5% */
+
+  /* ---- Night shift (2026-09-28): the homepage alternates night and paper slabs on a night ground ----
+     Night values are the Kurogane Night theme's surfaces, usable on the Paper page without a theme switch. */
+  --surface-night: #0b1c16;                      /* night ground and night slabs */
+  --surface-night-raised: #13261e;               /* cards on night */
+  --night-hairline: #2a3b32;                     /* hairlines on night */
+  --night-shade: linear-gradient(135deg, #1a3a2e 0%, #0b1c16 100%); /* the leaf shade, lit from the top-left */
+  --glass-on-night: rgba(255, 255, 255, 0.06);   /* frosted cards over night video */
+  --surface-body: var(--surface-page);           /* the ground behind the slabs: page by default, night on .home */
 }
+
+/* The homepage ground: seams and gutter read as night. Set on <main class="home">. */
+.home { --surface-body: var(--surface-night); }
 
 [data-theme="night"] {
   --surface-page: #0b1c16;
@@ -73,6 +109,13 @@
   --color-raised: var(--surface-raised);
   --color-sunken: var(--surface-sunken);
   --color-brand: var(--surface-brand);
+  --color-body: var(--surface-body);
+  --color-night: var(--surface-night);
+  --color-night-raised: var(--surface-night-raised);
+  --color-night-hairline: var(--night-hairline);
+  --color-leaf-gold: var(--leaf-gold);
+  --color-leaf-sage: var(--leaf-sage);
+  --color-leaf-dark: var(--leaf-dark);
   --color-hairline: var(--hairline);
   --color-border-strong: var(--border-strong);
   --color-ink: var(--ink);
@@ -96,16 +139,22 @@
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
   --radius-pill: var(--radius-pill);
 
-  --font-display: var(--font-display), "Times New Roman", serif;
+  --font-display: var(--font-display), "Cooper Black", Georgia, serif;
   --font-ui: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
   --font-jp: var(--font-jp), "Hiragino Maru Gothic ProN", sans-serif;
-  --font-zh: var(--font-zh), "PingFang SC", sans-serif;
+  --font-zh: var(--font-zh), "Yuanti SC", "PingFang SC", sans-serif;
   /* Chillax first so Latin glyphs are Chillax; CJK glyphs fall through to the locale face. */
   --font-sans: var(--font-ui), var(--font-body), sans-serif;
 
   --ease-enter: var(--ease-enter);
+  --ease-reveal: var(--ease-reveal);
+  --ease-roll: var(--ease-roll);
+  --ease-expo-out: var(--ease-expo-out);
+  --ease-out-cubic: var(--ease-out-cubic);
+  --ease-unfold: var(--ease-unfold);
   --default-transition-duration: var(--dur-enter);
   --default-transition-timing-function: var(--ease-enter);
 }
@@ -118,6 +167,11 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
 }
+/* Lenis owns the scroll while <SmoothScroll> is mounted (M1); native smoothing would fight it. */
+html.smooth-scroll { scroll-behavior: auto; }
+html.lenis, html.lenis body { height: auto; }
+html.lenis.lenis-stopped { overflow: clip; }
+html.lenis.lenis-smooth iframe { pointer-events: none; }
 
 body {
   background: var(--surface-page);
@@ -126,7 +180,7 @@ body {
   font-size: 17px;
   line-height: 1.6;
   font-feature-settings: "palt" 1;
-  -webkit-font-smoothing: antialiased;
+  /* No -webkit-font-smoothing: antialiased — it thins Chillax on macOS. */
   overflow-x: clip;
 }
 
@@ -136,15 +190,26 @@ body {
   outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
 }
-.on-brand :focus-visible,
-.on-highlight :focus-visible {
+/* The element carrying .on-brand can itself be the focusable (the skip link), so both forms match (V38, V39, A-8). */
+.on-brand:focus-visible, .on-brand :focus-visible {
   outline-color: var(--focus-ring-inverse);
+}
+/* Tokens re-scoped on brand surfaces: the attention ink and strong border are tuned for the page and fall to 2.3:1 on
+   --surface-brand (A-4, the [GAP] chips). The night value of --attention (7.7:1 on brand) and --on-brand-muted stand in. */
+.on-brand {
+  --attention: var(--attention-on-brand);
+  --border-strong: var(--on-brand-muted);
+}
+/* focus-ring-inverse is the highlight yellow itself (1:1 on highlight), so the ring on highlight is on-highlight. */
+.on-highlight :focus-visible {
+  outline-color: var(--on-highlight);
 }
 
 /* ---- type styles (tokens.json → classes) ---- */
-.t-display-xl { font-family: var(--font-display); font-size: clamp(56px, 7vw, 88px); line-height: 0.95; font-weight: 400; letter-spacing: 0.01em; }
-.t-display-l  { font-family: var(--font-display); font-size: clamp(44px, 5.2vw, 62px); line-height: 1.08; font-weight: 400; letter-spacing: 0.01em; }
-.t-display-m  { font-family: var(--font-display); font-size: 40px; line-height: 1.15; font-weight: 400; letter-spacing: 0.015em; }
+/* Display: Coustard Black. Heavier than the Italiana ramp it replaces, so every step is smaller. Never below 28px. */
+.t-display-xl { font-family: var(--font-display); font-size: clamp(44px, 5.8vw, 72px); line-height: 1; font-weight: 900; letter-spacing: -0.015em; }
+.t-display-l  { font-family: var(--font-display); font-size: clamp(34px, 4.2vw, 52px); line-height: 1.08; font-weight: 900; letter-spacing: -0.015em; }
+.t-display-m  { font-family: var(--font-display); font-size: 36px; line-height: 1.15; font-weight: 900; letter-spacing: -0.01em; }
 .t-title-l    { font-family: var(--font-ui); font-size: 30px; line-height: 1.25; font-weight: 600; letter-spacing: -0.015em; }
 .t-title-m    { font-family: var(--font-ui); font-size: 23px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; }
 .t-title-s    { font-family: var(--font-ui); font-size: 19px; line-height: 1.35; font-weight: 600; }
@@ -154,13 +219,16 @@ body {
 .t-label      { font-family: var(--font-ui); font-size: 14px; line-height: 1.3; font-weight: 600; }
 .t-overline   { font-family: var(--font-ui); font-size: 12px; line-height: 1.4; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; }
 .t-caption    { font-size: 13px; line-height: 1.5; font-weight: 400; }
-.t-numeral    { font-family: var(--font-ui); font-size: clamp(40px, 5vw, 64px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; }
-/* CJK display: Zen Maru / Noto Sans SC via --font-body */
+.t-numeral    { font-family: var(--font-ui); font-size: 40px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; }
+/* CJK display: Zen Maru Gothic / Resource Han Rounded SC via --font-body */
 .t-jp-display-xl { font-family: var(--font-body); font-size: clamp(36px, 5.4vw, 72px); line-height: 1.2; font-weight: 500; }
 .t-jp-display-l  { font-family: var(--font-body); font-size: clamp(30px, 4vw, 56px); line-height: 1.3; font-weight: 500; }
 .t-jp-display    { font-family: var(--font-body); font-size: clamp(24px, 2.6vw, 32px); line-height: 1.5; font-weight: 500; }
 .t-jp-body-l     { font-size: 19px; line-height: 1.9; font-weight: 400; }
 .t-jp-body       { font-size: 17px; line-height: 1.85; font-weight: 400; }
+/* Chinese: Resource Han Rounded SC via --font-zh — the rounded counterpart of Zen Maru Gothic (which has no Simplified glyphs) */
+.t-zh-display-xl { font-family: var(--font-zh); font-size: clamp(36px, 5.4vw, 72px); line-height: 1.2; font-weight: 500; }
+.t-zh-body       { font-family: var(--font-zh); font-size: 17px; line-height: 1.85; font-weight: 400; }
 
 /* Statement / hero sentences in Chillax, tight leading — robot.com's big-type register. */
 .t-statement { font-family: var(--font-ui); font-size: clamp(28px, 3.6vw, 52px); line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; }
@@ -176,12 +244,92 @@ body {
 @utility band-y {
   padding-block: clamp(var(--space-12), 8vw, 128px);
 }
+/* Tailwind has no duration namespace; these pair with the ease-* classes the @theme block registers. */
+@utility duration-reveal { transition-duration: var(--dur-reveal); }
+@utility duration-roll { transition-duration: var(--dur-roll); }
+@utility duration-unfold { transition-duration: var(--dur-unfold); }
+@utility duration-menu { transition-duration: var(--dur-menu); }
+@utility duration-scroll { transition-duration: var(--dur-scroll); }
+/* Night-shift surfaces. */
+.bg-night-shade { background: var(--night-shade); }
+.glass-night { background: var(--glass-on-night); border: 1px solid rgba(255, 255, 255, 0.14); }
 
-/* robot.com-style LED dot pattern, drawn in the current colour */
-.dot-grid {
-  background-image: radial-gradient(circle, currentColor 1.6px, transparent 2px);
-  background-size: 16px 16px;
+/* Header glass: pair with bg via --glass-on-brand / --glass-on-page. */
+@utility glass {
+  -webkit-backdrop-filter: blur(26px);
+  backdrop-filter: blur(26px);
 }
+
+/* ---- v3 home primitives (components/home) ---------------------------
+   Values here are the robot.com measurements (spec §2, §3.3, M4, M22); the
+   components carry no px of their own. */
+
+/* 24-column grid, gap 4 (§2, V12). 6 columns below 768 (robot.com 390). */
+@utility grid-24 {
+  display: grid;
+  gap: var(--space-1);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  @media (width >= 48rem) { grid-template-columns: repeat(24, minmax(0, 1fr)); }
+}
+/* Cell placement from custom properties <Col> sets inline: --col/--col-start/--row (≥768) and the -sm pair below. Named cell-24 because col-<n> is a Tailwind built-in. */
+@utility cell-24 {
+  grid-column: var(--col-start-sm, auto) / span var(--col-sm, 6);
+  grid-row: var(--row-sm, auto);
+  @media (width >= 48rem) {
+    grid-column: var(--col-start, auto) / span var(--col, 24);
+    grid-row: var(--row, auto);
+  }
+}
+
+/* Stacked-label pill (§3.3, M22–M23). Two label copies; hover rolls copy 1 up and copy 2 in.
+   The transition is declared only under :hover so hover-out snaps, as measured. */
+.pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 11px 21px;            /* §3.3 ButtonPill_content */
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 250ms var(--ease-roll), background-color 250ms var(--ease-roll); /* M23: declared, never fired by hover */
+}
+.pill--lg { padding: 19px 20px; }  /* §3.3 header CTA, 48 tall */
+.pill--inline { padding: 11px 13px; } /* §3.3 inline CTA pill inside the closing statement */
+.pill:disabled { pointer-events: none; opacity: 0.5; }
+.pill--on-page { background: var(--surface-brand); color: var(--on-brand); }
+.pill--on-brand { background: var(--surface-page); color: var(--ink); }
+.pill--highlight { background: var(--highlight); color: var(--on-highlight); }
+.pill--gold { background: var(--leaf-gold); color: var(--ink); } /* night-shift primary: leaf gold, ink label (8.9:1) */
+.pill--outline { background: transparent; color: var(--ink); border-color: currentColor; }
+.pill--outline-on-brand { background: transparent; color: var(--on-brand); border-color: currentColor; }
+.pill--on-brand:focus-visible, .pill--outline-on-brand:focus-visible { outline-color: var(--focus-ring-inverse); }
+.pill__track {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  line-height: 1.225;            /* §3.3: 14px x 1.225 = 17.15px travel */
+}
+.pill__label { display: block; transition: none; } /* rest: no transition, so hover-out snaps (V20) */
+.pill__label[aria-hidden] { position: absolute; inset: 0 auto auto 0; transform: translateY(100%); }
+.pill:hover .pill__label, .pill-hover-parent:hover .pill__label {
+  transition: transform var(--dur-roll) var(--ease-roll);
+}
+.pill:hover .pill__label:not([aria-hidden]), .pill-hover-parent:hover .pill__label:not([aria-hidden]) { transform: translateY(-100%); }
+.pill:hover .pill__label[aria-hidden], .pill-hover-parent:hover .pill__label[aria-hidden] { transform: translateY(0); }
+
+/* Heading line reveal (M4). Each measured line sits in an overflow-hidden wrapper; the inner
+   block rises from translateY(100%) once the heading is half in view. Opacity is never touched. */
+.reveal-line { display: block; overflow: hidden; padding-bottom: 0.15ch; }
+.reveal-line__inner {
+  display: block;
+  transform: translateY(100%);
+  transition: transform var(--dur-reveal) var(--ease-reveal);
+}
+.is-in .reveal-line__inner { transform: none; }
 
 @keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 .anim-fade-up { animation: fade-up var(--dur-slow) var(--ease-enter) both; }
@@ -190,6 +338,14 @@ body {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-timeline: auto !important; /* scroll-driven animations become time-driven and finish at once */
     transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
   }
+  /* Pills: no roll, copy 1 stays put (§5 reduced-motion rule). */
+  .pill:hover .pill__label:not([aria-hidden]), .pill-hover-parent:hover .pill__label:not([aria-hidden]) { transform: none; }
+  .pill:hover .pill__label[aria-hidden], .pill-hover-parent:hover .pill__label[aria-hidden] { transform: translateY(100%); }
+  /* Headings: static at their end state, never robot.com's invisible-headings bug. */
+  .reveal-line__inner { transform: none; }
 }

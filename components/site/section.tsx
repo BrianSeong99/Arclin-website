@@ -24,9 +24,15 @@ export function Section({ tone = "page", inset, className, children, ...props }:
 }
 
 /** Uppercase eyebrow above a heading (Kurogane `overline`). */
+/**
+ * Eyebrow above a heading: a sentence-case chip (borrowed from easehealth.com's tag, 2026-09-23) instead of the
+ * tracked uppercase overline — Kurogane asks for sentence case on chips and tracked capitals are the hardest register
+ * for an older reader. .t-label in a pill, --surface-sunken on page bands, the on-* ink at 10% on brand and highlight
+ * bands; never --highlight (the page already spends its two highlight bands). Sits --space-6 above the heading.
+ */
 export function Kicker({ children, tone = "page", className }: { children: ReactNode; tone?: SectionTone; className?: string }) {
-  const c = tone === "brand" ? "text-on-brand-muted" : tone === "highlight" ? "text-on-highlight/70" : "text-ink-subtle";
-  return <p className={cn("t-overline", c, className)}>{children}</p>;
+  const c = tone === "brand" ? "bg-on-brand/10 text-on-brand-muted" : tone === "highlight" ? "bg-on-highlight/10 text-on-highlight" : "bg-sunken text-ink-muted";
+  return <p className={cn("t-label inline-flex items-center rounded-pill px-3 py-2", c, className)}>{children}</p>;
 }
 
 /** CJK section heading; pass two lines to force the designed line break. */
@@ -50,7 +56,7 @@ export function SectionHeading({ label, lines, lead, tone = "page", className }:
   return (
     <div className={className}>
       <Kicker tone={tone}>{label}</Kicker>
-      <Heading lines={lines} className="mt-4" />
+      <Heading lines={lines} className="mt-6" />
       {lead && <p className={cn("t-body-l mt-5 max-w-[36em] text-pretty", tone === "brand" ? "text-on-brand-muted" : tone === "highlight" ? "text-on-highlight/80" : "text-ink-muted")}>{lead}</p>}
     </div>
   );

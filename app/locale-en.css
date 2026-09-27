@@ -1,0 +1,2 @@
+/* English pages: no CJK body face, so the body falls through to the UI face (Chillax). */
+html[lang="en"] { --font-body: var(--font-ui); }

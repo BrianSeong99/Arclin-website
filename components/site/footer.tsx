@@ -1,63 +1,116 @@
 "use client";
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n/context";
-import { otherLocale, STORAGE_KEY } from "@/lib/i18n";
-import { NAV_HREFS } from "@/lib/site";
-import { DotEyes } from "@/components/viz/dot-eyes";
+import { FOOTER_COLUMNS, type PageLink } from "@/lib/site";
+import { Band, Col, Grid24 } from "@/components/home/band";
+import { Copy } from "@/components/site/copy";
+import { FooterArt } from "@/components/viz/footer-art";
 import { Wordmark } from "./wordmark";
 
-/** Brand-slab footer: wordmark, nav column, company rows, disclaimer, then the LED eyes. */
+/** Privacy and terms leave the main list: they are the small links under column 1. */
+const LEGAL_KEYS: ReadonlySet<PageLink["key"]> = new Set(["privacy", "terms"]);
+
+const FOOTER_CSS = `
+.footer-link, .footer-small { font-weight: 500; }
+.footer-art { aspect-ratio: 1350 / 220; }
+`;
+
+/** Main footer link (M25): the two-copy roll-over on bare text, .t-body at 500. */
+function RollLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link href={href} className="pill-hover-parent footer-link t-body inline-block text-on-brand">
+      <span className="pill__track">
+        <span className="pill__label">
+          <Copy text={label} />
+        </span>
+        <span className="pill__label" aria-hidden="true">
+          <Copy text={label} />
+        </span>
+      </span>
+    </Link>
+  );
+}
+
+/** Secondary link (M26): --on-brand at .55, to 1 over --dur-roll --ease-roll. */
+const secondaryClass = "footer-small t-caption inline-block text-on-brand opacity-55 transition-opacity duration-roll ease-roll hover:opacity-100";
+const legalsType = { fontSize: 12, lineHeight: 1 } as const;
+
+/**
+ * Band 11, the footer (night shift, 2026-09-28): a night slab with the leaf shade, 600 tall at 1440, in three rows:
+ * the wordmark with the tagline under it and the two nav columns on top (cols 17–20 and 21–24), a hairline legals row
+ * (entity left, © right), then the camellia line drawing across the bottom. Below 768: padding 24, nav columns side by
+ * side, legals stacked, art hidden. robot.com's 903px dot-matrix footer is gone.
+ */
 export function Footer() {
   const { t, locale } = useLocale();
-  const other = otherLocale(locale);
-  const remember = () => {
-    try {
-      localStorage.setItem(STORAGE_KEY, other);
-    } catch {}
-  };
+  const c = t.common;
+  const year = new Date().getFullYear();
+  const headings = [c.footerColumns.product, c.footerColumns.company];
+  const legal = [
+    { key: "privacy", label: c.legal.privacy, href: `/${locale}/privacy/` },
+    { key: "terms", label: c.legal.terms, href: `/${locale}/terms/` },
+  ];
+  const socials = [c.socials.x, c.socials.linkedin, c.socials.youtube];
+
   return (
-    <footer className="on-brand mx-2 mb-2 overflow-hidden rounded-lg bg-brand text-on-brand-muted sm:mx-3 sm:mb-3">
-      <div className="container-x grid gap-10 pb-10 pt-12 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div>
-          <Wordmark tone="brand" size="lg" />
-          <p className="t-body mt-4 max-w-[30em]">{t.companyTagline}</p>
-        </div>
-        <nav aria-label="Footer" className="flex flex-col gap-2">
-          {t.nav.map((label, i) => (
-            <a key={label} href={NAV_HREFS[i]} className="t-body hover:text-on-brand">
-              {label}
-            </a>
+    <>
+      <style href="footer-band" precedence="default">
+        {FOOTER_CSS}
+      </style>
+      <Band as="footer" tone="night" style={{ paddingBottom: "var(--seam)" }} slabClassName="bg-night-shade p-6 md:px-10 md:pt-10 md:pb-8">
+        <Grid24 className="gap-y-10">
+          <Col span={16} spanSm={6} className="flex flex-col gap-3">
+            <Wordmark tone="brand" size="lg" />
+            <p className="font-display text-on-brand-muted" style={{ fontSize: 18, letterSpacing: "-0.01em" }}>
+              <Copy text={c.tagline} />
+            </p>
+          </Col>
+
+          {FOOTER_COLUMNS.map((col, i) => (
+            <Col key={headings[i]} span={4} spanSm={3}>
+              <nav aria-label={headings[i]} className="flex flex-col items-start gap-1.5">
+                {col
+                  .filter((p) => !LEGAL_KEYS.has(p.key))
+                  .map((p) => (
+                    <RollLink key={p.key} href={`/${locale}${p.path}`} label={c.pageLabels[p.key]} />
+                  ))}
+                {i === 0 ? (
+                  <div className="mt-4 flex flex-col items-start gap-1">
+                    {legal.map((l) => (
+                      <Link key={l.key} href={l.href} className={secondaryClass}>
+                        <Copy text={l.label} />
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div role="group" aria-label={c.socials.heading} className="mt-4 flex flex-col items-start gap-1">
+                    {socials.map((label) => (
+                      <a key={label} href="#" className={secondaryClass}>
+                        <Copy text={label} />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </nav>
+            </Col>
           ))}
-          <a href="#contact" className="t-body hover:text-on-brand">
-            {t.navContact}
-          </a>
-        </nav>
-        <dl className="t-body-s flex flex-col gap-2">
-          {t.company.map((row) => (
-            <div key={row.k} className="grid grid-cols-[6em_1fr] gap-2">
-              <dt className="text-on-brand-muted/70">{row.k}</dt>
-              <dd className={row.ph ? "text-highlight" : "text-on-brand"}>{row.v}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-      <div className="container-x">
-        <p className="t-caption max-w-[60em] text-pretty">{t.disclaimer}</p>
-        <div className="t-caption mt-6 flex flex-wrap justify-between gap-3 border-t border-on-brand-muted/25 pt-5">
-          <span>© 2026 Arclin K.K. / 株式会社智渡仁</span>
-          <div className="flex gap-5">
-            <Link href={`/${locale}/privacy/`} className="hover:text-on-brand">
-              {t.privacy}
-            </Link>
-            <Link href={`/${other}/`} hrefLang={other} lang={other} onClick={remember} className="hover:text-on-brand">
-              {t.otherLang}
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className="mt-8 border-t border-on-brand-muted/25 bg-ink/40 px-6 py-6 text-highlight">
-        <DotEyes className="mx-auto max-w-3xl" />
-      </div>
-    </footer>
+
+          <Col span={24} spanSm={6} className="mt-10 border-t border-night-hairline pt-4 md:mt-16">
+            <Grid24>
+              <Col span={12} spanSm={6} as="p" className="footer-small t-caption text-on-brand-muted" style={legalsType}>
+                <Copy text={c.entity} />
+              </Col>
+              <Col span={6} start={19} spanSm={6} as="p" className="footer-small t-caption text-on-brand-muted md:text-right" style={legalsType}>
+                <Copy text={`© ${year} ${c.siteName}`} />
+              </Col>
+            </Grid24>
+          </Col>
+
+          <Col span={24} spanSm={6} className="footer-art text-on-brand-muted">
+            <FooterArt className="hidden md:block" />
+          </Col>
+        </Grid24>
+      </Band>
+    </>
   );
 }
