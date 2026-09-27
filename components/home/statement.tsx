@@ -99,7 +99,7 @@ function ScrubWords({ target, words, cjk }: { target: RefObject<HTMLElement | nu
 
 /**
  * Band 3, the statement slab (spec §2 row 5, §3, M5, M7, V24): a night slab with the leaf shade, radius --radius-xl,
- * holding one h3 that runs the two safety sentences (home.safety.sentences). No CTA: robot.com's band 5 has none.
+ * holding one h3 that runs the two statement sentences (home.statement). No CTA: robot.com's band 5 has none.
  * Night shift (2026-09-28) drops robot.com's inline 200x151 thumbnail and centres the sentence.
  * Words rest at opacity .3 of --on-brand and light up per word as the slab scrolls up (M5).
  * Reduced motion: every word static at opacity 1, no scrub (usePrefersReducedMotion, so the server tree and the
@@ -110,7 +110,7 @@ export function Statement({ className }: { className?: string }) {
   const reduce = usePrefersReducedMotion();
   const slab = useRef<HTMLDivElement>(null);
   const cjk = locale === "ja" || locale === "zh";
-  const [first, second] = t.home.safety.sentences;
+  const { a: first, b: second } = t.home.statement;
   const words = [...splitWords(first, locale, cjk), ...splitWords(second, locale, cjk)];
 
   return (

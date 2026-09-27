@@ -9,30 +9,29 @@ import { MEDIA } from "@/lib/media";
 
 /**
  * Band 9, the closing CTA (night shift, 2026-09-28; Mobbin: Square's "Make your next move"). A night slab with the leaf
- * shade holding a small rounded video card centred (420 square from 768, 300 below; radius 28) under a night dim, and over
- * its lower half the closing line in Coustard --on-brand with two pills: the gold primary for care facilities and an
- * outline pill for robotics companies. Replaces robot.com's yellow band with the inline pill; Soga survives only as the
- * announce-style accent elsewhere. The whole card is decorative; the pills are the links.
+ * shade holding a small rounded video card centred (360 square from 768, 260 below; radius 28) under a night dim, and
+ * under it the closing line in Coustard --on-brand with two pills: the gold primary for care operators and an outline
+ * pill for robot makers, both into the contact page. The card is decorative; the pills are the links. Heights are
+ * content-driven (the 640px floor left a slab of empty night, 2026-09-28).
  */
 export function ClosingCta({ className }: { className?: string }) {
   const { locale, t } = useLocale();
-  const media = MEDIA.interlude;
-  const dev = true;
+  const media = MEDIA.delivery;
   const titleClass = locale === "en" ? "t-display-l" : "t-jp-display-l";
 
   return (
-    <Band tone="night" id="closing" className={className} slabClassName="bg-night-shade flex min-h-[560px] flex-col items-center justify-end px-5 pt-16 pb-12 md:min-h-[640px] md:pb-16">
-      <div className="pointer-events-none absolute top-14 left-1/2 size-[300px] -translate-x-1/2 overflow-hidden rounded-[28px] md:top-[110px] md:size-[420px]" aria-hidden="true">
-        <VideoFrame src={dev ? media.src : undefined} poster={dev ? media.poster : undefined} ratio="auto" label={media.label} className="absolute inset-0 rounded-none" />
-        <div className={cn("absolute inset-0", dev ? "bg-night/45" : "bg-night-raised")} />
+    <Band tone="night" id="closing" className={className} slabClassName="bg-night-shade flex flex-col items-center gap-8 px-5 py-12 md:gap-10 md:py-16">
+      <div className="pointer-events-none relative size-[260px] overflow-hidden rounded-[28px] md:size-[360px]" aria-hidden="true">
+        <VideoFrame src={media.src} poster={media.poster} ratio="auto" label={media.label} className="absolute inset-0 rounded-none" />
+        <div className="absolute inset-0 bg-night/35" />
       </div>
-      <div className="relative flex max-w-[700px] flex-col items-center gap-6 text-center">
+      <div className="relative flex max-w-[720px] flex-col items-center gap-6 text-center">
         <h3 lang={locale} className={cn(titleClass, "text-on-brand")}>
           <Copy text={t.home.closing.line} />
         </h3>
         <div className="flex flex-wrap justify-center gap-3">
-          <PillLink href={`/${locale}/contact/`} label={t.contactCare} variant="gold" />
-          <PillLink href={`/${locale}/contact/`} label={t.contactRobot} variant="outline-on-brand" />
+          <PillLink href={`/${locale}/contact/`} label={t.common.contactCare} variant="gold" />
+          <PillLink href={`/${locale}/contact/`} label={t.common.contactRobot} variant="outline-on-brand" />
         </div>
       </div>
     </Band>

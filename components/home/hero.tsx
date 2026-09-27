@@ -1,5 +1,6 @@
 "use client";
 import { useLocale } from "@/lib/i18n/context";
+import { cn } from "@/lib/utils";
 import { Band } from "@/components/home/band";
 import { PillLink } from "@/components/home/pill";
 import { Copy } from "@/components/site/copy";
@@ -10,20 +11,23 @@ import { MEDIA } from "@/lib/media";
  * Band 1, the hero (spec §2 row 3 geometry; night-shift styling, Figma "Home / Night shift" 2026-09-28).
  *
  * Slab: full width inside the 5px gutter, `calc(100vh - 10px)` tall (robot.com's `calc(100vh - 1rem)` at its 10px rem),
- * radius --radius-xl, overflow hidden, padding 24. The night video fills it; over it robot.com's top gradient and edge
- * vignette (literal, no token). The night-shift additions: the copy column bottom-left with the Japanese line first, the headline in Coustard at up to 96px in --on-brand (white, never gold), the
- * sub-sentence, then the gold primary pill and an outline pill (the large mark and glow were cut on 2026-09-28: the clip
- * carries the band). Below 768 the column stacks.
- *
- * Motion: none on the text (V11). The video loops (M40); under prefers-reduced-motion VideoFrame shows only the poster.
+ * radius --radius-xl, overflow hidden, padding 24. The clip fills it; over it robot.com's top gradient and edge vignette
+ * (literal, no token) and a night scrim behind the copy. The copy column sits bottom-left: the headline in the reader's
+ * own language (Coustard for en, the rounded CJK display face for ja and zh; 2026-09-28, it used to be English in every
+ * locale), the other-language line small above it, the sub-sentence, then the gold primary pill and an outline pill.
+ * Below 768 the column stacks. Motion: none on the text (V11). The clip loops (M40); under prefers-reduced-motion
+ * VideoFrame shows only the poster.
  */
 export function Hero() {
   const { locale, t } = useLocale();
-  const cjkLang = locale === "zh" ? "zh" : "ja";
+  const h = t.home.hero;
+  const en = locale === "en";
+  // The small line is a second language: Japanese above the English and Chinese headlines (the home market), English above the Japanese one.
+  const altLang = locale === "ja" ? "en" : "ja";
 
   return (
     <Band tone="night" id="hero" slabClassName="flex flex-col justify-end p-6 pb-20 md:pb-6" slabStyle={{ height: "calc(100vh - 10px)" }}>
-      <VideoFrame src={MEDIA.hero.src} poster={MEDIA.hero.poster} ratio="auto" label={t.home.hero.videoLabel} className="absolute inset-0 rounded-none" />
+      <VideoFrame src={MEDIA.hero.src} poster={MEDIA.hero.poster} ratio="auto" label={h.videoLabel} className="absolute inset-0 rounded-none" />
 
       {/* Night scrim behind the copy column (Figma: Home / Night shift): night at 92% on the left fading out by 60% of the width,
           and from the bottom below 768, so the white headline and pills hold 4.5:1 over any frame of the clip. */}
@@ -43,19 +47,19 @@ export function Hero() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(0, 0, 0, 0.38) 0, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0) 58%, rgba(0, 0, 0, 0.38) 100%)" }} />
 
       {/* Copy column, bottom-left (mobile: pinned by the slab's justify-end). */}
-      <div className="relative flex max-w-[860px] flex-col items-start gap-4 md:gap-5">
-        <p lang={cjkLang} className="t-jp-display text-on-brand-muted" style={{ fontSize: "clamp(15px, 1.5vw, 22px)", lineHeight: 1.5 }}>
-          <Copy text={t.home.hero.cjkLine} />
+      <div className="relative flex max-w-[900px] flex-col items-start gap-4 md:gap-5">
+        <p lang={altLang} className={cn(altLang === "ja" ? "t-jp-display" : "font-display", "text-on-brand-muted")} style={{ fontSize: "clamp(15px, 1.5vw, 22px)", lineHeight: 1.5 }}>
+          <Copy text={h.altLine} />
         </p>
-        <h1 lang="en" className="t-display-xl text-on-brand" style={{ fontSize: "clamp(44px, 6.7vw, 96px)", lineHeight: 0.98 }}>
-          <Copy text={t.home.hero.line} />
+        <h1 lang={locale} className={cn(en ? "t-display-xl" : "t-jp-display-xl", "text-on-brand")} style={{ fontSize: en ? "clamp(44px, 6.7vw, 96px)" : "clamp(34px, 4.6vw, 66px)", lineHeight: en ? 0.98 : 1.22 }}>
+          <Copy text={h.line} />
         </h1>
-        <p className="t-body-l hidden max-w-[560px] text-on-brand-muted md:block">
-          <Copy text={t.heroSub} />
+        <p className="t-body-l hidden max-w-[600px] text-on-brand-muted md:block">
+          <Copy text={h.sub} />
         </p>
         <div className="flex flex-wrap gap-3">
-          <PillLink href={`/${locale}/robot/`} label={t.home.hero.cta} variant="gold" />
-          <PillLink href={`/${locale}/care-homes/`} label={t.heroCta1} variant="outline-on-brand" className="hidden md:inline-flex" />
+          <PillLink href={`/${locale}/approach/`} label={h.cta} variant="gold" />
+          <PillLink href={`/${locale}/partners/`} label={h.ctaSecondary} variant="outline-on-brand" className="hidden md:inline-flex" />
         </div>
       </div>
     </Band>

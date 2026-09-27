@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return { title: m.title, description: m.description, alternates: { canonical: `/${locale}${PATH}`, languages: Object.fromEntries(locales.map((l) => [l, `/${l}${PATH}`])) } };
 }
 
-/** One line, one email, what to include, response time. */
+/** One line, one email, what each side should include, an honest reply-time line. */
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) return null;
@@ -43,11 +43,18 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             </dl>
             <div className="border-t border-hairline pt-6">
               <h2 className="t-title-m">{p.include.title}</h2>
-              <ol className="t-body mt-3 flex list-decimal flex-col gap-2 pl-6 text-ink-muted">
-                {p.include.items.map((item) => (
-                  <li key={item}>{item}</li>
+              <div className="mt-4 grid gap-8 sm:grid-cols-2">
+                {p.include.groups.map((g) => (
+                  <div key={g.who}>
+                    <h3 className="t-label text-ink-muted">{g.who}</h3>
+                    <ol className="t-body mt-2 flex list-decimal flex-col gap-2 pl-6 text-ink-muted">
+                      {g.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ol>
+                  </div>
                 ))}
-              </ol>
+              </div>
             </div>
             <div className="border-t border-hairline pt-6">
               <p className="t-body text-ink-muted">

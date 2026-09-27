@@ -1,6 +1,7 @@
 "use client";
 import Lenis from "lenis";
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { createContext, useContext, useEffect, useLayoutEffect, useState, type ReactNode } from "react";
 import { DUR, easeExpoOut } from "@/lib/motion";
 
 const LenisContext = createContext<Lenis | null>(null);
@@ -19,6 +20,21 @@ export function useLenis(): Lenis | null {
  */
 export function SmoothScroll({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
+  const pathname = usePathname();
+
+  // A route change without a hash starts at the top. Next's own scroll handler skips the page's first element when it
+  // is already in the viewport (the fixed skip link always is), and the smooth `scroll-behavior` on <html> then let the
+  // locale switch drift to the bottom of the new page (2026-09-28). Layout effect: before paint, after Next's handler.
+  useLayoutEffect(() => {
+    if (window.location.hash) return;
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    html.style.scrollBehavior = prev;
+    lenis?.scrollTo(0, { immediate: true, force: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- runs per route, not per Lenis instance
+  }, [pathname]);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");

@@ -2,10 +2,10 @@
 import type { Messages } from "./ja";
 
 export const zh: Messages = {
-  metaTitle: "株式会社智渡仁 / Arclin K.K. — 让机器人成为日本介护的力量",
-  metaDesc: "智渡仁（Arclin K.K.）连接机器人企业与日本介护现场，提供现场理解、本地化、安全验证到落地部署的全程支持。",
-  ogTitle: "让机器人成为日本介护的力量 — Arclin K.K.",
-  ogDesc: "连接机器人企业与日本介护现场的本地化・落地伙伴。",
+  metaTitle: "株式会社智渡仁 / Arclin K.K. — 把中国机器人，变成日本养老院可用的结果",
+  metaDesc: "株式会社智渡仁是中国机器人厂商与日本养老院之间的运营层：需求定义、日语化与二次开发、安全验收、系统接入和现场运营。",
+  ogTitle: "把中国机器人，变成日本养老院可用的结果 — Arclin K.K.",
+  ogDesc: "中国机器人厂商与日本养老院之间的运营层。",
   skip: "跳到正文",
 
   announce: "面向介护机构的试点项目，正在受理。",
@@ -50,15 +50,15 @@ export const zh: Messages = {
   source: "出处・性质",
 
   statsKicker: "为什么是日本",
-  statsH2: "日本的介护，正处在重大转折点。",
+  statsH2: "日本介护正在进入供给缺口的陡峭区。",
   stats: [
-    { value: 29.3, decimals: 1, unit: "%", label: "老龄化率", sub: "65岁以上人口占总人口比例", source: "日本总务省统计局《人口推计》（2024年）。上线前请核对最新数值。" },
-    { value: 57, decimals: 0, unit: "万人", label: "介护人员预计缺口", sub: "与2040年度所需人数之差", source: "日本厚生劳动省《基于第9期介护保险事业计划的介护人员需求数》。上线前请核对。" },
-    { value: 14, decimals: 0, unit: "万亿日元", label: "介护费用（年）", sub: "介护保险给付总费用规模", source: "日本厚生劳动省《介护保险事业状况报告》。概算值，上线前请核对。" },
+    { value: 29.4, decimals: 1, unit: "%", label: "65岁以上人口占比，全球最高水平", sub: "65岁以上人口占总人口比例", source: "日本总务省" },
+    { value: 240, decimals: 0, unit: "万人", label: "2026年度介护人员必要数。2022年实绩为215万人", sub: "2026年度必要数", source: "日本厚生劳动省" },
+    { value: 11.94, decimals: 2, unit: "万亿日元", label: "2024年度介护给付等费用，同比 +3.7%", sub: "介护给付等费用", source: "日本厚生劳动省" },
   ],
   trendTitle: "老龄化率变化（65岁以上人口占比）",
   trendNote: "2020年以后为推算值",
-  trendSource: "出处：日本总务省《人口推计》／国立社会保障・人口问题研究所《日本未来推算人口》。上线前请核对最新数值。",
+  trendSource: "出处：日本总务省《人口推计》、国立社会保障・人口问题研究所《日本未来推算人口》",
   quoteA: "不是从机器人出发，",
   quoteB: "而是从介护现场出发。",
   quoteBy: "株式会社智渡仁",
@@ -108,7 +108,7 @@ export const zh: Messages = {
   partnerKicker: "合作方式",
   partnerH2: "我们与介护机构和机器人企业合作。",
   fitKicker: "适合的伙伴",
-  partners: [
+  partnersLegacy: [
     { kicker: "介护机构", title: "介护机构", body: "想尝试机器人，却不知道什么在现场真正有效。我们从这个阶段起与您同行。", cta: "咨询导入事宜", fit: ["愿意探索新的介护技术", "具备可开展试点的环境", "有衡量成果的意愿", "能够获得员工参与", "对中长期导入有兴趣"], subject: "导入咨询" },
     { kicker: "机器人企业", title: "机器人企业", body: "技术已经有了，想进入日本市场。从演示到真实介护运营，我们一起缩短这段距离。", cta: "咨询日本市场拓展", fit: ["处于可实用阶段的机器人产品", "对日本市场有兴趣", "有本地化意愿", "具备API・集成能力", "长期的市场承诺"], subject: "日本市场拓展咨询" },
   ],
@@ -150,351 +150,226 @@ export const zh: Messages = {
     note: "本页各条款为法务审阅前的占位内容，上线前请确定。",
   },
 
-  // ---- v3（brief v3 IA）。方括号中的 [GAP: …] 是尚未确定的事实，确定后替换。 ----
+  // ---- v3（2026-09-28：桥梁型公司）。创业初期，没有实测的数字一律不写。 ----
   common: {
     siteName: "Arclin",
     skip: "跳到正文",
-    navLabels: ["机器人", "介护机构", "家属", "安全", "联系我们"],
+    navLabels: ["我们的方法", "合作对象", "联系我们"],
     menuOpen: "打开菜单",
     menuClose: "关闭菜单",
     dismiss: "关闭",
-    footerColumns: { product: "产品与部署", company: "公司" },
+    footerColumns: { site: "网站", legal: "法律信息" },
     pageLabels: {
-      robot: "机器人",
-      careHomes: "介护机构",
-      families: "家属",
-      safety: "安全",
-      deployment: "部署流程",
-      newsroom: "新闻",
-      careers: "招聘",
+      approach: "我们的方法",
+      partners: "合作对象",
       contact: "联系我们",
       privacy: "隐私政策",
       terms: "使用条款",
     },
-    legal: { privacy: "隐私政策", terms: "使用条款" },
     entity: "株式会社智渡仁 / Arclin K.K.",
-    socials: { heading: "社交媒体", x: "X", linkedin: "LinkedIn", youtube: "YouTube" },
+    founded: "2026年9月于东京设立",
     localeNames: { ja: "日本語", en: "English", zh: "中文" },
     localeSwitch: "语言",
-    gapNotice: "方括号中的 [GAP: …] 是尚未确定的事实的占位。确定后逐一替换为实际数值。",
     talkToUs: "和我们谈谈",
     tagline: "更温暖的明天",
+    contactCare: "介护机构由此联系",
+    contactRobot: "机器人厂商由此联系",
   },
 
   home: {
     meta: {
-      title: "Arclin — 放在介护现场的陪伴机器人",
-      description:
-        "株式会社智渡仁提供在介护机构、日间照护中心和家中陪在老人身边的陪伴机器人。这里有规格、安全和部署流程。",
+      title: "Arclin — 把中国机器人，变成日本养老院可用的结果",
+      description: "株式会社智渡仁是中国机器人厂商与日本养老院之间的运营层：需求定义、日语化与二次开发、安全验收、系统接入和现场运营。",
     },
-    announce: { text: "面向介护机构的试点项目，正在受理。", cta: "联系我们" },
     hero: {
-      line: "A companion robot, built for elder care.",
-      cjkLine: "放在介护现场的陪伴机器人。",
-      cta: "了解机器人",
-      videoLabel: "机器人在楼层上活动的视频",
+      line: "把中国机器人，变成日本养老院可用的结果。",
+      altLine: "中国のロボットを、日本の介護現場で使えるかたちに。",
+      sub: "智渡仁是中国机器人厂商与日本养老院之间的运营层。从需求定义，到日语化与二次开发、安全验收、既有系统接入，再到让机器人留在现场的持续运营。",
+      cta: "看我们的方法",
+      ctaSecondary: "合作对象",
+      videoLabel: "机器人在养老院走廊里移动的视频",
     },
-    trustedBy: {
-      eyebrow: "部署机构",
-      facilities: ["[GAP: pilot facility 1 name]", "[GAP: pilot facility 2 name]", "[GAP: pilot facility 3 name]"],
-      sentence: "在 [GAP: prefectures] 的 [GAP: number of pilot facilities] 家机构里，它陪在 [GAP: residents served] 位老人身边。",
-      cta: "咨询部署",
-    },
-    robot: {
-      eyebrow: "介护陪伴机器人",
-      name: "Mimamori",
-      sentences: [
-        "高 [GAP: robot height] cm，重 [GAP: robot weight] kg。",
-        "充一次电可运行 [GAP: battery life] 小时，除日语外还能听懂 [GAP: languages and dialects]。",
-      ] as [string, string],
-      cta: "查看规格",
-    },
-    scale: {
-      figures: [
-        { value: "[GAP: number of facilities running]", label: "运行中的机构" },
-        { value: "[GAP: total hours logged on floors]", label: "累计运行小时" },
-        { value: "[GAP: residents served]", label: "陪伴的老人" },
-      ],
-    },
-    founder: {
-      quote: "[GAP: founder quote — one or two factual sentences]",
-      name: "[GAP: founder name]",
-      title: "[GAP: founder title]",
-    },
-    safety: {
-      sentences: [
-        "它记录的是 [GAP: what it records — e.g. audio, video, movement events]。",
-        "数据存放在 [GAP: where data is stored]，只有 [GAP: who can see the data] 能看到。",
-      ] as [string, string],
-      cta: "阅读安全与隐私",
-    },
-    markets: {
-      eyebrow: "使用场所",
-      rows: [
-        {
-          title: "介护机构",
-          sentences: [
-            "放在楼层里，陪在老人身边。",
-            "员工的工作有什么变化，用部署机构的数字来说明：[GAP: measured change in staff routine at pilot sites]。",
-          ] as [string, string],
-          href: "/care-homes/",
-          cta: "介护机构",
-        },
-        {
-          title: "日间照护",
-          sentences: [
-            "只在日间服务时段运行。",
-            "搬入和收纳需要 [GAP: setup and teardown time at a day service]。",
-          ] as [string, string],
-          href: "/care-homes/",
-          cta: "咨询部署",
-        },
-        {
-          title: "家中",
-          sentences: [
-            "在家里，它 [GAP: what it does at home]。",
-            "家属会被告知什么、不会被告知什么，写在家属页面上。",
-          ] as [string, string],
-          href: "/families/",
-          cta: "家属",
-        },
-      ],
-    },
-    interlude: {
-      line: "一台机器人背后，有网络、更新和支持它的人。",
-      cta: "查看部署流程",
-    },
-    closing: {
-      line: "关于部署的谈话，从看现场开始。",
+    stage: {
+      sentence: "2026年9月于东京设立。已完成东京收费养老院的现场走访，写出了首个产品 Mimamori 的初版任务与测试框架。下一步：与一家机器人厂商签订框架协议，在两家机构做概念验证。",
       cta: "和我们谈谈",
     },
+    statement: {
+      a: "我们不造机器人。",
+      b: "从它到达日本，到养老院验收签字，中间的一切由我们负责。这就是智渡仁的工作。",
+    },
+    pillars: {
+      kicker: "两大支柱",
+      mimamori: {
+        name: "Mimamori",
+        tagline: "首个产品，从守护开始",
+        body: ["白天陪伴、傍晚守护、夜间巡逻。从高频、低接触的任务切入。", "机器人本体不与人发生身体接触。只识别、通知与配送。"],
+        cta: "查看 Mimamori",
+      },
+      careos: {
+        name: "CareOS",
+        tagline: "适配与运营层",
+        body: ["日语交互、任务编排、安全策略、机构地图、设备适配和运营数据字典。接入护士呼叫与介护记录，并承担现场运营。"],
+        note: "本体、底层控制和基础算法是厂商的知识产权；日本介护需求规格、场景行为、验收方法和运营数据体系是智渡仁的知识产权。",
+        cta: "看我们的方法",
+      },
+    },
+    day: {
+      eyebrow: "Mimamori 的一天",
+      rows: [
+        { time: "09:00–17:00", title: "日间陪伴", sentences: ["在活动室用日语对话，陪在身边。", "提醒饮水并配送，发现有人离席时通知职员。"] },
+        { time: "17:00–22:00", title: "晚间守护", sentences: ["食堂、走廊、居室门前。守护餐后的移动。", "就寝前巡回一圈，有异常即通报。"] },
+        { time: "22:00–05:00", title: "夜间巡逻", sentences: ["巡逻公共走廊，识别徘徊与异常。", "与夜班职员协同，而不是取代他们。"] },
+      ],
+      cta: "查看 Mimamori",
+    },
+    audiences: {
+      careOperators: { title: "介护机构", descriptor: "知道缺人，却写不出机器人的需求规格。", line: "夜班压力大、派遣成本高、已有护士呼叫或介护记录系统的机构。我们从这里开始。" },
+      robotMakers: { title: "机器人厂商", descriptor: "技术已经有了，想进入日本。", line: "有本体和基础技术，想进入日本。从演示到养老院验收签字之间的距离，由我们来填。" },
+    },
+    interlude: {
+      line: "中国工厂与日本养老院的楼层之间，隔着六道墙。六道，我们全部接下。",
+      cta: "看我们的方法",
+    },
+    closing: { line: "谈话从看平面图和夜班排班表开始。" },
   },
 
-  robot: {
+  approach: {
     meta: {
-      title: "机器人 — Arclin",
-      description: "Mimamori 的规格。高度、重量、续航时间、充电时间、传感器、速度、噪音、支持的语言、离线时的行为。",
+      title: "我们的方法 — Arclin",
+      description: "到岸只是开始。中国机器人到日本养老院验收之间的六道墙、CareOS 的分层、按门槛推进的概念验证、首个产品 Mimamori，以及安全与合规。",
     },
-    hero: {
-      eyebrow: "介护陪伴机器人",
-      line: "放在楼层里的陪伴机器人。",
-      highlight: "充一次电运行 [GAP: battery life] 小时",
-    },
-    specsTitle: "规格",
-    specs: [
-      { label: "高度", value: "[GAP: robot height] cm" },
-      { label: "重量", value: "[GAP: robot weight] kg" },
-      { label: "续航时间", value: "[GAP: battery life] 小时" },
-      { label: "充电时间", value: "[GAP: charging time] 小时" },
-      { label: "传感器", value: "[GAP: sensor suite]" },
-      { label: "移动速度", value: "最高 [GAP: max speed] km/h" },
-      { label: "噪音", value: "[GAP: noise level] dB" },
-      { label: "支持的语言和方言", value: "[GAP: languages and dialects]" },
-      { label: "离线时的行为", value: "[GAP: offline capability]" },
-    ],
-    whatItDoesTitle: "它做什么",
-    blocks: [
-      {
-        title: "陪伴",
-        body: "在楼层的固定位置等候，陪在老人身边。有人跟它说话，它用 [GAP: languages and dialects] 回答。",
-      },
-      {
-        title: "日常帮助",
-        body: "提醒日常安排的时间。帮什么、帮到哪一步：[GAP: daily tasks it performs, and their limits]。",
-      },
-      {
-        title: "安全移动",
-        body: "以最高 [GAP: max speed] km/h 移动，在障碍物前 [GAP: obstacle stop distance] cm 停下。有人摔倒时，它 [GAP: what it does when someone falls]。",
-      },
-      {
-        title: "保持联系",
-        body: "通过 [GAP: how it notifies — app, message, call] 通知员工和家属。通知什么、不通知什么，写在家属页面上。",
-      },
-    ],
-    safetySummary: {
-      title: "安全要点",
-      body: "认证状态：[GAP: ISO 13482 status]。记录什么、数据放在哪里、保存多久，汇总在安全页面。",
-      cta: "阅读安全",
-    },
-    inBox: {
-      title: "箱内物品",
-      items: ["机器人本体", "[GAP: remaining box contents — charger or dock, cables, printed guide]"],
-    },
-    facilityProvides: {
-      title: "机构需要准备的",
+    hero: { eyebrow: "我们的方法", line: "到岸只是开始。养老院采购的是结果，不是一台机器人。" },
+    walls: {
+      title: "六道墙",
+      lead: "中国一侧有本体、感知与运动、供应链和快速迭代。日本养老院要的是减负与安全、明确的验收指标、与既有系统的接入，以及可信赖的本地服务。两者之间隔着六道墙，智渡仁全部接下。",
       items: [
-        "[GAP: network requirement — Wi-Fi band and bandwidth]",
-        "[GAP: power outlet requirement]",
-        "[GAP: floor space for charging]",
+        { title: "尺寸与空间", body: "走廊宽度、居室门口、食堂动线。把尺寸和动作方式改到适合日本机构。" },
+        { title: "日语交互", body: "不是翻译。是老人和职员不用思考就能使用的措辞、界面和语音。" },
+        { title: "安全与法规", body: "参照国际与日本标准的风险评估、急停、速度与区域限制、无线与电气认证核验。" },
+        { title: "数据与系统", body: "护士呼叫、介护记录、告警、事件导出。接入机构的系统。" },
+        { title: "验收与交付", body: "先商定指标，再在单楼层、单任务的验证中确认，然后交付。" },
+        { title: "售后服务", body: "远程监控、服务等级、事故响应、更新。本地团队持续跟进。" },
       ],
     },
-    closing: { line: "到楼层上看看它。", cta: "和我们谈谈" },
+    layers: {
+      title: "CareOS 的分层",
+      lead: "不重写底层，而是拥有场景层与运营闭环，并把边界划清楚。",
+      items: [
+        { name: "日本现场运营", items: "部署、培训、远程监控、服务等级、事故响应", owner: "arclin" },
+        { name: "CareBridge 连接模块", items: "护士呼叫、介护记录、告警、事件导出、补助要件", owner: "arclin" },
+        { name: "CareOS 核心", items: "日语交互、任务编排、安全策略、机构地图、设备适配、运营数据字典", owner: "arclin" },
+        { name: "中国机器人平台", items: "本体、运动控制、传感器、基础模型、SDK / API / ROS 2", owner: "oem" },
+      ],
+      owners: { arclin: "智渡仁拥有", oem: "厂商拥有" },
+    },
+    gates: {
+      title: "按门槛推进的概念验证",
+      lead: "用门槛管理替代无边界定制。从平台筛选到第一台机器人在机构上线，大约十到十一个月。",
+      items: [
+        { gate: "Gate 0", title: "平台筛选", weeks: "3周", body: "预先核验接口、噪声和低照度识别。任何一项不达标，就继续优化或更换平台。" },
+        { gate: "Gate 1", title: "需求冻结", weeks: "4周", body: "场景、边界、指标和责任矩阵，确定后冻结。" },
+        { gate: "Gate 2", title: "本地开发", weeks: "16周", body: "日语交互、任务、安全和接入的二次开发。合规预查与机构流程梳理并行推进。" },
+        { gate: "Gate 3", title: "现场概念验证", weeks: "12周", body: "单楼层、单任务，跨班次测试。" },
+        { gate: "Gate 4", title: "上线准备", weeks: "10–12周", body: "运维服务等级、培训、复盘，以及下一个楼层。" },
+      ],
+    },
+    mimamori: {
+      eyebrow: "首个产品",
+      title: "Mimamori。从高频、低接触的守护任务切入。",
+      boundary: { title: "安全边界", body: "机器人本体不与老人发生身体接触。只识别、通知与配送。不搬扶、不喂食、不诊断。最终判断始终由职员做出。" },
+      day: [
+        { time: "09:00–17:00", place: "活动室", title: "日间陪伴", items: ["日语对话与陪伴", "饮水提醒与配送", "离席检知并通知职员"] },
+        { time: "17:00–22:00", place: "食堂、走廊、居室门前", title: "晚间守护", items: ["守护餐后的移动", "就寝前巡回", "异常通报"] },
+        { time: "22:00–05:00", place: "公共走廊", title: "夜间巡逻", items: ["走廊巡逻", "识别徘徊与异常", "协同夜班职员"] },
+      ],
+      acceptance: {
+        title: "概念验证的验收线",
+        lead: "概念验证按五项指标验收。目标值是智渡仁依据日本介护现场条件提出的要求规格，不是行业标准，在需求定义阶段与每家机构共同确认。",
+        items: [
+          { value: "≤40 dBA", label: "深夜行走噪声，距离 1 米" },
+          { value: "≤5 lux", label: "低照度下的人形检测" },
+          { value: "≥95%", label: "电池可用率" },
+          { value: "100%", label: "事件记录可导出" },
+          { value: "0", label: "碰撞与安全事故" },
+        ],
+      },
+      scopeNote: "功能范围以概念验证的验收为准。",
+    },
+    compliance: {
+      title: "安全与合规",
+      lead: "合规是产品能力，不是上线前的补作业。",
+      items: [
+        { title: "隐私与数据", body: "从设计阶段纳入隐私。跨境传输与委托管理、最小化采集、明确保存期限。" },
+        { title: "人机安全", body: "参照国际与日本安全标准。风险评估、急停、速度与区域限制。" },
+        { title: "无线与电气", body: "逐产品核验无线认证；电气安全认证按适用范围判断。" },
+        { title: "补助与登录", body: "逐产品、逐地区确认资格。不把补助视为自动获得的收入。" },
+        { title: "网络与运营", body: "本地日志、权限与更新管理。事故分级、响应服务等级、保险。" },
+      ],
+      note: "法规路径由日本律师、认证机构与保险人逐产品确认。认证与合规状态只刊载已确定的内容。",
+    },
+    closing: { line: "介护是我们首先验证这套方法的地方。这套方法可以带到其他机构化程度高的日本产业。", cta: "和我们谈谈" },
   },
 
-  careHomes: {
+  partners: {
     meta: {
-      title: "介护机构 — Arclin",
-      description: "它在楼层上做什么，员工的工作有什么变化，运行它需要多少员工时间，试点如何开始。",
+      title: "合作对象 — Arclin",
+      description: "夜班压力大的介护机构，以及想进入日本的中国机器人厂商。我们各为对方承担什么、需要什么、合作原则与知识产权边界。",
     },
-    hero: { eyebrow: "介护机构", line: "楼层上放一台。员工的工作会怎样变。" },
-    blocks: [
-      {
-        title: "在楼层上做什么",
-        body: "在楼层的固定位置等候，陪在老人身边。夜间 [GAP: night-time behaviour — patrol, stationary, off]。",
-      },
-      {
-        title: "员工的工作有什么变化",
-        body: "员工放下的工作和新增的工作，用部署机构的记录来说明：[GAP: measured change in staff routine at pilot sites]。",
-      },
-      {
-        title: "运行它需要的员工时间",
-        body: "每天 [GAP: staff minutes per day to run it — charging, checks, log review] 分钟。明细写在部署流程页面。",
-      },
-      {
-        title: "试点如何开始",
-        body: "按现场勘查、员工培训、上线运行的顺序进行。从下单到运行需要 [GAP: time from order to running]。",
-      },
-    ],
-    closing: { line: "把平面图和夜班安排给我们看。从那里开始。", cta: "和我们谈谈" },
-  },
-
-  families: {
-    meta: {
-      title: "家属 — Arclin",
-      description: "和机器人在一起的一天，家属会被告知什么、不会被告知什么，如何联系到人。",
+    hero: { eyebrow: "合作对象", line: "一个平台，两类伙伴：介护机构与机器人厂商。" },
+    lead: "先需求，后供给。从机构的需求出发，不同时服务过多厂商。",
+    careOperators: {
+      title: "介护机构",
+      line: "知道缺人，却写不出机器人的需求规格。我们从这里开始。",
+      lead: "机构通常知道“缺人”，却难以自行写出机器人应该做什么。智渡仁把痛点转成可验收的任务。",
+      fitTitle: "我们希望最先合作的机构",
+      fit: ["60床以上的收费养老院", "24小时运营，夜班压力高", "临时派遣人员成本较高", "已有护士呼叫或介护记录系统", "院长或经营层可以直接决策"],
+      pocTitle: "概念验证怎么做",
+      poc: [
+        { title: "一起定义需求", body: "从平面图和夜班排班表出发，确定场景、边界、指标和责任分工。" },
+        { title: "单楼层，单任务", body: "在一个楼层做一件事，跨班次验证 12 周。" },
+        { title: "按五项指标验收", body: "噪声、低照度检测、电池可用率、记录可导出、零事故。按商定的数字判断。" },
+        { title: "下一个楼层", body: "以验收数据为依据，向经营法人旗下的其他机构展开。" },
+      ],
+      termsTitle: "合作原则",
+      terms: ["先与经营法人签框架协议，再按机构部署。", "机器人以买断为主，租赁可选。", "概念验证是付费的。不接受无期限的免费定制。", "补助资格逐产品、逐地区确认，从不预设。"],
+      cta: "介护机构由此联系",
     },
-    hero: { eyebrow: "家属", line: "父母身边，有一台机器人。" },
-    day: {
-      title: "一天的样子",
-      body: "早上 [GAP: morning behaviour]。白天它陪在老人身边。晚上 [GAP: night behaviour]。",
+    robotMakers: {
+      title: "机器人厂商",
+      line: "技术已经有了，想进入日本。从演示到验收签字之间的距离，由我们来填。",
+      lead: "中国机器人与供应链在制造成本和迭代速度上占优。缺的不是本体，而是需求定义、日语交互、安全验收、系统接入和现场服务。",
+      weDoTitle: "我们承担的",
+      weDo: [
+        { title: "面向日本的二次开发", body: "日语交互、场景行为、安全策略、接入机构系统。" },
+        { title: "合规预查", body: "无线认证、电气安全、隐私、补助与登录要件，逐产品与日本专业人士确认。" },
+        { title: "现场验证与运营", body: "机构概念验证、验收签字，之后的远程监控、服务等级与事故响应。" },
+        { title: "长期兼容", body: "每次更新，都持续确认机器人在日本场景中的表现。" },
+      ],
+      weNeedTitle: "我们需要的",
+      weNeed: ["关键 API、遥测与远程运维权限", "SDK，或 ROS 2 接入", "配合噪声、低照度识别与接口的预先核验", "对日本市场的长期承诺"],
+      ipTitle: "知识产权边界",
+      ip: [
+        { who: "厂商拥有", items: "本体、底层控制、基础算法以及平台原生能力" },
+        { who: "智渡仁拥有", items: "日本介护需求规格、场景行为适配器、验收方法与运营数据分类体系" },
+      ],
+      cta: "机器人厂商由此联系",
     },
-    told: {
-      title: "会被告知的，不会被告知的",
-      will: ["[GAP: what families are notified of — e.g. falls, missed meals]", "[GAP: how often a summary is sent]"],
-      willNot: ["[GAP: what is not shared — e.g. audio, video, conversation content]"],
-    },
-    reach: {
-      title: "联系到人",
-      body: "联系机构员工：[GAP: how families reach staff]。联系 Arclin：[GAP: support contact and hours]。",
-    },
-    closing: { line: "有想问的，由人来回答。", cta: "联系我们" },
-  },
-
-  safety: {
-    meta: {
-      title: "安全 — Arclin",
-      description:
-        "认证状态、记录什么、数据存放在哪里、由谁管理、保存期限、撤回同意、身体安全、网络断开时的行为。",
-    },
-    hero: { eyebrow: "安全与隐私", line: "记录什么，放在哪里，谁能看。" },
-    summaryTitle: "要点",
-    summary: [
-      { label: "认证状态", value: "[GAP: ISO 13482 status and Japanese regulatory position]" },
-      { label: "记录什么", value: "[GAP: what it records]" },
-      { label: "不记录什么", value: "[GAP: what it does not record]" },
-      { label: "数据存放地点与管理方", value: "[GAP: where data is stored and under whose control]" },
-      { label: "保存期限", value: "[GAP: retention period]" },
-      { label: "撤回同意", value: "[GAP: how consent is withdrawn and what happens to the data]" },
-      {
-        label: "身体安全",
-        value: "最高 [GAP: max speed] km/h。在障碍物前 [GAP: obstacle stop distance] cm 停止。有人摔倒时 [GAP: what it does if someone falls]。",
-      },
-      { label: "网络断开时", value: "[GAP: behaviour when the network drops]" },
-    ],
-    detailTitle: "详细",
-    details: [
-      {
-        title: "认证状态",
-        body: "ISO 13482：[GAP: ISO 13482 status]。在日本的监管定位：[GAP: Japanese regulatory position]。保险与责任范围：[GAP: insurance and liability model]。",
-      },
-      {
-        title: "记录什么，不记录什么",
-        body: "记录的是 [GAP: what it records]。不记录的是 [GAP: what it does not record]。",
-      },
-      {
-        title: "数据存放地点与管理方",
-        body: "数据存放在 [GAP: where data is stored]。管理方是 [GAP: who controls the data]。能查看的是 [GAP: who can see the data]。",
-      },
-      { title: "保存期限", body: "[GAP: retention period] 后删除。删除方式：[GAP: deletion method]。" },
-      {
-        title: "撤回同意",
-        body: "通过 [GAP: how consent is withdrawn] 撤回同意。撤回后，数据 [GAP: what happens to data after withdrawal]。",
-      },
-      {
-        title: "身体安全",
-        body: "以最高 [GAP: max speed] km/h 移动，在障碍物前 [GAP: obstacle stop distance] cm 停下。有人摔倒时，它 [GAP: what it does if someone falls]。",
-      },
-      {
-        title: "网络断开时",
-        body: "网络断开后，它 [GAP: behaviour when the network drops]。恢复后 [GAP: what happens after reconnection]。",
-      },
-    ],
-    closing: { line: "这里没写的，请问我们。", cta: "联系我们" },
-  },
-
-  deployment: {
-    meta: {
-      title: "部署流程 — Arclin",
-      description: "从下单到运行的时间、现场勘查、员工培训、支持体制、网络要求、更新。",
-    },
-    hero: { eyebrow: "部署流程", line: "从下单到运行，[GAP: time from order to running]。" },
-    blocks: [
-      {
-        title: "从下单到运行",
-        body: "从下单到运行需要 [GAP: time from order to running]。这期间进行现场勘查和员工培训。",
-      },
-      {
-        title: "现场勘查",
-        body: "确认楼层动线、充电位置和网络状况。所需时间：[GAP: site survey duration]。",
-      },
-      { title: "员工培训", body: "[GAP: training duration and format]。培训对象：[GAP: which staff are trained]。" },
-      {
-        title: "支持体制",
-        body: "联系渠道：[GAP: support channel]。响应时间：[GAP: support hours]。需要到现场时：[GAP: on-site response time]。",
-      },
-      {
-        title: "网络要求",
-        body: "[GAP: Wi-Fi band, bandwidth, ports]。网络断开时的行为写在安全页面。",
-      },
-      {
-        title: "更新",
-        body: "软件按 [GAP: update cadence] 更新。更新时段：[GAP: when updates are applied — e.g. at night while charging]。",
-      },
-    ],
-    closing: { line: "从现场勘查开始。", cta: "和我们谈谈" },
-  },
-
-  newsroom: {
-    meta: { title: "新闻 — Arclin", description: "株式会社智渡仁的公告。" },
-    hero: { eyebrow: "新闻", line: "关于公司和产品的公告。" },
-    intro: "有公告时，会发在这里。",
-    entries: [] as { date: string; title: string; body: string; href?: string }[],
-    empty: "暂无公告。",
-  },
-
-  careers: {
-    meta: { title: "招聘 — Arclin", description: "在 Arclin 的工作、在招职位、申请方式。" },
-    hero: { eyebrow: "招聘", line: "做放在介护现场的机器人。" },
-    about:
-      "我们做在介护机构楼层上运行的机器人，以及它背后的网络、更新和支持。工作地点在 [GAP: office location]，工作方式是 [GAP: remote or on-site policy]。",
-    rolesTitle: "在招职位",
-    roles: [] as { title: string; location: string; href?: string }[],
-    rolesEmpty: "目前没有在招职位。",
-    apply: {
-      title: "申请方式",
-      body: "发邮件告诉我们你的经历，以及对哪项工作感兴趣。回复需要 [GAP: response time]。",
-      cta: "发送邮件",
-      subject: "求职申请",
-    },
+    closing: { line: "平面图和夜班排班表，或者平台概要和 API 文档。从哪一样开始都可以。" },
   },
 
   contact: {
-    meta: { title: "联系我们 — Arclin", description: "通过邮件联系。希望你写明的内容，以及回复所需的时间。" },
+    meta: { title: "联系我们 — Arclin", description: "通过邮件联系。介护机构和机器人厂商希望写明的内容。" },
     hero: { eyebrow: "联系我们", line: "发邮件给我们。由人来读。" },
     emailLabel: "邮箱",
     subject: "咨询",
-    include: { title: "希望你写明的", items: ["机构名称或所在地", "机构类型和入住人数", "想问的问题"] },
-    responseTime: "回复所需时间：[GAP: response time]",
+    include: {
+      title: "希望你写明的",
+      groups: [
+        { who: "介护机构", items: ["机构类型与床位数", "夜班体制", "已有系统，如护士呼叫或介护记录"] },
+        { who: "机器人厂商", items: ["平台概要", "API、SDK 或 ROS 2 的支持情况", "进入日本的目标时间"] },
+      ],
+    },
+    responseTime: "我们是刚起步的小团队，回复可能需要几天。",
     cta: "发送邮件",
   },
 
