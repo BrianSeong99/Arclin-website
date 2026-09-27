@@ -4,7 +4,7 @@ import { PillLink } from "@/components/home/pill";
 import { RevealHeading } from "@/components/home/reveal-heading";
 import { Copy } from "@/components/site/copy";
 import { VideoFrame } from "@/components/site/video-frame";
-import { DEV_MEDIA, type DevMediaEntry } from "@/lib/dev-media";
+import { MEDIA, type MediaEntry } from "@/lib/media";
 import { useLocale } from "@/lib/i18n/context";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +23,7 @@ interface Row {
   descriptor: string;
   /** p: the page's first body block. */
   line: string;
-  media: DevMediaEntry;
+  media: MediaEntry;
 }
 
 /**
@@ -49,14 +49,14 @@ export function AudienceRows() {
       title: t.common.pageLabels.careHomes,
       descriptor: t.careHomes.hero.line,
       line: t.careHomes.blocks[0].body,
-      media: DEV_MEDIA["robot-moving-safely"],
+      media: MEDIA["robot-company"],
     },
     {
       slug: "families",
       title: t.common.pageLabels.families,
       descriptor: t.families.hero.line,
       line: t.families.day.body,
-      media: DEV_MEDIA["robot-staying-in-touch"],
+      media: MEDIA["robot-staying-in-touch"],
     },
   ];
 

@@ -5,7 +5,7 @@ import { Band } from "@/components/home/band";
 import { PillLink } from "@/components/home/pill";
 import { Copy } from "@/components/site/copy";
 import { VideoFrame } from "@/components/site/video-frame";
-import { DEV_MEDIA } from "@/lib/dev-media";
+import { MEDIA } from "@/lib/media";
 
 /**
  * Band 9, the closing CTA (night shift, 2026-09-28; Mobbin: Square's "Make your next move"). A night slab with the leaf
@@ -16,8 +16,8 @@ import { DEV_MEDIA } from "@/lib/dev-media";
  */
 export function ClosingCta({ className }: { className?: string }) {
   const { locale, t } = useLocale();
-  const media = DEV_MEDIA.interlude;
-  const dev = process.env.NEXT_PUBLIC_DEV_MEDIA === "1";
+  const media = MEDIA.interlude;
+  const dev = true;
   const titleClass = locale === "en" ? "t-display-l" : "t-jp-display-l";
 
   return (

@@ -6,7 +6,8 @@ import { Band, Col, Grid24 } from "@/components/home/band";
 import { PillLink } from "@/components/home/pill";
 import { Copy } from "@/components/site/copy";
 import { VideoFrame } from "@/components/site/video-frame";
-import { DEV_MEDIA, type DevMediaSlot } from "@/lib/dev-media";
+import type { DevMediaSlot } from "@/lib/dev-media";
+import { MEDIA as CLIPS } from "@/lib/media";
 import { useLocale } from "@/lib/i18n/context";
 import { cn } from "@/lib/utils";
 
@@ -33,7 +34,7 @@ export function MarketsAccordion({ id, initial = 0, className }: MarketsAccordio
   const uid = useId();
   const rows = t.home.markets.rows;
   const [active, setActive] = useState(() => Math.min(Math.max(initial, 0), rows.length - 1));
-  const media = DEV_MEDIA[MEDIA[active] ?? MEDIA[0]];
+  const media = CLIPS[MEDIA[active] ?? MEDIA[0]];
   const separator = locale === "en" ? " " : "";
   const titleClass = locale === "en" ? "t-display-m" : "t-jp-display";
 

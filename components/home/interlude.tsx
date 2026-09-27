@@ -9,7 +9,7 @@ import { RevealHeading } from "@/components/home/reveal-heading";
 import { useLenis } from "@/components/home/smooth-scroll";
 import { Copy } from "@/components/site/copy";
 import { VideoFrame } from "@/components/site/video-frame";
-import { DEV_MEDIA } from "@/lib/dev-media";
+import { MEDIA } from "@/lib/media";
 import { useLocale } from "@/lib/i18n/context";
 import { DUR, usePrefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -51,10 +51,10 @@ const clamp = (min: number, v: number, max: number) => Math.min(max, Math.max(mi
  */
 export function Interlude() {
   const { locale, t } = useLocale();
-  const dev = process.env.NEXT_PUBLIC_DEV_MEDIA === "1";
+  const dev = true;
   const reduce = usePrefersReducedMotion();
   const lenis = useLenis();
-  const media = DEV_MEDIA.interlude;
+  const media = MEDIA.interlude;
   const dialogId = useId();
 
   /* ---- M10 parallax: y = 30px x (scrollY − slabTop) / viewportHeight, clamped to ±30. ---- */

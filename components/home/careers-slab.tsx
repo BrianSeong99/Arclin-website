@@ -1,5 +1,5 @@
 "use client";
-import { DEV_MEDIA } from "@/lib/dev-media";
+import { MEDIA } from "@/lib/media";
 import { useLocale } from "@/lib/i18n/context";
 import { Band } from "@/components/home/band";
 import { PillLink } from "@/components/home/pill";
@@ -19,8 +19,8 @@ import { Wordmark } from "@/components/site/wordmark";
  */
 export function CareersSlab({ className }: { className?: string }) {
   const { locale, t } = useLocale();
-  const media = DEV_MEDIA["robot-daily-help"];
-  const dev = process.env.NEXT_PUBLIC_DEV_MEDIA === "1";
+  const media = MEDIA["robot-daily-help"];
+  const dev = true;
 
   return (
     // §2 row 12: the slab sits 4px from each viewport edge (1432 / 760 / 382 wide), one token narrower than --gutter-page.

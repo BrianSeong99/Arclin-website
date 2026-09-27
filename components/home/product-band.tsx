@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/lib/i18n/context";
-import { DEV_MEDIA } from "@/lib/dev-media";
+import { MEDIA, type MediaEntry } from "@/lib/media";
 import { Copy } from "@/components/site/copy";
 import { VideoFrame } from "@/components/site/video-frame";
 import { Band, Col, Grid24 } from "@/components/home/band";
@@ -18,7 +18,7 @@ interface ProductCardProps {
   note?: string;
   cta: string;
   href: string;
-  media: (typeof DEV_MEDIA)[keyof typeof DEV_MEDIA];
+  media: MediaEntry;
   lang: string;
 }
 
@@ -81,8 +81,8 @@ export function ProductBand({ id = "products", className }: ProductBandProps) {
         <Copy text={t.productsKicker} />
       </p>
       <Grid24>
-        <ProductCard name={robot.name} tagline={robot.eyebrow} titleClass={titleClass} body={robot.sentences} cta={robot.cta} href={`/${locale}/robot/`} media={DEV_MEDIA["robot-moving-safely"]} lang={locale} />
-        <ProductCard name={careos.name} tagline={careos.sub} titleClass={titleClass} body={[careos.body]} note={careos.note} cta={careos.cta} href={`/${locale}/deployment/`} media={DEV_MEDIA["robot-daily-help"]} lang={locale} />
+        <ProductCard name={robot.name} tagline={robot.eyebrow} titleClass={titleClass} body={robot.sentences} cta={robot.cta} href={`/${locale}/robot/`} media={MEDIA["robot-moving-safely"]} lang={locale} />
+        <ProductCard name={careos.name} tagline={careos.sub} titleClass={titleClass} body={[careos.body]} note={careos.note} cta={careos.cta} href={`/${locale}/deployment/`} media={MEDIA["robot-daily-help"]} lang={locale} />
       </Grid24>
     </Band>
   );
