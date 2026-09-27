@@ -5,7 +5,7 @@ import { PillLink } from "@/components/home/pill";
 import { Copy } from "@/components/site/copy";
 import { Mark } from "@/components/site/mark";
 import { VideoFrame } from "@/components/site/video-frame";
-import { DEV_MEDIA } from "@/lib/dev-media";
+import { MEDIA } from "@/lib/media";
 
 /**
  * Band 1, the hero (spec §2 row 3 geometry; night-shift styling, Figma "Home / Night shift" 2026-09-28).
@@ -20,12 +20,12 @@ import { DEV_MEDIA } from "@/lib/dev-media";
  */
 export function Hero() {
   const { locale, t } = useLocale();
-  const dev = process.env.NEXT_PUBLIC_DEV_MEDIA === "1";
+  const dev = true;
   const cjkLang = locale === "zh" ? "zh" : "ja";
 
   return (
     <Band tone="night" id="hero" slabClassName="flex flex-col justify-end p-6" slabStyle={{ height: "calc(100vh - 10px)" }}>
-      <VideoFrame src={DEV_MEDIA.hero.src} poster={dev ? DEV_MEDIA.hero.poster : undefined} ratio="auto" label={t.home.hero.videoLabel} className="absolute inset-0 rounded-none" />
+      <VideoFrame src={MEDIA.hero.src} poster={MEDIA.hero.poster} ratio="auto" label={t.home.hero.videoLabel} className="absolute inset-0 rounded-none" />
 
       {/* Pending media only: the frame is --surface-sunken, so the night ground stands in for the footage. Removed once a clip plays. */}
       {!dev && <div aria-hidden="true" className="absolute inset-0 bg-night" />}

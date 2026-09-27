@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   basePath,
   images: { unoptimized: true },
+  // Raw <video> and <source> URLs do not get basePath applied; lib/media.ts prefixes them with this.
+  env: { NEXT_PUBLIC_BASE_PATH: basePath ?? "" },
 };
 
 export default nextConfig;
