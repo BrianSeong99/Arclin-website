@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AnnounceBar } from "@/components/home/announce-bar";
 import { Band, type BandTone } from "@/components/home/band";
 import { Nav } from "./nav";
 
@@ -24,7 +23,6 @@ export const Page: S = {
   render: () => (
     <div className="bg-page">
       <Nav initialTheme="brand" />
-      <AnnounceBar />
       <main id="main" tabIndex={-1}>
         {tones.map((b, i) => (
           <Band key={i} tone={b.tone} seam={i > 0} slabClassName="flex min-h-[90vh] items-end p-6" style={i === 0 ? { marginTop: "var(--gutter-page)" } : undefined}>

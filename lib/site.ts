@@ -2,42 +2,25 @@
 export const EMAIL = "contact@[PLACEHOLDER]"; // TODO: confirm domain (arclin.ai / arclin.jp)
 
 /** Page keys index `t.common.pageLabels`; paths are locale-relative and end in a slash. */
-export type PageKey =
-  | "robot"
-  | "careHomes"
-  | "families"
-  | "safety"
-  | "deployment"
-  | "newsroom"
-  | "careers"
-  | "contact"
-  | "privacy"
-  | "terms";
+export type PageKey = "approach" | "partners" | "contact" | "privacy" | "terms";
 
 export type PageLink = { key: PageKey; path: `/${string}/` };
 
-/** Header nav, in order. Labels come from `t.common.navLabels` at the same index. */
+/** Header nav, in order. Labels come from `t.common.navLabels` at the same index. The company is three pages old. */
 export const NAV: readonly PageLink[] = [
-  { key: "robot", path: "/robot/" },
-  { key: "careHomes", path: "/care-homes/" },
-  { key: "families", path: "/families/" },
-  { key: "safety", path: "/safety/" },
+  { key: "approach", path: "/approach/" },
+  { key: "partners", path: "/partners/" },
   { key: "contact", path: "/contact/" },
 ];
 
 /** Footer columns, in order. Labels come from `t.common.pageLabels[key]`. */
 export const FOOTER_COLUMNS: readonly (readonly PageLink[])[] = [
   [
-    { key: "robot", path: "/robot/" },
-    { key: "careHomes", path: "/care-homes/" },
-    { key: "families", path: "/families/" },
-    { key: "safety", path: "/safety/" },
-    { key: "deployment", path: "/deployment/" },
+    { key: "approach", path: "/approach/" },
+    { key: "partners", path: "/partners/" },
+    { key: "contact", path: "/contact/" },
   ],
   [
-    { key: "newsroom", path: "/newsroom/" },
-    { key: "careers", path: "/careers/" },
-    { key: "contact", path: "/contact/" },
     { key: "privacy", path: "/privacy/" },
     { key: "terms", path: "/terms/" },
   ],

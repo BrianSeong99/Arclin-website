@@ -244,17 +244,17 @@ export function Interlude() {
               <div className="mb-6 w-full max-w-60 md:mb-4 md:flex-1 lg:max-w-none">
                 {/* §4 title h4 row: 24/600/24 → .t-title-m (23/1.3). */}
                 <h3 className="t-title-m ml-auto w-fit">
-                  <Copy text={t.common.pageLabels.deployment} />
+                  <Copy text={t.common.pageLabels.approach} />
                 </h3>
               </div>
               {/* §2 row 10 text column: 447 wide from ≥768 (448 here, see deviations), auto below. */}
               <div className="w-full md:w-112 md:shrink-0">
                 {/* §4 interlude p row: 14/500/15.4 → .t-body-s at 500; padding-bottom 12 (robot.com ContentOverlay_text). */}
                 <p className="t-body-s pb-3 font-medium">
-                  <Copy text={t.deployment.hero.line} />
+                  <Copy text={t.approach.hero.line} />
                 </p>
                 {/* §3.3 white-outline pill → outline-on-brand; content-spacers p + pill: margin-top 20. */}
-                <PillLink href={`/${locale}/deployment/`} label={t.home.interlude.cta} variant="gold" className="mt-5" />
+                <PillLink href={`/${locale}/approach/`} label={t.home.interlude.cta} variant="gold" className="mt-5" />
               </div>
             </div>
           </Grid24>

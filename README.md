@@ -45,7 +45,7 @@ components/
   ui/        button, badge, demo-tag, footnote
   site/      nav, footer, wordmark, copy ([GAP] markers), video-frame, section chrome, reveal
   home/      the homepage bands, one file each, in page order: announce-bar, hero, trusted-by, statement,
-             product-band, stats-bento, audience-rows, markets-accordion, interlude, closing-cta, careers-slab;
+             product-band, stats-bento, audience-rows, markets-accordion, interlude, closing-cta;
              plus the shared pieces: band (slab + 24-col grid), band-theme (header theme per band),
              smooth-scroll (Lenis), pill (roll-over label), reveal-heading (line reveal)
   viz/       count-up, trend-line, donut-gauge, iso-stack, dot-eyes, illustrations

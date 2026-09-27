@@ -37,7 +37,6 @@ export { SceneIllustration } from "../../components/viz/mimamori-scenes";
 export type { SceneId } from "../../components/viz/mimamori-scenes";
 export { IsoStack } from "../../components/viz/iso-stack";
 export type { IsoLayer } from "../../components/viz/iso-stack";
-export { FooterArt } from "../../components/viz/footer-art";
 
 // Homepage bands (components/home, robot.com order; reference spec docs/superpowers/specs/2026-09-23-robot-com-reference.md).
 export { Band, Grid24, Col } from "../../components/home/band";
@@ -49,9 +48,8 @@ export { PillLink, PillButton } from "../../components/home/pill";
 export type { PillLinkProps, PillButtonProps, PillVariant, PillSize } from "../../components/home/pill";
 export { RevealHeading } from "../../components/home/reveal-heading";
 export type { RevealHeadingProps } from "../../components/home/reveal-heading";
-export { AnnounceBar } from "../../components/home/announce-bar";
 export { Hero } from "../../components/home/hero";
-export { TrustedBy } from "../../components/home/trusted-by";
+export { StageStrip } from "../../components/home/stage-strip";
 export { Statement } from "../../components/home/statement";
 export { ProductBand } from "../../components/home/product-band";
 export { StatsBento } from "../../components/home/stats-bento";
@@ -59,4 +57,3 @@ export { AudienceRows } from "../../components/home/audience-rows";
 export { MarketsAccordion } from "../../components/home/markets-accordion";
 export { Interlude } from "../../components/home/interlude";
 export { ClosingCta } from "../../components/home/closing-cta";
-export { CareersSlab } from "../../components/home/careers-slab";

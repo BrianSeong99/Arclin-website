@@ -23,7 +23,7 @@ interface ProductCardProps {
 }
 
 /**
- * One product card (night shift, 2026-09-28; Mobbin: Okta and 1Password product pairs): a raised card, radius --radius-xl,
+ * One pillar card (night shift, 2026-09-28; Mobbin: Okta and 1Password product pairs): a raised card, radius --radius-xl,
  * the media across the top (aspect 709/400 from 768, 380/240 below), then name, gold tagline, body, note and an outline
  * pill. This replaces robot.com's right-half cut-out figure and the yellow band with its unveiling mask.
  */
@@ -64,25 +64,23 @@ export interface ProductBandProps {
 }
 
 /**
- * Band 4, the two pillars (night shift, 2026-09-28): a paper band with a Coustard kicker and two product cards side by
- * side (span 12 each, 4px gap) with their media on top. Mimamori reads home.robot, CareOS reads products[1].
- * The yellow band, the blossom unveiling mask and the pinned card strip (robot.com band 6, M8) are gone; Soga is an
- * accent only on this page.
+ * Band 4, the two pillars (night shift, 2026-09-28): a paper band with a Coustard kicker and two cards side by side
+ * (span 12 each, 4px gap) with their media on top: Mimamori, the first product (the night patrol clip), and CareOS, the
+ * adaptation and operations layer (the telepresence clip: a robot wired into Japanese staff). Both read home.pillars.
  */
-export function ProductBand({ id = "products", className }: ProductBandProps) {
+export function ProductBand({ id = "pillars", className }: ProductBandProps) {
   const { locale, t } = useLocale();
-  const robot = t.home.robot;
-  const careos = t.products[1];
+  const { kicker, mimamori, careos } = t.home.pillars;
   const titleClass = locale === "en" ? "t-display-m" : "t-jp-display";
 
   return (
     <Band tone="page" id={id} className={className} slabClassName="px-1 pt-6 pb-1">
       <p className="font-display mb-5 px-4 text-ink-subtle md:px-5" style={{ fontSize: 24, letterSpacing: "-0.01em" }}>
-        <Copy text={t.productsKicker} />
+        <Copy text={kicker} />
       </p>
       <Grid24>
-        <ProductCard name={robot.name} tagline={robot.eyebrow} titleClass={titleClass} body={robot.sentences} cta={robot.cta} href={`/${locale}/robot/`} media={MEDIA["robot-moving-safely"]} lang={locale} />
-        <ProductCard name={careos.name} tagline={careos.sub} titleClass={titleClass} body={[careos.body]} note={careos.note} cta={careos.cta} href={`/${locale}/deployment/`} media={MEDIA["robot-daily-help"]} lang={locale} />
+        <ProductCard name={mimamori.name} tagline={mimamori.tagline} titleClass={titleClass} body={mimamori.body} cta={mimamori.cta} href={`/${locale}/approach/#mimamori`} media={MEDIA["night-patrol"]} lang={locale} />
+        <ProductCard name={careos.name} tagline={careos.tagline} titleClass={titleClass} body={careos.body} note={careos.note} cta={careos.cta} href={`/${locale}/approach/#layers`} media={MEDIA.telepresence} lang={locale} />
       </Grid24>
     </Band>
   );

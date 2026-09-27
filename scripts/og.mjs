@@ -4,8 +4,8 @@ import { chromium } from "playwright";
 import { readFileSync, writeFileSync } from "node:fs";
 
 const copy = {
-  ja: { line1: "ロボットを、", line2: "日本の介護の力へ。", sub: "ロボティクス企業と日本の介護現場をつなぐ、ローカライズ・導入パートナー", font: "Zen Maru Gothic" },
-  zh: { line1: "让机器人，", line2: "成为日本介护的力量。", sub: "连接机器人企业与日本介护现场的本地化・落地伙伴", font: "Resource Han Rounded SC", local: "ResourceHanRoundedSC-Medium" },
+  ja: { line1: "中国のロボットを、", line2: "日本の介護現場で使えるかたちに。", sub: "中国のロボットメーカーと日本の介護施設のあいだに立つ、運用レイヤー", font: "Zen Maru Gothic" },
+  zh: { line1: "把中国机器人，", line2: "变成日本养老院可用的结果。", sub: "中国机器人厂商与日本养老院之间的运营层", font: "Resource Han Rounded SC", local: "ResourceHanRoundedSC-Medium" },
 };
 
 // Kurogane: surface-page, ink, surface-brand slab, the three-leaf mark; Coustard Black wordmark. The mark is the same
@@ -25,7 +25,7 @@ ${c.local ? "" : `<link href="https://fonts.googleapis.com/css2?family=${encodeU
   .brand{display:flex;align-items:baseline;gap:14px}
   .brand b{font-family:"Coustard",serif;font-weight:900;font-size:44px;letter-spacing:-.015em}
   .brand span{font-size:20px;letter-spacing:.16em;color:#5e6f68}
-  h1{font-size:72px;line-height:1.2;margin:0;font-weight:500}
+  h1{font-size:60px;line-height:1.2;margin:0;font-weight:500}
   .sub{font-size:24px;line-height:1.6;color:#47594f;margin-top:20px}
   .foot{font-size:16px;letter-spacing:.22em;color:#5e6f68;text-transform:uppercase}
 </style></head><body><div class="slab"></div><div class="mark">${MARK}</div>
