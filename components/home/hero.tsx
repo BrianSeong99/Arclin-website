@@ -20,15 +20,24 @@ import { MEDIA } from "@/lib/media";
  */
 export function Hero() {
   const { locale, t } = useLocale();
-  const dev = true;
   const cjkLang = locale === "zh" ? "zh" : "ja";
 
   return (
-    <Band tone="night" id="hero" slabClassName="flex flex-col justify-end p-6" slabStyle={{ height: "calc(100vh - 10px)" }}>
+    <Band tone="night" id="hero" slabClassName="flex flex-col justify-end p-6 pb-20 md:pb-6" slabStyle={{ height: "calc(100vh - 10px)" }}>
       <VideoFrame src={MEDIA.hero.src} poster={MEDIA.hero.poster} ratio="auto" label={t.home.hero.videoLabel} className="absolute inset-0 rounded-none" />
 
-      {/* Pending media only: the frame is --surface-sunken, so the night ground stands in for the footage. Removed once a clip plays. */}
-      {!dev && <div aria-hidden="true" className="absolute inset-0 bg-night" />}
+      {/* Night scrim behind the copy column (Figma: Home / Night shift): night at 92% on the left fading out by 60% of the width,
+          and from the bottom below 768, so the white headline and pills hold 4.5:1 over any frame of the clip. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{ background: "linear-gradient(90deg, color-mix(in srgb, var(--surface-night) 92%, transparent) 0, color-mix(in srgb, var(--surface-night) 70%, transparent) 30%, transparent 62%)" }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 md:hidden"
+        style={{ background: "linear-gradient(0deg, color-mix(in srgb, var(--surface-night) 92%, transparent) 0, color-mix(in srgb, var(--surface-night) 70%, transparent) 40%, transparent 70%)" }}
+      />
 
       {/* §2 row 3 figure::before / ::after — robot.com's top gradient and edge vignette, literal values. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0, rgba(0, 0, 0, 0.28) 15%, rgba(0, 0, 0, 0.1) 32%, rgba(0, 0, 0, 0) 48%)" }} />
